@@ -3,7 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const usersRouter = require('./routes/users');
-const groupsRouter = require('./routes/groups');
+const clubsRouter = require('./routes/clubs');
 
 const app = express();
 const PORT = 3000;
@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 /* Add routers */
 app.use('/users', usersRouter);
-app.use('/groups', usersRouter);
+app.use('/clubs', clubsRouter);
 
 /* 
  Only serve the index file if not in production. dev-server will handle serving it otherwise.
