@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.get('*', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../client/index.html')));
+app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../client/index.html')));
 app.use('*', (req, res) => res.status(404).send('Route not found'));
 
 app.use((err, req, res, next) => {
