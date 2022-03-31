@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const usersRouter = require('./routes/users');
 const clubsRouter = require('./routes/clubs');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
@@ -17,6 +18,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors());
 
 /* Add routers */
 app.use('/users', usersRouter);

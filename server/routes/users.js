@@ -8,7 +8,18 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  // db.query(queries.createUser, ['Jonathan', 'Haviv', 'jonathandhaviv@gmail.com', 'jonh', 'password'])
+  const username = req.body.username;
+  const password = req.body.password;
+  const email = req.body.email;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  db.query(queries.createUser, [firstName, lastName, email, username, password])
+    .then(response => res.locals = response.rows)
+    .then(() => next())
+    .catch(err => next({
+      log: err,
+    }));
+  // db.query(queries.createUser, ['Nidhi', 'Reddy', 'nidhi@gmail.com', 'nidhik', 'pass'])
   //   .then(response => res.locals = response.rows)
   //   .then(() => next())
   //   .catch(err => next({
