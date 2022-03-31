@@ -2,6 +2,8 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const usersRouter = require('./routes/users');
+const clubsRouter = require('./routes/clubs');
 
 const app = express();
 const PORT = 3000;
@@ -16,8 +18,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+/* Add routers */
+app.use('/users', usersRouter);
+app.use('/clubs', clubsRouter);
+
 /* 
- Only serve the indexf file if not in production. dev-server will handle serving it otherwise.
+ Only serve the index file if not in production. dev-server will handle serving it otherwise.
 */
 if (process.env.NODE_ENV === 'production') {
   // serve index.html on the route '/'
