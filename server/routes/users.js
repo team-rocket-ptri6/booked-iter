@@ -8,28 +8,27 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  const email = req.body.email;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
+  const {username, password, email, firstName, lastName} = req.body;
   db.query(queries.createUser, [firstName, lastName, email, username, password])
     .then(response => res.locals = response.rows)
     .then(() => next())
     .catch(err => next({
       log: err,
     }));
-  // db.query(queries.createUser, ['Nidhi', 'Reddy', 'nidhi@gmail.com', 'nidhik', 'pass'])
-  //   .then(response => res.locals = response.rows)
-  //   .then(() => next())
-  //   .catch(err => next({
-  //     log: err,
-  //   }));
 } , (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/login', (req, res) => {
+//toDo: error handling for wrong username/password combo
+router.post('/login', (req, res, next) => {
+  const {username, password} = req.body;
+  db.query(queries.loginUser, [username, password])
+    .then(response => res.locals = response.rows)
+    .then(() => next())
+    .catch(err => next({
+      log: err,
+    }));
+} , (req, res) => {
   res.status(200).json(res.locals);
 });
 
