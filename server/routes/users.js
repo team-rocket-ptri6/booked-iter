@@ -6,20 +6,12 @@ router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/signup',userController.createUser , (req, res) => {
+router.post('/signup', userController.createUser , (req, res) => {
   res.status(200).json(res.locals);
 });
 
 //toDo: error handling for wrong username/password combo
-router.post('/login',(req, res, next) => {
-  const {username, password} = req.body;
-  db.query(queries.loginUser, [username, password])
-    .then(response => res.locals = response.rows)
-    .then(() => next())
-    .catch(err => next({
-      log: err,
-    }));
-} , (req, res) => {
+router.post('/login', userController.loginUser, (req, res) => {
   res.status(200).json(res.locals);
 });
 
