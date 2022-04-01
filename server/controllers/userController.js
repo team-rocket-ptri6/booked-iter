@@ -11,7 +11,7 @@ userController.createUser = async (req, res, next) => {
     const { username, password, email, firstName, lastName } = req.body;
     const hashPassword = await bcrypt.hash(password, SALT_WORK_FACTOR);
     const response = await db.query(queries.createUser, [firstName, lastName, email, username, hashPassword]);
-    res.locals = response.rows;
+    res.locals = response.rows[0];
     return next();
   } catch (error) {
     return next({
@@ -30,9 +30,9 @@ userController.loginUser = async (req, res, next) => {
     res.locals = {
       user_id: response.rows[0].user_id,
       email: response.rows[0].email,
-      firstName: response.rows[0].first_name,
-      lastName: response.rows[0].last_name,
-      username: response.rows[0].username,
+      first_name: response.rows[0].first_name,
+      last_name: response.rows[0].last_name,
+      user_name: response.rows[0].username,
       description: response.rows[0].description,
     }; 
     return next();

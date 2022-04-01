@@ -1,17 +1,18 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const jwtController = require('../controllers/jwtController');
 const router = express.Router();
 
 router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/signup', userController.createUser , (req, res) => {
+router.post('/signup', userController.createUser, jwtController.generateToken, (req, res) => {
   res.status(200).json(res.locals);
 });
 
 //toDo: error handling for wrong username/password combo
-router.post('/login', userController.loginUser, (req, res) => {
+router.post('/login', userController.loginUser, jwtController.generateToken,(req, res) => {
   res.status(200).json(res.locals);
 });
 
