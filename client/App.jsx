@@ -12,7 +12,7 @@ function App() {
   const [loginPassword, setLoginPassword] = useState('');
 
   const signUp = () => {
-    axios.post('http://localhost:3000/users/signup', {
+    axios.post('http://localhost:8080/users/signup', {
       username: username,
       password: password, 
       email: email, 
@@ -25,7 +25,7 @@ function App() {
 
   //todo: error handling display on frontend
   const login = () => {
-    axios.post('http://localhost:3000/users/login', {
+    axios.post('http://localhost:8080/users/login', {
       username: loginUsername,
       password: loginPassword, 
     }).then((response) => {
