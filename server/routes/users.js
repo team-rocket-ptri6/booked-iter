@@ -3,7 +3,7 @@ const userController = require('../controllers/userController');
 const jwtController = require('../controllers/jwtController');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/',(req, res) => {
   res.status(200).json(res.locals);
 });
 

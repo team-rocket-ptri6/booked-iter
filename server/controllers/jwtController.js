@@ -27,5 +27,23 @@ jwtController.generateToken = async (req, res, next) => {
   }
 };
 
+jwtController.verifyToken = async (req, res, next) => {
+  try {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    
+    if (!token) res.status(401).send('No authorization!');
+    const decoded = await jwt.verify(token, process.env.SECRET_KEY, { maxAge: '2h' });
+    req.user = decoded.userId;
+    if (decoded) return next();
+  } catch (error) {
+    return next({
+      log: `jwtController.verifyToken: ERROR: ${error}`,
+      status: 403,
+      message: { err: 'jwtController.verifyToken: ERROR: Check server logs for details.' }
+    });
+  }
+};
+
 
 module.exports = jwtController;
