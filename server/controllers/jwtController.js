@@ -32,7 +32,7 @@ jwtController.verifyToken = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     
-    if (!token) res.status(401).send('No authorization!');
+    if (!token) return res.status(401).send('No authorization!');
     const decoded = await jwt.verify(token, process.env.SECRET_KEY, { maxAge: '2h' });
     req.user = decoded.userId;
     if (decoded) return next();
