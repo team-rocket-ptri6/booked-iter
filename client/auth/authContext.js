@@ -23,7 +23,7 @@ function AuthProvider({children}) {
       username,
       description
     };
-
+    
     try {
       const response = await auth.signUp(user);
       // TO-DO: Added error handling
