@@ -7,4 +7,4 @@ render(
   <AuthProvider>
     <App />
   </AuthProvider>
-, document.getElementById('app'));
+  , document.getElementById('app'));

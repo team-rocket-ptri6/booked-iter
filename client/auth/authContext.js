@@ -21,7 +21,7 @@ function AuthProvider({children}) {
       email,
       username
     };
-
+    
     try {
       const response = await auth.signUp(user);
       // TO-DO: Added error handling
