@@ -21,7 +21,8 @@ function AuthProvider({children}) {
       email,
       username
     };
-
+    console.log('hi');
+    
     try {
       const response = await auth.signUp(user);
       // TO-DO: Added error handling
