@@ -59,10 +59,10 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './client/index.html',
-      publicPath: process.env.NODE_ENV === 'production' ? 'build' : 'auto',
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: './client/index.html',
+    //   publicPath: process.env.NODE_ENV === 'production' ? 'build' : 'auto',
+    // }),
   ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension

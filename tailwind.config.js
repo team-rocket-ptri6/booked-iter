@@ -1,5 +1,7 @@
 module.exports = {
-  content: [],
+  content: [
+    "./client/**/*.{js,jsx,ts,tsx}",
+  ],
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
@@ -946,5 +948,7 @@ module.exports = {
     'active',
     'disabled',
   ],
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
