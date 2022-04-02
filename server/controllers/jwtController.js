@@ -12,7 +12,7 @@ jwtController.generateToken = async (req, res, next) => {
       userId: res.locals.user_id
     };
     const options = {
-      expiresIn: '2h',
+      expiresIn: '3d',
     };
     const token = await jwt.sign(payload, process.env.SECRET_KEY, options);
     res.locals.token = token;
@@ -33,7 +33,7 @@ jwtController.verifyToken = async (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1];
     
     if (!token) return res.status(401).send('No authorization!');
-    const decoded = await jwt.verify(token, process.env.SECRET_KEY, { maxAge: '2h' });
+    const decoded = await jwt.verify(token, process.env.SECRET_KEY, { maxAge: '3d' });
     req.user = decoded.userId;
     if (decoded) return next();
   } catch (error) {
