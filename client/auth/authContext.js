@@ -10,6 +10,7 @@ function AuthProvider({children}) {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [description, setDescription] = useState('');
   const [token, setToken] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -19,7 +20,8 @@ function AuthProvider({children}) {
       lastName,
       password,
       email,
-      username
+      username,
+      description
     };
 
     try {
@@ -36,7 +38,7 @@ function AuthProvider({children}) {
 
   });
 
-  const value = { username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, authenticated, setAuthenticated, signUp, token, setToken  };
+  const value = { username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, description, setDescription, authenticated, setAuthenticated, signUp, token, setToken  };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
