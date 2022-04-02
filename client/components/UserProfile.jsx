@@ -19,7 +19,7 @@ function UserProfile(){
       {/*  */}
       <button >Create New Club</button>
       {/*  */}
-    </div>
+   </div>
   );
 }
 

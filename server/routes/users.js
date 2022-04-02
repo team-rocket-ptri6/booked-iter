@@ -1,16 +1,17 @@
 const express = require('express');
-
+const userController = require('../controllers/userController');
 const router = express.Router();
 
 router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', userController.createUser , (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/login', (req, res) => {
+//toDo: error handling for wrong username/password combo
+router.post('/login', userController.loginUser, (req, res) => {
   res.status(200).json(res.locals);
 });
 
