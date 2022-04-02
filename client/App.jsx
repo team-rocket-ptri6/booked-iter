@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from './auth/authContext';
 // import UserProfile from './components/UserProfile';
 
 function App() {
+  const auth = useAuth();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
