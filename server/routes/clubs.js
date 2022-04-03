@@ -1,4 +1,5 @@
 const express = require('express');
+const clubController = require('../controllers/clubController');
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.post('/delete', (req, res) => {
 });
 
 /* /:id routes */
-router.get('/:id', (req, res) => {
+router.get('/:id', clubController.getClub,(req, res) => {
   res.status(200).json(res.locals);
 });
 

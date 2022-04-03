@@ -7,4 +7,6 @@ queries.createUser = `INSERT INTO users (first_name, last_name, email, user_name
 
 queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';   
 
+queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
+
 module.exports = queries;
