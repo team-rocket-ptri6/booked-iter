@@ -43,4 +43,6 @@ WHERE
 RETURNING
 	*;`;
 
+queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
+
 module.exports = queries;

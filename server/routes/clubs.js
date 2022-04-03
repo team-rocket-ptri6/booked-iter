@@ -1,8 +1,11 @@
 const express = require('express');
 const clubController = require('../controllers/clubController');
+<<<<<<< HEAD
 const jwtController = require('../controllers/jwtController');
 const memberController = require('../controllers/memberController');
 const userController = require('../controllers/userController');
+=======
+>>>>>>> b564966 (.env need to fix)
 
 const router = express.Router();
 
@@ -25,7 +28,7 @@ router.post('/delete', (req, res) => {
 });
 
 /* /:id routes */
-router.get('/:id', (req, res) => {
+router.get('/:id', clubController.getClub,(req, res) => {
   res.status(200).json(res.locals);
 });
 
