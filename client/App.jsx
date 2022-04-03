@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth } from './auth/authContext';
+import UserProfile from './components/UserProfile';
+
+import Signup from './components/signup';
+import Login from './components/login';
+import './stylesheets/styles.css';
 
 function App() {
+  const auth = useAuth();
+  const [showLogin, setShowLogin] = useState('false');
+
+  const toggleForm = () => {
+    setShowLogin(!showLogin);
+  };
+
   return (
-    <div>Hello Goblin Sharks!</div>
+    <>
+      {!showLogin ? 
+        (<Signup />) :
+        (<Login />)
+      }
+      {!showLogin ?
+        (<p>Don&apos;t have an account? <span className='underline decoration-sky-500 cursor-pointer' type='button' onClick={toggleForm}>Sign up today!</span></p>) :
+        (<p>Have an account? <span className='underline decoration-sky-500 cursor-pointer' type='button' onClick={toggleForm}>Login here.</span></p>)
+      }
+      <UserProfile /> 
+    </>
   );
 }
 
