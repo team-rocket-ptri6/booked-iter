@@ -16,6 +16,13 @@ FROM
 WHERE
 	email = $1`;
 
+queries.findUser = `SELECT
+	user_id
+FROM
+	users
+WHERE
+	email = $1`;
+
 queries.addMember = `INSERT INTO members (user_id, club_id)
 	VALUES ($1, $2)
 RETURNING
