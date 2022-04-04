@@ -5,6 +5,13 @@ queries.createUser = `INSERT INTO users (first_name, last_name, email, user_name
   RETURNING
     user_id, user_name, first_name`;
 
-queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';   
+queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';  
+
+queries.findUser = `SELECT
+	user_id
+FROM
+	users
+WHERE
+	email = $1`;
 
 module.exports = queries;

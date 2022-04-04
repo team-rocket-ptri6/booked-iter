@@ -45,4 +45,27 @@ userController.loginUser = async (req, res, next) => {
   }
 };
 
+userController.findOneByEmail = async (req, res, next) => {
+  const email = req.body.email;
+  try {
+    const response = await db.query(queries.findUser, [email]);
+    if (response.rows.length < 1) {
+      throw {
+        log: `User with email: ${email} could not be found.`,
+        status: 404,
+        message: `User with email: ${email} could not be found.`,
+      };
+    };
+
+    res.locals = response.rows[0];
+    return next();
+  } catch (error) {
+    return next({
+      log: `userController.findOneByEmail: ERROR: ${error.log}`,
+      message: { err: `${error.message ? error.message : 'userController.findOneByEmail: ERROR: Check server logs for details.'}` },
+      status: error.status ? error.status : 500,
+    });
+  }
+};
+
 module.exports = userController;
