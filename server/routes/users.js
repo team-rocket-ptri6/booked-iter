@@ -14,7 +14,7 @@ router.post('/signup', userController.createUser, jwtController.generateToken, (
 //toDo: error handling for wrong username/password combo
 router.post('/login', userController.loginUser, jwtController.generateToken,(req, res) => {
   res.status(200).json(res.locals);
-});
+}); 
 
 /* /:id routes */
 router.get('/:id', (req, res) => {

@@ -34,7 +34,7 @@ clubController.getClub = async (req, res, next) => {
       message: {
         err: 'clubController.getClub: ERROR: Check server logs for details.',
       },
-    });
+    });    
   }
 };
 
