@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, (req,res) => {
+router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, memberController.setAdmin, (req,res) => {
   res.status(200).json(res.locals);
 });
 

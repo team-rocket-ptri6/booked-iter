@@ -34,4 +34,13 @@ WHERE
 	AND club_id = $2
 `;
 
+queries.setAdmin = `UPDATE
+	members
+SET
+	admin = TRUE
+WHERE
+	member_id = $1
+RETURNING
+	*;`;
+
 module.exports = queries;

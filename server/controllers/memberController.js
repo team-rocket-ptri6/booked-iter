@@ -44,4 +44,20 @@ memberController.addMember = async (req, res, next) => {
   }
 };
 
+memberController.setAdmin = async (req, res, next) => {
+  const { member_id } = res.locals.member;
+  try {
+    const response = await db.query(queries.setAdmin, [member_id]);
+    res.locals.member = response.rows[0];
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `memberController.setAdmin: ERROR: ${error}`,
+      message: { err: 'memberController.setAdmin: ERROR: Check server logs for details.' }
+    });
+  }
+
+};
+
 module.exports = memberController;
