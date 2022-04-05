@@ -4,13 +4,13 @@ import ClubQuestions from './ClubQuestions';
 import ClubBookList from './ClubBookList';
 
 function ClubPage () {
-    return (
-        <div>
-          <ClubInfo />
-          <ClubQuestions />
-          <ClubBookList />         
-        </div>
-    )
+  return (
+    <div>
+      <ClubInfo />
+      <ClubQuestions />
+      <ClubBookList />         
+    </div>
+  );
 }
 
 export default ClubPage;

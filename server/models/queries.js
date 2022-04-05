@@ -16,12 +16,7 @@ FROM
 WHERE
 	email = $1`;
 
-queries.findUser = `SELECT
-	user_id
-FROM
-	users
-WHERE
-	email = $1`;
+queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
 
 queries.addMember = `INSERT INTO members (user_id, club_id)
 	VALUES ($1, $2)

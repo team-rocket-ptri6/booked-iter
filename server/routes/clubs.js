@@ -1,11 +1,17 @@
 const express = require('express');
 const clubController = require('../controllers/clubController');
 <<<<<<< HEAD
+<<<<<<< HEAD
 const jwtController = require('../controllers/jwtController');
 const memberController = require('../controllers/memberController');
 const userController = require('../controllers/userController');
 =======
 >>>>>>> b564966 (.env need to fix)
+=======
+const jwtController = require('../controllers/jwtController');
+const memberController = require('../controllers/memberController');
+const userController = require('../controllers/userController');
+>>>>>>> 19413a3 (Add member middleware)
 
 const router = express.Router();
 
@@ -13,7 +19,11 @@ router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
+<<<<<<< HEAD
 router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, memberController.setAdmin, (req,res) => {
+=======
+router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, (req,res) => {
+>>>>>>> 19413a3 (Add member middleware)
   res.status(200).json(res.locals);
 });
 
