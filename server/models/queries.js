@@ -52,6 +52,15 @@ RETURNING
 
 queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
 
+queries.findMember = `SELECT
+	*
+FROM
+	members
+WHERE
+	user_id = $1
+	AND club_id = $2
+`;
+
 module.exports = queries;
 queries.addMember = `INSERT INTO members (user_id, club_id, admin)
 	VALUES ($1, $2, $3)
