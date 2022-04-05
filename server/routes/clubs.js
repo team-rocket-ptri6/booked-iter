@@ -7,14 +7,16 @@ router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/new', (req,res) => {
+router.post('/new', clubController.createClub, (req,res) => {
   res.status(200).json(res.locals);
 });
 
+//add members
 router.post('/add', (req, res) => {
   res.status(200).json(res.locals);
 });
 
+//delete members
 router.post('/delete', (req, res) => {
   res.status(200).json(res.locals);
 });
