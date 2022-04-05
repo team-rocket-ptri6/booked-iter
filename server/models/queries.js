@@ -25,4 +25,13 @@ queries.createClub = `INSERT INTO clubs (club_name, description)
     VALUES ($1, $2)
   RETURNING club_name, description`;
 
+queries.findMember = `SELECT
+	*
+FROM
+	members
+WHERE
+	user_id = $1
+	AND club_id = $2
+`;
+
 module.exports = queries;
