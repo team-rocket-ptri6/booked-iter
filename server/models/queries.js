@@ -21,4 +21,8 @@ queries.addMember = `INSERT INTO members (user_id, club_id, admin)
 RETURNING
 	*;`;
 
+queries.createClub = `INSERT INTO clubs (club_name, description)
+    VALUES ($1, $2)
+  RETURNING club_name, description`;
+
 module.exports = queries;
