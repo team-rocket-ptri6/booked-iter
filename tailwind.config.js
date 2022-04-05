@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./client/**/*.{js,jsx,ts,tsx}",
+    './client/**/*.{js,jsx,ts,tsx}',
   ],
   presets: [],
   darkMode: 'media', // or 'class'
