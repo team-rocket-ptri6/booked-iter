@@ -20,10 +20,14 @@ router.get('/', (req, res) => {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, memberController.setAdmin, (req,res) => {
 =======
 router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, (req,res) => {
 >>>>>>> 19413a3 (Add member middleware)
+=======
+router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, memberController.setAdmin, (req,res) => {
+>>>>>>> 033cbfd (Sets admin as the member who created the club upon club creation)
   res.status(200).json(res.locals);
 });
 
