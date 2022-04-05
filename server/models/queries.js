@@ -16,14 +16,14 @@ FROM
 WHERE
 	email = $1`;
 
-queries.addMember = `INSERT INTO members (user_id, club_id, admin)
-	VALUES ($1, $2, $3)
+queries.addMember = `INSERT INTO members (user_id, club_id)
+	VALUES ($1, $2)
 RETURNING
 	*;`;
 
 queries.createClub = `INSERT INTO clubs (club_name, description)
     VALUES ($1, $2)
-  RETURNING club_name, description`;
+  RETURNING club_name, description, club_id`;
 
 queries.findMember = `SELECT
 	*

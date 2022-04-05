@@ -1,5 +1,8 @@
 const express = require('express');
 const clubController = require('../controllers/clubController');
+const jwtController = require('../controllers/jwtController');
+const memberController = require('../controllers/memberController');
+const userController = require('../controllers/userController');
 
 const router = express.Router();
 
@@ -7,12 +10,12 @@ router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/new', clubController.createClub, (req,res) => {
+router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, (req,res) => {
   res.status(200).json(res.locals);
 });
 
 //add members
-router.post('/add', (req, res) => {
+router.post('/add', jwtController.verifyToken, memberController.verifyAdmin, userController.findOneByEmail, memberController.addMember, (req, res) => {
   res.status(200).json(res.locals);
 });
 

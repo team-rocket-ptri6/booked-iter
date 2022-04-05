@@ -57,7 +57,7 @@ userController.findOneByEmail = async (req, res, next) => {
       };
     };
 
-    res.locals = response.rows[0];
+    res.locals.user_id = response.rows[0].user_id;
     return next();
   } catch (error) {
     return next({

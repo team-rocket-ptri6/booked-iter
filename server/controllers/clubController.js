@@ -8,6 +8,7 @@ clubController.createClub = async (req, res, next) => {
     const { clubName, clubDescription } = req.body;
     const response = await db.query(queries.createClub, [clubName, clubDescription]);
     res.locals = response.rows[0];
+    res.locals.user_id = req.user;
     return next();    
   } catch (error) {
     return next({

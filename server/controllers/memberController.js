@@ -1,4 +1,3 @@
-const { response } = require('express');
 const db = require('../models/database');
 const queries = require('../models/queries');
 
@@ -10,7 +9,7 @@ memberController.verifyAdmin = async (req, res, next) => {
 
   try {
     const memberResponse = await db.query(queries.findMember, [userId, clubId]);
-    if (response.rows.length < 1 || !response.rows[0].admin) {
+    if (memberResponse.rows.length < 1 || !memberResponse.rows[0].admin) {
       throw {
         log: `Member with ID: ${userId} could not be found in club with ID: ${clubId} or the member is not an admin this club.`,
         status: 404,
@@ -18,6 +17,8 @@ memberController.verifyAdmin = async (req, res, next) => {
       };
     };
 
+    res.locals.club_id = memberResponse.rows[0].club_id;
+    
     return next();
 
   } catch (error) {
@@ -29,5 +30,18 @@ memberController.verifyAdmin = async (req, res, next) => {
   }
 };
 
+memberController.addMember = async (req, res, next) => {
+  const { club_id, user_id } = res.locals;
+  try {
+    const response = await db.query(queries.addMember, [user_id, club_id]);
+    res.locals.member = response.rows[0];
+    return next();
+  } catch (error) {
+    return next({
+      log: `memberController.addMember: ERROR: ${error}`,
+      message: { err: 'memberController.addMember: ERROR: Check server logs for details.' }
+    });
+  }
+};
 
 module.exports = memberController;
