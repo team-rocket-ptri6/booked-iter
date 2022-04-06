@@ -33,12 +33,32 @@ function AuthProvider({children}) {
       
       return callback();
     } catch (error) {
-      
+      return 'The user could not be signed up!';
     }
-
   });
 
-  const value = { username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, description, setDescription, authenticated, setAuthenticated, signUp, token, setToken  };
+  const login = useCallback(async (callback) => {
+    const user = {
+      password,
+      username,
+    };
+
+    try {
+      const response = await auth.login(user);
+      // TO-DO: Added error handling
+      setAuthenticated(auth.isAuthenticated);
+      setPassword('');
+      setToken(response.token);
+      setFirstName(response.first_name);
+      setLastName(response.last_name);
+      setEmail(response.email);
+      return callback();
+    } catch (error) {
+      return 'The user could not be logged in';
+    }
+  });
+
+  const value = { username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, description, setDescription, authenticated, setAuthenticated, signUp, token, setToken, login };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
