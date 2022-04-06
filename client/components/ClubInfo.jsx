@@ -75,7 +75,12 @@ function ClubInfo() {
             {peeps.firstName} 
             <span> 
               {/* This button has no functionality. I added arrow just because it was hard to see */}
-              {editPage ? <> <span>--------></span> <button onClick={ () => alert('this needs to remove a member')} >remove member</button> </> : null }
+              {editPage ? 
+              <> 
+                <span>--------></span> <button onClick={ () => alert('this needs to remove a member')} >remove member</button> 
+                <span>--------></span> <button onClick={ () => alert('this needs to make member admin')} >make admin</button>
+              </> 
+              : null }
             </span>
           </li>
         </ul>  ))}
