@@ -37,7 +37,7 @@ router.post('/add', jwtController.verifyToken, memberController.verifyAdmin, use
 });
 
 //delete members
-router.post('/delete', (req, res) => {
+router.post('/remove', jwtController.verifyToken, memberController.verifyAdmin, memberController.removeMember, (req, res) => {
   res.status(200).json(res.locals);
 });
 

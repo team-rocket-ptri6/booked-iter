@@ -57,7 +57,24 @@ memberController.setAdmin = async (req, res, next) => {
       message: { err: 'memberController.setAdmin: ERROR: Check server logs for details.' }
     });
   }
-
 };
+
+memberController.removeMember = async (req, res, next) => {
+  const { member_id } = req.body;
+  try {
+    const response = await db.query(queries.deleteMember, [member_id]);
+    res.locals.member = response.rows[0];
+
+    return next();
+
+  } catch (error) {
+    return next({
+      log: `memberController.removeMember: ERROR: ${error}`,
+      message: { err: 'memberController.removeMember: ERROR: Check server logs for details.' }
+    });
+  }
+}; 
+
+
 
 module.exports = memberController;
