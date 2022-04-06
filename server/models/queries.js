@@ -68,5 +68,12 @@ queries.addMember = `INSERT INTO members (user_id, club_id, admin)
 RETURNING
 	*;`;
 
+queries.getClubMembers = `SELECT
+	user_id
+FROM
+	members
+WHERE
+	club_id = $1`;
+
 
 module.exports = queries;

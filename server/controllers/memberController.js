@@ -75,6 +75,21 @@ memberController.removeMember = async (req, res, next) => {
   }
 }; 
 
+memberController.getAllClubMembers = async (req, res, next) => {
+  const clubId = req.params.id;
+  try {
+    const response = await db.query(queries.getClubMembers, [clubId]);
+    res.locals.members = response.rows;
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `memberController.removeMember: ERROR: ${error}`,
+      message: { err: 'memberController.removeMember: ERROR: Check server logs for details.' },
+    });
+  }
+
+};
 
 
 module.exports = memberController;
