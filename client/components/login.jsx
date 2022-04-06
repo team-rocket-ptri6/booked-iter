@@ -24,7 +24,7 @@ function Login() {
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " id='userName' type="text" placeholder="Username" value={auth.username} onChange={(e)=>{auth.setUsername(e.target.value);}}/>
 
         <label className="block text-gray-700 text-sm font-bold mb-2 pt-6" htmlFor="password">Password</label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " type="text"  placeholder="******************" id='password' value={auth.password} onChange={(e)=>{auth.setPassword(e.target.value);}}/>
+        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " type="password"  placeholder="******************" id='password' value={auth.password} onChange={(e)=>{auth.setPassword(e.target.value);}}/>
         <div><button form='login' value='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-6 px-4 rounded focus:outline-none focus:shadow-outline" type='submit'>Login</button></div>
       
       </form> 
