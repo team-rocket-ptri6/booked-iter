@@ -11,6 +11,7 @@ clubController.createClub = async (req, res, next) => {
       clubDescription,
     ]);
     res.locals = response.rows[0];
+    res.locals.user_id = req.user;
     return next();
   } catch (error) {
     return next({

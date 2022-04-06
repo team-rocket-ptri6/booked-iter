@@ -3,7 +3,9 @@ import ClubInfo from './ClubInfo';
 import ClubQuestions from './ClubQuestions';
 import ClubBookList from './ClubBookList';
 
+
 function ClubPage() {
+
   return (
     <div>
       <ClubInfo />
