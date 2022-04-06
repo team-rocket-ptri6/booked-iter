@@ -28,7 +28,7 @@ router.post('/delete', (req, res) => {
 });
 
 /* /:id routes */
-router.get('/:id', clubController.getClub,(req, res) => {
+router.get('/:id',(req, res) => {
   res.status(200).json(res.locals);
 });
 
