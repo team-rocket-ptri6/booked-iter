@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from './auth/authContext';
 import UserProfile from './components/UserProfile';
 
-import Signup from './components/signup';
-import Login from './components/login';
+import Signup from './components/Signup';
+import Login from './components/Login';
 import './stylesheets/styles.css';
 import ClubPage from './components/ClubPage';
 
