@@ -2,17 +2,33 @@ import React, { useState, useContext } from 'react';
 import {useAuth} from '../auth/authContext';
 import axios from 'axios';
 
+const clubs = [
+  {
+    club_id: 47,
+    member_id: 20,
+    name: 'Kitty Club',
+    description: 'Place to share books about cats and funny images'
+  },
+  {
+    club_id: 1,
+    member_id: 20,
+    name: 'Rachelle Club',
+    description: 'Love reading nonfiction'
+  },
+  {
+    club_id: 5,
+    member_id: 20,
+    name: 'Patrick Club',
+    description: 'Place to read books'
+  }
+];
+
 function UserProfile(){
   const auth = useAuth();
   const [clubName, setClubName] = useState('');
   const [clubDescription, setClubDescription] = useState('');
   const [show, setShow] = useState(false);
-  const [clubs, setClubs] = useState([]);
-  
-  
-  auth.firstName = 'Bob';
-  auth.lastName = 'Saget';
-  auth.description = 'I am super cool';
+  // const [clubs, setClubs] = useState([]);
 
   async function createClub (e){
     e.preventDefault();
@@ -24,11 +40,6 @@ function UserProfile(){
     }).then((response) => {
       if (response) {
         // const club_id = response.data.club_id; //use club_id as route path
-        // setClubs(clubs.concat({
-        //   id: response.data.club_id,
-        //   name: response.data.club_name,
-        //   description: response.data.description
-        // }));
         // setClubs((prevClubs) => [
         //   ...prevClubs,
         //   {
@@ -46,17 +57,20 @@ function UserProfile(){
 
   return (
     <div>
-      <h1>user profile</h1>
+      <h1>Welcome To MyBookClub.com,  {auth.firstName}!</h1>
       {/* <h2>User Image</h2> stretch goal */}
-      
-      <h2>Welcome {auth.firstName}</h2>
-      {/*  */}
-      <h2>Description </h2>
-      <p>{auth.description}</p>
-      {/*  */}
-      {/* <h2>My Friends</h2> stretch goal
-       */}
+      <h2>A place to promote our love of literature in a positive, nurturing environment! </h2>
+      {/* <h2>My Friends</h2> stretch goal*/}
       <h2>My Clubs</h2>
+      <ul>
+        {clubs.map((club) => (
+          // key needs to be unique id
+          <li key={club.club_id}>
+            <span>name: {club.name}</span>{' '}
+            <span>description: {club.description}</span>
+          </li>
+        ))}
+      </ul>
       <button onClick = {() => setShow(!show)}>Create New Club</button>
       { show && <form style={{display: 'flex', flexDirection: 'column'}} id='createclub' onSubmit={(e) => createClub(e)} >
         <input type="text" placeholder="Club Name" value={clubName} onChange={(e)=> setClubName(e.target.value)}/>
