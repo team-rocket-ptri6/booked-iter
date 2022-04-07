@@ -54,8 +54,8 @@ function UserProfile(){
     });
   }
 
-  function getBookClub(userID){
-    console.log(userID);
+  function getBookClub(club_id){
+    console.log(club_id);
   }
 
   return (
