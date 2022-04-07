@@ -65,4 +65,40 @@ WHERE
 `;
 
 
+queries.addQuestion = `WITH new_question AS (
+INSERT INTO questions (question, member_id)
+		VALUES ($1, $2)
+	RETURNING
+		*)
+	SELECT
+		new_question.question as question,
+		user_info."firstName" as "firstName",
+		user_info."lastName" as "lastName"
+	FROM
+		new_question
+		JOIN (
+			SELECT
+				members.member_id AS member_id, members.user_id AS user_id,
+				users.first_name AS "firstName",
+				users.last_name AS "lastName",
+				users.user_name AS username
+			FROM
+				members
+				JOIN users ON members.user_id = users.user_id) AS user_info ON new_question.member_id = user_info.member_id`;
+
+queries.getClubMembers = `SELECT
+	members.member_id as member_id,
+	members.user_id as user_id,
+	users.first_name as "firstName",
+	users.last_name as "lastName",
+	users.user_name as username,
+	members.admin as "isAdmin"
+FROM
+	members
+	JOIN users ON members.user_id = users.user_id
+WHERE
+	club_id =  $1`;
+
+
+
 module.exports = queries;

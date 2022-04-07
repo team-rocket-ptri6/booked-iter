@@ -27,7 +27,7 @@ router.post('/remove', jwtController.verifyToken, memberController.verifyAdmin, 
 });
 
 /* /:id routes */
-router.get('/:id',(req, res) => {
+router.get('/:id', jwtController.verifyToken, clubController.getClub, memberController.getAllClubMembers, (req, res) => {
   res.status(200).json(res.locals);
 });
 
