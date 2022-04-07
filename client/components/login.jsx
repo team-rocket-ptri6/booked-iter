@@ -1,28 +1,21 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../auth/authContext'; 
 import Logo from '../assets/logo.png'
 
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const auth = useAuth();
+  const navigate = useNavigate();
 
-  const [loginUsername, setLoginUsername] = useState('');
-  const [loginPassword, setLoginPassword] = useState(''); 
+
 
   //todo: error handling display on frontend
-  const login = () => {
-    axios.post('http://localhost:8080/users/login', {
-      username: loginUsername,
-      password: loginPassword, 
-    }).then((response) => {
-      console.log(response);
-      if (response.data.length > 0){
-        console.log('successful login');
-      }
-    });
-  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await auth.login(() => navigate('/profile'));
+  }
 
   return (
     <><div className="formcontainer">

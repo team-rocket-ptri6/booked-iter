@@ -1,30 +1,19 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 import { useAuth } from '../auth/authContext'; 
 import Logo from '../assets/logo.png'
 
 
 function Signup() {
   const auth = useAuth();
+  const navigate = useNavigate();
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const signUp = () => {
-    axios.post('http://localhost:8080/users/signup', {
-      username: username,
-      password: password, 
-      email: email, 
-      firstName: firstName,
-      lastName: lastName, 
-    }).then((response) => {
-      console.log(response);
-    });
-  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await auth.signUp(() => navigate('/profile'));
+  }
 
   return (
       <div className="formContainer">
