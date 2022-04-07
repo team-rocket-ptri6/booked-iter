@@ -1,1 +1,25 @@
-//Includes club info, members, currently reading book, to read list, questions, calendar, admin button to remove/add members, member button to remove self, return to profile button
+import React, { useState } from 'react';
+import ClubInfo from './ClubInfo';
+import ClubQuestions from './ClubQuestions';
+import ClubBookList from './ClubBookList';
+
+
+
+function ClubPage() {
+  const [isMember, setIsMember] = useState(true);
+
+  return (
+    
+    <div>
+      {!isMember ? 'We\'re sorry, but you are not a member of this club' :
+     ( <span>
+      <ClubInfo />
+      {/* <ClubQuestions /> */}
+      {/* <ClubBookList /> */}
+      </span>)
+      } 
+    </div>
+  );
+}
+
+export default ClubPage;
