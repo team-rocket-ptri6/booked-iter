@@ -17,14 +17,15 @@ function App() {
 
   return (
     <>
-      {!showLogin ? 
+      {/* {!showLogin ? 
         (<Signup />) :
         (<Login />)
       }
       {showLogin ?
         (<p>Don&apos;t have an account? <span className='underline decoration-sky-500 cursor-pointer' type='button' onClick={toggleForm}>Sign up today!</span></p>) :
         (<p>Have an account? <span className='underline decoration-sky-500 cursor-pointer' type='button' onClick={toggleForm}>Login here.</span></p>)
-      }
+      } */}
+      <ClubPage />
     </>
   );
 }
