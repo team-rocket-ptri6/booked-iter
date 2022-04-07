@@ -88,8 +88,24 @@ memberController.getAllClubMembers = async (req, res, next) => {
       message: { err: 'memberController.removeMember: ERROR: Check server logs for details.' },
     });
   }
-
 };
+
+// This process feels repetitive and can be bundled into the get all members function but not sure if there is enough case for them to be separate.
+// memberController.verifyMembership = async (req, res, next) => {
+//   const clubId = req.params.id;
+//   const userId = req.user; 
+//   try {
+//     const response = await await db.query(queries.findMember, [userId, clubId]);
+//     res.locals.members = response.rows; const userId = req.user;
+
+//     return next();
+//   } catch (error) {
+//     return next({
+//       log: `memberController.removeMember: ERROR: ${error}`,
+//       message: { err: 'memberController.removeMember: ERROR: Check server logs for details.' },
+//     });
+//   }
+// };
 
 
 module.exports = memberController;
