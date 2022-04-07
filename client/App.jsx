@@ -17,10 +17,10 @@ function App() {
   };
 
   return (
-    <div class='book'>
-      <div class="back">back</div>
+    <div className='book'>
+      {/* <div className="back">back</div> */}
 
-      <div class="page10">
+      <div className="page10">
         {!showLogin ?
         (<Signup  />) :
         (<Login />)
@@ -30,16 +30,16 @@ function App() {
           (<p>Have an account? <span type='button' onClick={toggleForm}>Login here.</span></p>)
         }
       </div>
-      <div class="page9"></div>
-      <div class="page8"></div>
-      <div class="page7"></div>
-      <div class="page6"></div>
-      <div class="page5"></div>
-      <div class="page4"></div>
-      <div class="page3"></div>
-      <div class="page2"></div>
-      <div class="page1"></div>
-      <div class="front">
+      <div className="page9"></div>
+      <div className="page8"></div>
+      <div className="page7"></div>
+      <div className="page6"></div>
+      <div className="page5"></div>
+      <div className="page4"></div>
+      <div className="page3"></div>
+      <div className="page2"></div>
+      <div className="page1"></div>
+      <div className="front">
       <img className="logo" src={Logo}/>
       </div>
         

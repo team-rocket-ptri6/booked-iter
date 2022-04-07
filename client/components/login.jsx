@@ -23,7 +23,7 @@ function Login() {
       <input type="text" placeholder="Username..." onChange={(e)=>{setLoginUsername(e.target.value);}}/>
       <br/>
       <input type="text" placeholder="Password..." onChange={(e)=>{setLoginPassword(e.target.value);}}/>
-      <button className="button" onClick={login}>Login</button>
+      <button className="button" onClick={Login}>Login</button>
     </div> 
     </>
   );

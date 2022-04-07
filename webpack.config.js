@@ -18,7 +18,7 @@ module.exports = {
     host: 'localhost',
     port: 8080,
     // watchFiles: {
-    //   paths: ['client/**'],
+      // paths: ['client/**'],
     //   options: {
     //     usePolling: false,
     //   },
@@ -52,9 +52,14 @@ module.exports = {
         },
       },
       {
-        test: /\.s?css/,
+        test: /\.(s?css)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.png$/,
+        exclude: /node_modules/,
+        use: ['file-loader'],
       },
     ],
   },

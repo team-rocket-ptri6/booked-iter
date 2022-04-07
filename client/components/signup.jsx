@@ -28,10 +28,10 @@ function Signup() {
         <input type="text" onChange={(e)=>{setUsername(e.target.value);}}/>
         <label>Password</label>
         <input type="text" onChange={(e)=>{setPassword(e.target.value);}}/>
-        <button className="button" onClick={signUp}>Register</button>
+        <button className="button" onClick={Signup}>Register</button>
       </div>
     
-  );
+  );s
 }
     
 export default Signup;
