@@ -69,6 +69,7 @@ RETURNING
 	*;`;
 
 queries.getClubMembers = `SELECT
+	members.member_id as member_id,
 	members.user_id as user_id,
 	users.first_name as "firstName",
 	users.last_name as "lastName",
