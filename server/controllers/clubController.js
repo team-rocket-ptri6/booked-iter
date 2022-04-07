@@ -24,8 +24,7 @@ clubController.createClub = async (req, res, next) => {
 
 clubController.getClub = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const response = await db.query(queries.getClub, [id]);
+    const { clubName, clubDescription } = req.body;
     res.locals = response.rows[0];
     return next();
   } catch (error) {

@@ -26,7 +26,7 @@ function ClubInfo() {
       <div>Display Members</div>
       <button>Add Member</button>
       <button>Remove Member</button>
-      <button>Edit Club Page</button>
+      <button>Edit Page</button>
     </div>
   );
 }

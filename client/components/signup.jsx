@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../auth/authContext'; 
+import Logo from '../assets/logo.png'
+
 
 function Signup() {
   const auth = useAuth();
@@ -25,12 +27,11 @@ function Signup() {
   };
 
   return (
-    <><div>Welcome to MyBookClub!</div>
-      <div className="signup">
-        <h1>Sign Up</h1>
-        <label>Firstname</label>
+      <div className="formContainer">
+        {/* <img src={Logo} className="logo"/> */}
+        <label>First Name</label>
         <input type="text" onChange={(e)=>{setFirstName(e.target.value);}}/>
-        <label>Lastname</label>
+        <label>Last Name</label>
         <input type="text" onChange={(e)=>{setLastName(e.target.value);}}/>
         <label>Email</label>
         <input type="text" onChange={(e)=>{setEmail(e.target.value);}}/>
@@ -38,9 +39,9 @@ function Signup() {
         <input type="text" onChange={(e)=>{setUsername(e.target.value);}}/>
         <label>Password</label>
         <input type="text" onChange={(e)=>{setPassword(e.target.value);}}/>
-        <button onClick={signUp}>Register</button>
+        <button className="button" onClick={signUp}>Register</button>
       </div>
-    </>
+    
   );
 }
     

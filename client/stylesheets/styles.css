@@ -1,3 +1,200 @@
-@tailwind base;
-@tailwind components;
+/* @tailwind base;
+@tailwind components 
 @tailwind utilities;
+
+
+.container{
+    /* background-color: rgb(226, 230, 174); */
+    /* background-color: rgb(236, 241, 245); */
+    /* border: 10px solid rgb(103, 54, 75) */
+/* }
+
+.formContainer {
+    background-color: rgb(171, 170, 130);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 200px;
+    margin-right: 200px;
+    border: 5px solid rgb(147, 77, 114)
+}
+
+.logo {
+    border-radius: 50%;
+    width: 20%;
+    height: auto;
+    margin: auto;
+    display: block;
+    padding: 10px;
+    
+}
+
+.button {
+    background-color: rgb(147, 77, 114);
+      padding: 10px 25px;
+      text-align:center;
+      color: rgb(236, 241, 245);
+      margin: 10px;
+      border: 2px solid rgb(147, 77, 114);
+      font-size: 16px;
+      border-radius: 8px;
+      /* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); */
+      /* color: rgb(10, 10, 10); */
+/* } */
+
+.logo {
+    /* border-radius: 50%; */
+    width: 85%;
+    height: auto;
+    /* margin: auto; */
+    /* display: block; */
+    padding: 30px;
+    padding-top: 70px;
+    
+    
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    background: #ccc;
+  }
+  
+  .book {
+    transform-style: preserve-3d;
+    position: center;
+    height: 350px;
+    cursor: pointer;
+    backface-visibility: visible;
+  }
+  
+  .front, .back, .page1, .page2, .page3, .page4, .page5, .page6, .page7, .page8, .page9, .page10 {
+    transform-style: preserve-3d;
+    position: absolute;
+    width: 400px;
+    height: 150%;
+    top: 0; left: 0;
+    transform-origin: left center;
+    transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
+  }
+  
+  .front, .back {
+    background: rgb(174,208,253);
+    border: 5px double rgb(169, 40, 42);
+  }
+  
+  .front, .page1, .page3, .page5 {
+    border-bottom-right-radius: .5em;
+    border-top-right-radius: .5em;
+  }
+  
+  .back, .page2, .page4, .page6 {
+    border-bottom-right-radius: .5em;
+    border-top-right-radius: .5em;
+  }
+  
+  .page1 { 
+    background: #efefefb0;
+  }
+  
+  .page2 {
+    background: #efefef;
+  }
+  
+  .page3 {
+    background: #f5f5f5;
+  }
+  
+  .page4 {
+    background: #f5f5f5;
+    z-index: 0;
+  }
+  
+  .page5 {
+    background: #fafafa;
+  }
+  
+  .page6 {
+    background: #fdfdfd;
+  }
+
+  .page7 {
+    background: #fdfdfd;
+  }
+
+  .page8 {
+    background: #fdfdfd;
+  }
+
+  .page9 {
+    background: #fdfdfd;
+  }
+
+  .page10 {
+    background: #fdfdfd;
+  }
+
+  
+  .book:hover .front {
+    transform: rotateY(-180deg) scale(1.1); 
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  } 
+  
+  .book:hover .page1 {
+    transform: rotateY(-175deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+  
+  .book:hover .page2 {
+    transform: rotateY(-170deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+  
+  .book:hover .page3 {
+    transform: rotateY(-165deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+  
+  .book:hover .page4 {
+    transform: rotateY(-160deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+  
+  .book:hover .page5 {
+    transform: rotateY(-155deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+
+  .book:hover .page6 {
+    transform: rotateY(-150deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+
+  .book:hover .page7 {
+    transform: rotateY(-145deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+
+  .book:hover .page8 {
+    transform: rotateY(-140deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+
+  .book:hover .page9 {
+    transform: rotateY(-135deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+  }
+  
+  .book:hover .page10 {
+    transform: rotateY(0deg) scale(1.1);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+   
+  }
+  
+  .book:hover .back {
+    transform: rotateY(0deg) scale(1.1);
+  }
