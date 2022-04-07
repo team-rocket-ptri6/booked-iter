@@ -4,6 +4,8 @@ import { useAuth } from '../auth/authContext';
 import Logo from '../assets/logo.png'
 
 import { useNavigate } from 'react-router-dom';
+import Logo from '../assets/logo.png'
+
 
 function Login() {
   const auth = useAuth();
