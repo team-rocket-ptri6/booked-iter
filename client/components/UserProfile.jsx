@@ -54,6 +54,9 @@ function UserProfile(){
     });
   }
 
+  function getBookClub(userID){
+    console.log(userID);
+  }
 
   return (
     <div>
@@ -68,6 +71,7 @@ function UserProfile(){
           <li key={club.club_id}>
             <span>name: {club.name}</span>{' '}
             <span>description: {club.description}</span>
+            <button onClick={() => getBookClub(club.club_id)}>Open Book Club</button>
           </li>
         ))}
       </ul>
