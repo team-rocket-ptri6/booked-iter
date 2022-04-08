@@ -56,70 +56,79 @@ function ClubInfo() {
 
   return (
     <div>
+        
       <h1>{clubName}</h1>
+
       <br />
 
       <div>
-        <h2>A Little about {clubName}</h2> 
+
+        <h2>A Little about {clubName}</h2>
+        <button
+          className="button"
+          value={editPage}
+          onClick={(e) => {
+            e.preventDefault();
+            setEditPage(!editPage);
+          }}
+        >
+          Edit Club Page
+        </button>
+
         <p>{clubDescription}</p>
-        
+
+
         {/* This button has no functionality */}
-        <span> {editPage ? <button onClick={ () => alert('this needs to edit description')} >Edit description</button> : null } </span>
+        <span> {editPage ? <button onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
       </div>
       <br />
 
       <div>
         <p>Who is reading with us?</p>
         {members.map((peeps) => (<ul key={peeps.user_id}>
-          <li>
-            {peeps.firstName} 
-            <span> 
+          <ul>
+            {peeps.firstName}
+            <span>
               {/* This button has no functionality. I added arrow just because it was hard to see */}
-              {editPage ? 
-              <> 
-                <span>--------></span> <button onClick={ () => alert('this needs to remove a member')} >remove member</button> 
-                <span>--------></span> <button onClick={ () => alert('this needs to make member admin')} >make admin</button>
-              </> 
-              : null }
+              {editPage ?
+                <>
+                  <br></br> <button className="button" onClick={() => alert('this needs to remove a member')} >remove member</button>
+                  <span></span> <button className="button" onClick={() => alert('this needs to make member admin')} >make admin</button>
+                </>
+                : null}
             </span>
-          </li>
-        </ul>  ))}
+          </ul>
+        </ul>))}
 
       </div>
       <br />
 
 
-      {!isAdmin ? null : 
-      <>
-      
-      <form  > {/* This is what I would put within the form brackets, but no function has been created yet: action="submit" onSubmit={onSubmit}*/}
-        <input 
-          type="email" 
-          value={addMember}
-          placeholder='New member email' 
-          onChange={(e) => setAddMember(e.target.value)}
-        />
+      {!isAdmin ? null :
+        <>
 
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            alert('this submits a request to add member. I figured email would be the best look up')
-          }}
-        >
-          Add Member
-        </button>
-      </form>  
-      <br />
-      <button 
-        value={editPage} 
-        onClick={(e) => {
-          e.preventDefault();
-          setEditPage(!editPage);
-        }}
-      >
-          Edit Club Page
-      </button> 
-      </>}
+          <form> {/* This is what I would put within the form brackets, but no function has been created yet: action="submit" onSubmit={onSubmit}*/}
+            <input
+              className="text"
+              type="email"
+              value={addMember}
+              placeholder='New member email'
+              onChange={(e) => setAddMember(e.target.value)}
+            />
+
+            <button
+              className="button"
+              onClick={(e) => {
+                e.preventDefault();
+                alert('this submits a request to add member. I figured email would be the best look up')
+              }}
+            >
+              Add Member
+            </button>
+          </form>
+          <br />
+
+        </>}
     </div>
   );
 }

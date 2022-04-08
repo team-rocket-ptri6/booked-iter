@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import {useAuth} from '../auth/authContext';
 import axios from 'axios';
+import Small from '../assets/smalllogo.png'
 
 const clubs = [
   {
@@ -60,26 +61,29 @@ function UserProfile(){
 
   return (
     <div>
-      <h1>Welcome To MyBookClub.com,  {auth.firstName}!</h1>
+      <img className="small" src={Small}/>
+      <h1 className="text">Welcome to Booked, {auth.firstName}!</h1>
       {/* <h2>User Image</h2> stretch goal */}
-      <h2>A place to promote our love of literature in a positive, nurturing environment! </h2>
+      <h2 className="leftText">A place to promote our love of literature in a positive, nurturing environment! </h2>
       {/* <h2>My Friends</h2> stretch goal*/}
-      <h2>My Clubs</h2>
+      
+      <h2 className="leftText">My Clubs</h2>
       <ul>
         {clubs.map((club) => (
           // key needs to be unique id
           <li key={club.club_id}>
             <span>name: {club.name}</span>{' '}
             <span>description: {club.description}</span>
-            <button onClick={() => getBookClub(club.club_id)}>Open Book Club</button>
+            <button className="button" onClick={() => getBookClub(club.club_id)}>Open Book Club</button>
           </li>
         ))}
       </ul>
-      <button onClick = {() => setShow(!show)}>Create New Club</button>
+
+      <button className="button" onClick = {() => setShow(!show)}>Create New Club</button>
       { show && <form style={{display: 'flex', flexDirection: 'column'}} id='createclub' onSubmit={(e) => createClub(e)} >
         <input type="text" placeholder="Club Name" value={clubName} onChange={(e)=> setClubName(e.target.value)}/>
         <textarea rows="4" cols="50" placeholder="Tell us about your club!" value={clubDescription} onChange={(e)=> setClubDescription(e.target.value)}></textarea>
-        <button form='createclub' type='submit'  >submit</button> <button onClick = {() => setShow(show)}>cancel</button> 
+        <button className="button" orm='createclub' type='submit'  >Submit</button> <button className="button" onClick = {() => setShow(show)}>Cancel</button> 
       </form> }
     </div>
   );
