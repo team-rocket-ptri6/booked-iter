@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../auth/authContext'; 
 import { useNavigate } from 'react-router-dom';
-import Small from '../assets/smalllogo.png'
+import Small from '../assets/smalllogo.png';
 
 function Login() {
   const auth = useAuth();
@@ -35,7 +35,7 @@ function Login() {
       
       </form> 
     </div>
-  )
+  );
    
 }
     

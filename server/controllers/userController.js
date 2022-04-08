@@ -6,7 +6,7 @@ const SALT_WORK_FACTOR = 10;
 
 const userController = {};
 
-const regex = new RegExp('\W');
+const regex = new RegExp('\s');
 
 userController.createUser = async (req, res, next) => {
   try {
