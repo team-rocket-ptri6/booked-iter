@@ -121,5 +121,14 @@ FROM
 		WHERE
 			clubs.club_id = $1) AS members ON questions.member_id = members.member_id
 `;
+queries.getClubsByUser = `SELECT
+	clubs.club_id as club_id,
+	clubs.club_name as "clubName",
+	clubs.description as description
+FROM
+	members
+	JOIN clubs ON members.club_id = clubs.club_id
+WHERE
+	members.user_id = $1`;
 
 module.exports = queries;

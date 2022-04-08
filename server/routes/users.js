@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/userController');
 const jwtController = require('../controllers/jwtController');
+const clubController = require('../controllers/clubController');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -16,6 +17,10 @@ router.post('/login', userController.loginUser, jwtController.generateToken,(req
   res.status(200).json(res.locals);
 }); 
 
+router.get('/clubs', jwtController.verifyToken, clubController.getClubsByUser, (req, res) => {
+  res.status(200).json(res.locals);
+});
+
 /* /:id routes */
 router.get('/:id', (req, res) => {
   res.status(200).json(res.locals);
@@ -28,5 +33,6 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   res.status(200).json(res.locals);
 });
+
 
 module.exports = router;
