@@ -41,14 +41,14 @@ function ClubInfo(props) {
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState();
 
- const params = useParams();
+  const params = useParams();
   useEffect(()=>{
     axios.get(`http://localhost:8080/clubs/${params.id}`, {headers: {
       'Authorization': `Bearer ${auth.token}` } 
     })
-    .then((response) => {
-    console.log(response)
-    });
+      .then((response) => {
+        console.log(response)
+      });
     // console.log(params.id)
   },[params.id]);
 
@@ -87,11 +87,11 @@ function ClubInfo(props) {
             <span> 
               {/* This button has no functionality. I added arrow just because it was hard to see */}
               {editPage ? 
-              <> 
-                <span>--------></span> <button onClick={ () => alert('this needs to remove a member')} >remove member</button> 
-                <span>--------></span> <button onClick={ () => alert('this needs to make member admin')} >make admin</button>
-              </> 
-              : null }
+                <> 
+                  <button onClick={ () => alert('this needs to remove a member')} >remove member</button> 
+                  <button onClick={ () => alert('this needs to make member admin')} >make admin</button>
+                </> 
+                : null }
             </span>
           </li>
         </ul>  ))}
@@ -101,36 +101,36 @@ function ClubInfo(props) {
 
 
       {!isAdmin ? null : 
-      <>
+        <>
       
-      <form  > {/* This is what I would put within the form brackets, but no function has been created yet: action="submit" onSubmit={onSubmit}*/}
-        <input 
-          type="email" 
-          value={addMember}
-          placeholder='New member email' 
-          onChange={(e) => setAddMember(e.target.value)}
-        />
+          <form  > {/* This is what I would put within the form brackets, but no function has been created yet: action="submit" onSubmit={onSubmit}*/}
+            <input 
+              type="email" 
+              value={addMember}
+              placeholder='New member email' 
+              onChange={(e) => setAddMember(e.target.value)}
+            />
 
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            alert('this submits a request to add member. I figured email would be the best look up')
-          }}
-        >
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                alert('this submits a request to add member. I figured email would be the best look up')
+              }}
+            >
           Add Member
-        </button>
-      </form>  
-      <br />
-      <button 
-        value={editPage} 
-        onClick={(e) => {
-          e.preventDefault();
-          setEditPage(!editPage);
-        }}
-      >
+            </button>
+          </form>  
+          <br />
+          <button 
+            value={editPage} 
+            onClick={(e) => {
+              e.preventDefault();
+              setEditPage(!editPage);
+            }}
+          >
           Edit Club Page
-      </button> 
-      </>}
+          </button> 
+        </>}
     </div>
   );
 }
