@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { useAuth } from '..auth/authConext';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../auth/authContext';
 
 const members = [
   {
@@ -30,29 +31,41 @@ const members = [
   },
 ];
 
-let about = 'iramisu gummi bears tootsie roll gingerbread chocolate bar sweet roll. Shortbread fruitcake sweet cheesecake shortbread. Jujubes dragée biscuit apple pie cotton candy cake gummi bears pudding. ';
+// let about = 'iramisu gummi bears tootsie roll gingerbread chocolate bar sweet roll. Shortbread fruitcake sweet cheesecake shortbread. Jujubes dragée biscuit apple pie cotton candy cake gummi bears pudding. ';
 
-function ClubInfo() {
-  //const auth = useAuth();
+function ClubInfo(props) {
+  const auth = useAuth();
   const [clubName, setClubName] = useState('Super Awesome Book Club');
-  const [clubDescription, setClubDescription] = useState(about);
+  const [clubDescription, setClubDescription] = useState('');
+  const [members, setMembers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState();
 
+  const params = useParams();
+  useEffect(()=>{
+    axios.get(`http://localhost:8080/clubs/${params.id}`, {headers: {
+      'Authorization': `Bearer ${auth.token}` } 
+    })
+      .then((response) => {
+        setClubName(response.data.club_name);
+        setClubDescription(response.data.description);
+        setMembers(response.data.members);
+      });
+  },[params.id]);
 
   //   const club = setClubName('Cool Club');
-  const club = (id) => {
-    axios
-      .get(`http://localhost:8080/clubs/:${id}`, {
-        clubName,
-        clubDescription,
-      })
-      .then((response) => {
-        console.log(response)
-        //ADD WHAT WE NEED HERE
-      });
-  };
+  // const club = (id) => {
+  //   axios
+  //     .get(`http://localhost:8080/clubs/:${id}`, {
+  //       clubName,
+  //       clubDescription,
+  //     })
+  //     .then((response) => {
+  //       console.log(response)
+  //       //ADD WHAT WE NEED HERE
+  //     });
+  // };
 
   return (
     <div>

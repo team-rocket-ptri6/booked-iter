@@ -6,6 +6,7 @@ import RequireAuth from './components/RequireAuth';
 import UserProfile from './components/UserProfile';
 import App from './App';
 import ClubInfo from './components/ClubInfo';
+import ClubPage from './components/ClubPage';
 
 render(
   <BrowserRouter>
@@ -16,6 +17,11 @@ render(
         <Route path='/profile' element={
           <RequireAuth>
             <UserProfile />
+          </RequireAuth>
+        } />
+        <Route path='/:id' element={
+          <RequireAuth>
+            <ClubPage />
           </RequireAuth>
         } />
       </Routes>
