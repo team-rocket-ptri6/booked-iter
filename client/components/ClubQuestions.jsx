@@ -1,8 +1,13 @@
-import React from 'react';
+import React , {useState}from 'react';
 
 function ClubQuestions() {
+  const [newQuestion, setNewQuestion] = useState('');
+
   return (
-    <div>ClubQuestions</div>
+    <div>
+      <label htmlFor="newQuestion">Post your question here...</label>
+      <input type="text" />
+    </div>
   );
 }
 
