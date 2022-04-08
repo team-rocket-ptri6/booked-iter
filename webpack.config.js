@@ -56,6 +56,11 @@ module.exports = {
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.png/,
+        exclude: /node_modules/,
+        use: ['file-loader'],
+      },
     ],
   },
   plugins: [
