@@ -19,4 +19,18 @@ questionController.addQuestion = async (req, res, next) => {
 
 };
 
+questionController.getClubQuestions = async (req, res, next) => {
+  const { clubId } = req.params;
+  try {
+    const response = await db.query(queries.getClubQuestions, [clubId]);
+    res.locals.questions = response.rows;
+    return next();
+  } catch (error) {
+    return next({
+      log: `questionController.getClubQuestions: ERROR: ${error}`,
+      message: { err: 'questionController.getClubQuestions: ERROR: Check server logs for details.' }
+    });
+  }
+};
+
 module.exports = questionController;

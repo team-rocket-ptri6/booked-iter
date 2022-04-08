@@ -99,6 +99,28 @@ FROM
 WHERE
 	club_id =  $1`;
 
+queries.getClubQuestions = `SELECT
+	question_id,
+	question,
+	members.first_name AS "firstName",
+	members.last_name AS "lastName",
+	user_id
+FROM
+	questions
+	JOIN (
+		SELECT
+			members.member_id AS member_id,
+			members.user_id AS user_id,
+			users.first_name AS first_name,
+			users.last_name AS last_name,
+			users.user_name AS username
+		FROM
+			members
+			JOIN clubs ON members.club_id = clubs.club_id
+			JOIN users ON members.user_id = users.user_id
+		WHERE
+			clubs.club_id = $1) AS members ON questions.member_id = members.member_id
+`;
 queries.getClubsByUser = `SELECT
 	clubs.club_id as club_id,
 	clubs.club_name as "clubName",
