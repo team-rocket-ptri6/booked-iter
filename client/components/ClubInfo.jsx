@@ -56,15 +56,14 @@ function ClubInfo() {
 
   return (
     <div>
-      <h1>{clubName}</h1>
-      <br />
+      <h1 className="h3">{clubName}</h1>
 
       <div>
         <h2>A Little about {clubName}</h2> 
         <p>{clubDescription}</p>
         
         {/* This button has no functionality */}
-        <span> {editPage ? <button onClick={ () => alert('this needs to edit description')} >Edit description</button> : null } </span>
+        <span> {editPage ? <button className="button" onClick={ () => alert('this needs to edit description')} >Edit description</button> : null } </span>
       </div>
       <br />
 
@@ -77,8 +76,8 @@ function ClubInfo() {
               {/* This button has no functionality. I added arrow just because it was hard to see */}
               {editPage ? 
               <> 
-                <span>--------</span> <button onClick={ () => alert('this needs to remove a member')} >remove member</button> 
-                <span>--------</span> <button onClick={ () => alert('this needs to make member admin')} >make admin</button>
+                <span>--------</span> <button className="button" onClick={ () => alert('this needs to remove a member')} >remove member</button> 
+                <span>--------</span> <button className="button" onClick={ () => alert('this needs to make member admin')} >make admin</button>
               </> 
               : null }
             </span>
@@ -100,7 +99,7 @@ function ClubInfo() {
           onChange={(e) => setAddMember(e.target.value)}
         />
 
-        <button
+        <button className="button"
           onClick={(e) => {
             e.preventDefault();
             alert('this submits a request to add member. I figured email would be the best look up')
@@ -110,7 +109,7 @@ function ClubInfo() {
         </button>
       </form>  
       <br />
-      <button 
+      <button className="button"
         value={editPage} 
         onClick={(e) => {
           e.preventDefault();

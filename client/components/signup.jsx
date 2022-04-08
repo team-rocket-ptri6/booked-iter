@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../auth/authContext'; 
-import Logo from '../assets/logo.png'
+import { useAuth } from '../auth/authContext';
+import SmallLogo from '../assets/smalllogo.png' 
 
 
 function Signup() {

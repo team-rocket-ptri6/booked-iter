@@ -5,6 +5,7 @@ import Logo from '../assets/logo.png'
 
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png'
+import SmallLogo from '../assets/smalllogo.png'
 
 
 function Login() {

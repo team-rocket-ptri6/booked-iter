@@ -29,7 +29,7 @@
     
 }
 
-.button {
+/* .button { 
     background-color: rgb(147, 77, 114);
       padding: 10px 25px;
       text-align:center;
@@ -38,9 +38,9 @@
       border: 2px solid rgb(147, 77, 114);
       font-size: 16px;
       border-radius: 8px;
-      /* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); */
-      /* color: rgb(10, 10, 10); */
-/* } */
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+      color: rgb(10, 10, 10);
+} */
 
 .logo {
     /* border-radius: 50%; */
@@ -59,7 +59,9 @@ body {
     justify-content: center;
     align-items: center;
     perspective: 1200px;
-    background: #ccc;
+    background:rgb(236, 241, 245);
+    /* padding-top: -200px; */
+    padding-bottom: 200px;
   }
   
   .book {
@@ -133,7 +135,8 @@ body {
   }
 
   .page10 {
-    background: #fdfdfd;
+    background: #f5f5f5;
+    
   }
 
   

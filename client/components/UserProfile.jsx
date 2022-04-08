@@ -80,6 +80,8 @@ function UserProfile(){
         <input type="text" placeholder="Club Name" value={clubName} onChange={(e)=> setClubName(e.target.value)}/>
         <textarea rows="4" cols="50" placeholder="Tell us about your club!" value={clubDescription} onChange={(e)=> setClubDescription(e.target.value)}></textarea>
         <button form='createclub' type='submit'  >submit</button> <button onClick = {() => setShow(show)}>cancel</button> 
+        <input type="text" placeholder="Add members" />
+        <button type='submit' >submit</button> <button className="button" onClick = {() => setShow(show)}>cancel</button> 
       </form> }
     </div>
   );

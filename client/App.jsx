@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from './auth/authContext';
-import UserProfile from './components/UserProfile';
-
 import Signup from './components/Signup';
 import Login from './components/Login';
 import './stylesheets/styles.css';
-import ClubPage from './components/ClubPage';
-import Logo from './assets/logo.png'
+import Book from './assets/book.png';
+
+
 
 function App() {
   const auth = useAuth();
@@ -25,9 +24,10 @@ function App() {
         (<Signup  />) :
         (<Login />)
       }
+   
         {showLogin ?
-          (<p>Don&apos;t have an account? <span type='button' onClick={toggleForm}>Sign up today!</span></p>) :
-          (<p>Have an account? <span type='button' onClick={toggleForm}>Login here.</span></p>)
+          (<p className="text">Don&apos;t have an account? <span className="button" type='button' onClick={toggleForm}>Sign up today!</span></p>) :
+          (<p className="text">Have an account? <span className="button" type='button' onClick={toggleForm}>Login here</span></p>)
         }
       </div>
       <div className="page9"></div>
