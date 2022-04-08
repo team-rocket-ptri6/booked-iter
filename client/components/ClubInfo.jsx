@@ -31,12 +31,13 @@ const members = [
   },
 ];
 
-let about = 'iramisu gummi bears tootsie roll gingerbread chocolate bar sweet roll. Shortbread fruitcake sweet cheesecake shortbread. Jujubes dragée biscuit apple pie cotton candy cake gummi bears pudding. ';
+// let about = 'iramisu gummi bears tootsie roll gingerbread chocolate bar sweet roll. Shortbread fruitcake sweet cheesecake shortbread. Jujubes dragée biscuit apple pie cotton candy cake gummi bears pudding. ';
 
 function ClubInfo(props) {
   const auth = useAuth();
   const [clubName, setClubName] = useState('Super Awesome Book Club');
-  const [clubDescription, setClubDescription] = useState(about);
+  const [clubDescription, setClubDescription] = useState('');
+  const [members, setMembers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState();
@@ -47,23 +48,24 @@ function ClubInfo(props) {
       'Authorization': `Bearer ${auth.token}` } 
     })
       .then((response) => {
-        console.log(response)
+        setClubName(response.data.club_name);
+        setClubDescription(response.data.description);
+        setMembers(response.data.members);
       });
-    // console.log(params.id)
   },[params.id]);
 
   //   const club = setClubName('Cool Club');
-  const club = (id) => {
-    axios
-      .get(`http://localhost:8080/clubs/:${id}`, {
-        clubName,
-        clubDescription,
-      })
-      .then((response) => {
-        console.log(response)
-        //ADD WHAT WE NEED HERE
-      });
-  };
+  // const club = (id) => {
+  //   axios
+  //     .get(`http://localhost:8080/clubs/:${id}`, {
+  //       clubName,
+  //       clubDescription,
+  //     })
+  //     .then((response) => {
+  //       console.log(response)
+  //       //ADD WHAT WE NEED HERE
+  //     });
+  // };
 
   return (
     <div>

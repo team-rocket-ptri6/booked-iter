@@ -25,12 +25,16 @@ function UserProfile(){
   }
 
   useEffect(()=>{
-    axios.get('http://localhost:8080/users/clubs', {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
-    })
-      .then((response) => {
-        setClubs(response.data.clubs);
-      });
+    let updateClub = true;
+    if (updateClub){
+      axios.get('http://localhost:8080/users/clubs', {headers: {
+        'Authorization': `Bearer ${auth.token}` } 
+      })
+        .then((response) => {
+          setClubs(response.data.clubs);
+        });
+    }
+    return () => {return updateClub = false};
   }, []);
 
 
@@ -58,10 +62,11 @@ function UserProfile(){
         ))}
       </ul>
       <button onClick = {() => setShow(!show)}>Create New Club</button>
-      { show && <form style={{display: 'flex', flexDirection: 'column'}} id='createclub' onSubmit={(e) => createClub(e)} >
+      { show && <form id='createclub' onSubmit={(e) => createClub(e)} >
         <input type="text" placeholder="Club Name" value={clubName} onChange={(e)=> setClubName(e.target.value)}/>
         <textarea rows="4" cols="50" placeholder="Tell us about your club!" value={clubDescription} onChange={(e)=> setClubDescription(e.target.value)}></textarea>
-        <button form='createclub' type='submit'  >submit</button> <button onClick = {() => setShow(show)}>cancel</button> 
+        <button form='createclub' type='submit'  >submit</button> 
+        <button onClick = {() => setShow(!show)}>cancel</button> 
       </form> }
     </div>
   );
