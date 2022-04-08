@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import {useAuth} from '../auth/authContext';
 import axios from 'axios';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const clubs = [
   {
@@ -57,7 +58,7 @@ function UserProfile(){
   function getBookClub(club_id){
     console.log(club_id);
   }
-
+  const navigate =  useNavigate();
   return (
     <div>
       <h1>Welcome To MyBookClub.com,  {auth.firstName}!</h1>
@@ -71,7 +72,8 @@ function UserProfile(){
           <li key={club.club_id}>
             <span>name: {club.name}</span>{' '}
             <span>description: {club.description}</span>
-            <button onClick={() => getBookClub(club.club_id)}>Open Book Club</button>
+            {/* <button onClick={() => getBookClub(club.club_id)}>Open Book Club</button> */}
+            <button onClick={() => navigate(`/${club.club_id}`)}>Open Book Club</button>
           </li>
         ))}
       </ul>
