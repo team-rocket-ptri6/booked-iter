@@ -41,7 +41,6 @@ clubController.getClub = async (req, res, next) => {
 
 clubController.getClubsByUser = async (req, res, next) => {
   const userId = req.user;
-  console.log('hi');
   try {
     const response = await db.query(queries.getClubsByUser, [userId]);
     res.locals.clubs = response.rows;
