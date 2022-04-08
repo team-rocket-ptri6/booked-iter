@@ -1,13 +1,13 @@
-.logo {
+.coverLogo {
     /* border-radius: 50%; */
     width: 100%;
-    /* height: auto; */
-    /* margin: auto; */
-    /* display: block; */
-    /* padding: 30px; */
-    /* padding-top: 70px; */
 }
 
+.logo {
+    width: 100%;
+    height: auto;
+    padding-top: 85px;
+}
 
 .small {
     border-radius: 50%;
@@ -19,6 +19,28 @@
 
 }
 
+.userProfile {
+    background: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    border:5px solid rgb(155, 44, 35);
+}
+
+.list {
+    color: rgb(0, 74, 173);
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border: 3px;
+    border-style: solid;
+    border-color: rgb(155, 44, 35);
+    background-color: lightgrey;
+    /* justify-content: space-between; */
+    padding-top: 8px;
+    
+}
+
 .text {
     color: rgb(0, 74, 173);
     justify-content: center;
@@ -27,7 +49,25 @@
     align-items: center;
 }
 
+.welcome {
+    color: rgb(0, 74, 173);
+    justify-content: center;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+}
+
 .leftText {
+    color: rgb(0, 74, 173);
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+
+
+.userText {
     color: rgb(0, 74, 173);
     justify-content: left;
     display: flex;
@@ -40,18 +80,51 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-left: 200px;
-    margin-right: 200px; */
+}
+
+.clubName {
+    color: rgb(0, 74, 173);
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    font-size: 18px ;
+    font-weight: bold;
 }
 
 .button { 
-    background-color: rgb(0, 74, 173);
+      background-color: rgb(0, 74, 173);
       padding: 8px 18px;
       text-align:center;
       color: rgb(236, 241, 245);
       margin: 10px;
       font-size: 14px;
 } 
+.buttonCenter { 
+    background-color: rgb(0, 74, 173);
+    padding: 8px 18px;
+    text-align:center;
+    color: rgb(236, 241, 245);
+    margin: 10px;
+    font-size: 14px;
+    display: center;
+    
+} 
+.smallButton { 
+      background-color:white;
+      padding: 6px 12px;
+      text-align:center;
+      color: rgb(0, 74, 173);
+      margin: 8px;
+      font-size: 12px;
+} 
+
+.createClub {
+    /* background-color:#f5f5f5; */
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
 
 body {
     width: 100%;
@@ -61,7 +134,6 @@ body {
     align-items: center;
     perspective: 1200px;
     background:rgb(236, 241, 245);
-    /* padding-top: -200px; */
     padding-bottom: 200px;
   }
   
@@ -196,3 +268,7 @@ body {
     transform: rotateY(0deg) scale(1.1);
     box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
   }
+
+
+
+

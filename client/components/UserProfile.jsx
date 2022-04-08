@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useAuth} from '../auth/authContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Small from '../assets/smalllogo.png';
+import Logo from '../assets/logo.png';
 
 function UserProfile(){
   const auth = useAuth();
@@ -45,31 +45,29 @@ function UserProfile(){
   // }
   const navigate =  useNavigate();
   return (
-    <div>
-      <img className="small" src={Small}/>
-      <h1 className="text">Welcome to Booked, {auth.firstName}!</h1>
-      {/* <h2>User Image</h2> stretch goal */}
-      <h2 className="leftText">A place to promote our love of literature in a positive, nurturing environment! </h2>
-      {/* <h2>My Friends</h2> stretch goal*/}
-      
-      <h2 className="leftText">My Clubs</h2>
-      <ul>
+   <div className="userProfile">
+      <img className="logo" src={Logo}/>
+      <h1 className="welcome">Welcome to Booked, {auth.firstName}!</h1>
+      <h2 className="welcome">A place to promote our love of literature in a positive, nurturing environment. </h2>
+      <br/>
+      <h2 className="leftText">MY CLUBS</h2>
+      <ul className="list">
         {clubs.map((club) => (
           // key needs to be unique id
-          <li key={club.club_id}>
-            <span>name: {club.clubName}</span>{' '}
-            <span>description: {club.description}</span>
+          <li  key={club.club_id}>
+            <span className="clubName">{club.clubName}</span>{' '}
+            <span>{club.description}</span>
             {/* <button onClick={() => getBookClub(club.club_id)}>Open Book Club</button> */}
-            <button  className="button"  onClick={() => navigate(`/${club.club_id}`)}>Open Book Club</button>
+            <button  className="smallButton"  onClick={() => navigate(`/${club.club_id}`)}>Open</button>
           </li>
         ))}
       </ul>
-      <button className="button" onClick = {() => setShow(!show)}>Create New Club</button>
-      { show && <form id='createclub' onSubmit={(e) => createClub(e)} >
+      <button className="buttonCenter" onClick = {() => setShow(!show)}>Create New Club</button>
+      { show && <form  className="createClub" id='createclub' onSubmit={(e) => createClub(e)} >
         <input type="text" placeholder="Club Name" value={clubName} onChange={(e)=> setClubName(e.target.value)}/>
         <textarea rows="4" cols="50" placeholder="Tell us about your club!" value={clubDescription} onChange={(e)=> setClubDescription(e.target.value)}></textarea>
-        <button className="button" form='createclub' type='submit'  >Submit</button> 
-        <button className="button" onClick = {() => setShow(!show)}>Cancel</button> 
+        <button className="button" form='createclub' type='submit'  >Submit</button> <button className="button" onClick = {() => setShow(!show)}>Cancel</button> 
+        
       </form> }
     </div>
   );
