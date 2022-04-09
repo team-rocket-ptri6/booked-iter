@@ -10,8 +10,10 @@ function UserProfile(){
   const [clubDescription, setClubDescription] = useState('');
   const [show, setShow] = useState(false);
   const [clubs, setClubs] = useState([]);
+  const [updateClubs, setUpdateClubs] = useState(false);
 
   async function createClub (e){
+    setUpdateClubs(false);
     e.preventDefault();
     axios.post('http://localhost:8080/clubs/new', {
       clubName:clubName,
@@ -21,32 +23,24 @@ function UserProfile(){
     }).then((response) => {
       if (response) {
         console.log('Successfully created club!');
-        setShow(false);
+        setUpdateClubs(true);
       }
+      setShow(false);
     });
   }
 
   useEffect(()=>{
-    let updateClub = true;
-    if (updateClub){
-      axios.get('http://localhost:8080/users/clubs', {headers: {
-        'Authorization': `Bearer ${auth.token}` } 
-      })
-        .then((response) => {
-          setClubs(response.data.clubs);
-        });
-    }
-    return () => {return updateClub = false};
-  }, []);
+    axios.get('http://localhost:8080/users/clubs', {headers: {
+      'Authorization': `Bearer ${auth.token}` } 
+    })
+      .then((response) => {
+        setClubs(response.data.clubs);
+      });
+  }, [updateClubs]);
 
-
-
-  // function getBookClub(club_id){
-  //   console.log(club_id);
-  // }
   const navigate =  useNavigate();
   return (
-   <div className="userProfile">
+    <div className="userProfile">
       <img className="logo" src={Logo}/>
       <h1 className="welcome">Welcome to Booked, {auth.firstName}!</h1>
       <h2 className="welcome">A place to promote our love of literature in a positive, nurturing environment. </h2>
