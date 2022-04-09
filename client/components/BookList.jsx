@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAuth } from '../auth/authContext';
 import Book from './Book';
 
 function BookList({ readingList }) {
@@ -37,7 +35,7 @@ function BookList({ readingList }) {
             </ol> 
           </div>
       }
-    </div>
+    </>
   );
 };
 
