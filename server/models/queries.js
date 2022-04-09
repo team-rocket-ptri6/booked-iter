@@ -136,4 +136,11 @@ queries.saveBook = `INSERT INTO books (google_book_id, club_id, to_read, book_vo
 RETURNING
 	*`;
 
+queries.getBooksByClub = `SELECT
+	*
+FROM
+	books
+WHERE
+	club_id = $1`;
+
 module.exports = queries;

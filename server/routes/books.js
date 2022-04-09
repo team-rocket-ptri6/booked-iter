@@ -8,4 +8,8 @@ router.post('/', jwtController.verifyToken, bookController.saveBook, (req, res) 
   return res.status(200).json(res.locals);
 });
 
+router.get('/:clubId', bookController.getBooksByClub,(req, res) => {
+  return res.status(200).json(res.locals);
+});
+
 module.exports = router;
