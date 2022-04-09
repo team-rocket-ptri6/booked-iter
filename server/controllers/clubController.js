@@ -39,4 +39,21 @@ clubController.getClub = async (req, res, next) => {
   }
 };
 
+clubController.getClubsByUser = async (req, res, next) => {
+  const userId = req.user;
+  try {
+    const response = await db.query(queries.getClubsByUser, [userId]);
+    res.locals.clubs = response.rows;
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `clubController.getClubsByUser: ERROR: ${error}`,
+      message: {
+        err: 'clubController.getClubsByUser: ERROR: Check server logs for details.',
+      },
+    });
+  }
+};
+
 module.exports = clubController;

@@ -12,11 +12,11 @@ function ClubPage() {
     
     <div>
       {!isMember ? 'We\'re sorry, but you are not a member of this club' :
-     ( <span>
-      <ClubInfo />
-      {/* <ClubQuestions /> */}
-      {/* <ClubBookList /> */}
-      </span>)
+        ( <span>
+          <ClubInfo />
+          {/* <ClubQuestions /> */}
+          {/* <ClubBookList /> */}
+        </span>)
       } 
     </div>
   );
