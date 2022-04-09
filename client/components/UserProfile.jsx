@@ -21,6 +21,7 @@ function UserProfile(){
     }).then((response) => {
       if (response) {
         console.log('Successfully created club!');
+        setShow(false);
       }
     });
   }
