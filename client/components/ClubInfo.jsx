@@ -4,34 +4,6 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 import Logo from '../assets/logo.png';
 
-const members = [
-  {
-    user_id: 42,
-    firstName: 'Patrick',
-    LastName: 'Reid'
-  },
-  {
-    user_id: 18,
-    firstName: 'Rachelle',
-    LastName: 'M'
-  },
-  {
-    user_id: 7,
-    firstName: 'Nidhi',
-    LastName: 'Kasireddy'
-  },
-  {
-    user_id: 1,
-    firstName: 'Flora',
-    LastName: 'Yufei'
-  },
-  {
-    user_id: 14,
-    firstName: 'Jon',
-    LastName: 'Haviv'
-  },
-];
-
 function ClubInfo(props) {
   const auth = useAuth();
   const [clubName, setClubName] = useState('Super Awesome Book Club');
@@ -39,7 +11,8 @@ function ClubInfo(props) {
   const [members, setMembers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const [editPage, setEditPage] = useState(false);
-  const [addMember, setAddMember] = useState();
+  const [addMember, setAddMember] = useState('');
+  const [membersUpdated, setMembersUpdated] = useState(false);
 
   const params = useParams();
   useEffect(()=>{
@@ -51,9 +24,31 @@ function ClubInfo(props) {
         setClubDescription(response.data.description);
         setMembers(response.data.members);
       });
-  },[params.id]);
+  },[params.id, membersUpdated]);
 
+  function postMember(e, action, member_id = '') {
+    e.preventDefault();
+    const body = {
+      email: addMember,
+      clubId: params.id,
+    };
+    if (action === 'remove') body.member_id = member_id;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Authorization':`Bearer ${auth.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    };
 
+    fetch(`http://localhost:8080/clubs/${action}`, options)
+      .then(response => {
+        setMembersUpdated(!membersUpdated);
+        if (action === 'add') setAddMember('');
+      })
+      .catch(err => console.warn(err));
+  };
 
   return (
     <div className="clubInfo">
@@ -67,16 +62,16 @@ function ClubInfo(props) {
       <ul className="members" >
         {members.map((peeps) => (<ul className="memberList" key={peeps.user_id}>
          
-          {peeps.firstName}
-          <span>
-            {editPage ?
-              <>
-                <br></br> <button className="smallButton" onClick={() => alert('this needs to remove a member')} >Remove Member</button>
-                <span></span> <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
-              </>
-              : null}
-          </span>
-         
+            {peeps.firstName}
+            <span>
+              {/* This button has no functionality. I added arrow just because it was hard to see */}
+              {editPage ?
+                <>
+                  <br></br> <button className="smallButton" onClick={(e) => postMember(e, 'remove', peeps.member_id)}>Remove Member</button>
+                  <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
+                </>
+                : null}
+            </span>
         </ul>))}
       </ul>
       <br />
@@ -91,14 +86,13 @@ function ClubInfo(props) {
               type="email"
               value={addMember}
               placeholder='New member email'
-              onChange={(e) => setAddMember(e.target.value)}
+              onChange={(e) => setAddMember(e.target.value, 'add')}
             />
 
             <button
               className="button"
               onClick={(e) => {
-                e.preventDefault();
-                alert('this submits a request to add member. I figured email would be the best look up');
+                postMember(e, 'add');
               }}
             >
               Add Member
