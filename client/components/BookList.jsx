@@ -28,9 +28,13 @@ function BookList({ readingList, setUpdate, updateList }) {
   return (
 
     <>
-      {currentlyReading && currentlyReading.length > 0 &&
+      {currentlyReading && typeof currentlyReading === 'object' &&
       <>
-        <label id="bookList">Currently Reading: </label>  <Book className ="clubName" title={currentlyReading.title} key={currentlyReading.book_id} bookId={currentlyReading.bookId} author={currentlyReading.authors} currentlyReading={true} thumbnail={currentlyReading.thumbnail ? currentlyReading.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
+        <ul className='list-none'>
+          <li>
+            <label id="bookList">Currently Reading: </label>  <Book className ="clubName" title={currentlyReading.title} key={currentlyReading.book_id} bookId={currentlyReading.bookId} author={currentlyReading.authors} currentlyReading={true} thumbnail={currentlyReading.thumbnail ? currentlyReading.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
+          </li>
+        </ul>
       </>
       }
 
