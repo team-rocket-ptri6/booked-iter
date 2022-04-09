@@ -131,4 +131,9 @@ FROM
 WHERE
 	members.user_id = $1`;
 
+queries.saveBook = `INSERT INTO books (google_book_id, club_id, to_read, book_votes)
+	VALUES ($1, $2, TRUE, 1)
+RETURNING
+	*`;
+
 module.exports = queries;

@@ -34,10 +34,11 @@ function BookSearch() {
 
 
 
-
   return (
     <>
-      <input type="search" placeholder='Search for a new book to read!' size='30' aria-label='Search for a new book to read!' value={search} onChange={e => setSearch(e.target.value)}/>
+      <div>
+        <input type="search" placeholder='Search for a new book to read!' id='search' size='30' aria-label='Search for a new book to read!' value={search} onChange={e => setSearch(e.target.value)}/> <button type='button' htmlFor='search'>Search</button>
+      </div>
       {Array.isArray(suggestions) && search != '' && suggestions.map(suggestion => {
         return <SearchSuggestions title={suggestion.volumeInfo.title} author={suggestion.volumeInfo.authors}  key={suggestion.id}/>;
       })}
