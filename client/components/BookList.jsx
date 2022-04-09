@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Book from './Book';
+import { useParams } from 'react-router-dom';
 
 function BookList({ readingList, setUpdate, updateList }) {
+  const params = useParams();
   // Can move this sort to the backend if there is time
   const [rank, setRank] = useState('');
   const [currentlyReading, setCurrentlyReading] = useState('');
@@ -20,6 +22,9 @@ function BookList({ readingList, setUpdate, updateList }) {
       headers: {
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify({
+        clubId: params.id
+      })
     }).then(response => response.json())
       .then(() => setUpdate(!updateList))
       .catch(err => console.warn(err));

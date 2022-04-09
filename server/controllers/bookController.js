@@ -64,8 +64,10 @@ bookController.getGoogleBooks = async (req, res, next) => {
 
 bookController.setCurrentlyReading = async (req, res, next) => {
   const bookId = req.params.bookId;
+  const { clubId } = req.body;
   try {
-    const repsonse = await db.query(queries.setCurrentlyReading, [bookId]);
+    await db.query(queries.setCurrentlyReadingFalse, [clubId]);
+    const repsonse = await db.query(queries.setCurrentlyReadingTrue, [bookId]);
     res.locals.book = repsonse.rows;
 
     return next();

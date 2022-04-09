@@ -143,12 +143,22 @@ FROM
 WHERE
 	club_id = $1`;
 
-queries.setCurrentlyReading = `UPDATE
+queries.setCurrentlyReadingTrue = `UPDATE
 	books
 SET
 	currently_reading = TRUE
 WHERE
 	book_id = $1
+RETURNING
+	*;`;
+
+queries.setCurrentlyReadingFalse = `UPDATE
+	books
+SET
+	currently_reading = FALSE
+WHERE
+	currently_reading = TRUE
+	AND club_id = $1
 RETURNING
 	*;`;
 
