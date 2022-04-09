@@ -21,7 +21,6 @@ function App() {
   //If path is /profile then show userprofile plus all the other page
     //else render this below
     <>
-      <BookSearch />
       <div className='book'>
         <div className="back"><img className="logo" src={Book}/></div>
 
