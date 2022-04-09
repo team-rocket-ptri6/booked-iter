@@ -32,7 +32,7 @@ function BookPanel() {
   return (
     <>
       <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
-      {readingList.length >= 1 && <BookList readingList={readingList} />}
+      {(readingList.length >= 1) && <BookList readingList={readingList} />}
     </>
   );
 }
