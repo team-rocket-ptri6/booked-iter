@@ -1,12 +1,11 @@
 .coverLogo {
-    /* border-radius: 50%; */
     width: 100%;
 }
 
 .logo {
     width: 100%;
-    height: auto;
-    padding-top: 85px;
+    padding-top: 100px;
+    
 }
 
 .small {
@@ -16,14 +15,20 @@
     margin: auto;
     display: block;
     padding:15px;
-
 }
 
 .userProfile {
     background: white;
-    padding-left: 25px;
-    padding-right: 25px;
-    border:5px solid rgb(155, 44, 35);
+    padding: 20px;
+    border: 10px solid rgb(155, 44, 35);
+}
+
+.clubInfo {
+    background: white;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    border:10px solid rgb(155, 44, 35);
 }
 
 .list {
@@ -41,6 +46,11 @@
     
 }
 
+.clubDescription {
+    color: rgb(0, 74, 173);
+    font-size:14pt;
+}
+
 .text {
     color: rgb(0, 74, 173);
     justify-content: center;
@@ -53,19 +63,60 @@
     color: rgb(0, 74, 173);
     justify-content: center;
     display: flex;
+    align-items: center;
+}
+
+.clubTitle {
+    color: rgb(0, 74, 173);
+    justify-content: center;
+    display: flex;
     /* flex-direction: column; */
     align-items: center;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.members {
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border: 4px;
+    border-style: solid;
+    border-color: rgb(155, 44, 35);
+    background-color: lightgrey;
+    padding: 8px;
+    margin-left: auto;
+    font-size: 16px;
+    font-style: bold;   
+    color: rgb(0, 74, 173);
+}
+
+.memberList {
+    margin-left: -25px;
+    font-style: bold;
+}
+
+.input {
+    width: 30%;
+    height: 40px;
+}
+
+.editButton {
+    background-color: rgb(155, 44, 35);
+    padding: 6px 12px;
+    text-align:center;
+    color: rgb(236, 241, 245);
+    margin: 8px;
+    font-size: 12px;
+    align-items: right;
 }
 
 .leftText {
     color: rgb(0, 74, 173);
     justify-content: left;
-    display: flex;
-    flex-direction: column;
     align-items: left;
 }
-
-
 
 .userText {
     color: rgb(0, 74, 173);
@@ -128,7 +179,7 @@
 
 body {
     width: 100%;
-    height: 100vh;
+    height:100vh;
     display: flex;
     justify-content: center;
     align-items: center;

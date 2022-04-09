@@ -49,25 +49,23 @@ function UserProfile(){
       <img className="logo" src={Logo}/>
       <h1 className="welcome">Welcome to Booked, {auth.firstName}!</h1>
       <h2 className="welcome">A place to promote our love of literature in a positive, nurturing environment. </h2>
-      <br/>
       <h2 className="leftText">MY CLUBS</h2>
       <ul className="list">
         {clubs.map((club) => (
           // key needs to be unique id
           <li  key={club.club_id}>
             <span className="clubName">{club.clubName}</span>{' '}
-            <span>{club.description}</span>
+            <span className="clubDescription">{club.description}</span>
             {/* <button onClick={() => getBookClub(club.club_id)}>Open Book Club</button> */}
             <button  className="smallButton"  onClick={() => navigate(`/${club.club_id}`)}>Open</button>
           </li>
         ))}
       </ul>
-      <button className="buttonCenter" onClick = {() => setShow(!show)}>Create New Club</button>
-      { show && <form  className="createClub" id='createclub' onSubmit={(e) => createClub(e)} >
+      <button className="button" onClick = {() => setShow(!show)}>Create New Club</button>
+      { show && <form className="createClub" id='createclub' onSubmit={(e) => createClub(e)} >
         <input type="text" placeholder="Club Name" value={clubName} onChange={(e)=> setClubName(e.target.value)}/>
         <textarea rows="4" cols="50" placeholder="Tell us about your club!" value={clubDescription} onChange={(e)=> setClubDescription(e.target.value)}></textarea>
         <button className="button" form='createclub' type='submit'  >Submit</button> <button className="button" onClick = {() => setShow(!show)}>Cancel</button> 
-        
       </form> }
     </div>
   );
