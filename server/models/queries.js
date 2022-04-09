@@ -146,7 +146,7 @@ WHERE
 queries.setCurrentlyReading = `UPDATE
 	books
 SET
-	currenly_reading = TRUE
+	currently_reading = TRUE
 WHERE
 	book_id = $1
 RETURNING
