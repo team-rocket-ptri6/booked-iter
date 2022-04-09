@@ -29,28 +29,30 @@ function ClubInfo(props) {
       });
   },[params.id, membersUpdated]);
 
-  function postMember(e) {
+  function postMember(e, action, member_id = '') {
     e.preventDefault();
-    const body = JSON.stringify({
+    const body = {
       email: addMember,
       clubId: params.id,
-    });
+    };
+    if (action === 'remove') body.member_id = member_id;
     const options = {
       method: 'POST',
       headers: {
         'Authorization':`Bearer ${auth.token}`,
         'Content-Type': 'application/json'
       },
-      body: body,
+      body: JSON.stringify(body),
     };
 
-    fetch('http://localhost:8080/clubs/add', options)
+    fetch(`http://localhost:8080/clubs/${action}`, options)
       .then(response => {
         setMembersUpdated(!membersUpdated);
-        setAddMember('');
+        if (action === 'add') setAddMember('');
       })
       .catch(err => console.warn(err));
   };
+
 
   return (
     <div className="clubInfo">
@@ -73,8 +75,8 @@ function ClubInfo(props) {
               {/* This button has no functionality. I added arrow just because it was hard to see */}
               {editPage ?
                 <>
-                  <br></br> <button className="smallButton" onClick={() => alert('this needs to remove a member')} >Remove Member</button>
-                  <span></span> <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
+                  <br></br> <button className="smallButton" onClick={(e) => postMember(e, 'remove', peeps.member_id)}>Remove Member</button>
+                  <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
                 </>
                 : null}
             </span>
@@ -94,13 +96,13 @@ function ClubInfo(props) {
               type="email"
               value={addMember}
               placeholder='New member email'
-              onChange={(e) => setAddMember(e.target.value)}
+              onChange={(e) => setAddMember(e.target.value, 'add')}
             />
 
             <button
               className="button"
               onClick={(e) => {
-                postMember(e);
+                postMember(e, 'add');
               }}
             >
               Add Member
