@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
+import BookList from './BookList';
 import  BookSearch from './BookSearch';
 
 function BookPanel() {
@@ -17,7 +18,7 @@ function BookPanel() {
       }
     }).then(response => response.json())
       .then(data => {
-        setReadingList(data);
+        setReadingList(data.books);
         const idList = [];
         for (let i = 0; i < data.books.length; i++) {
           idList.push(data.books[i].google_book_id);
@@ -30,6 +31,7 @@ function BookPanel() {
   return (
     <>
       <BookSearch idList={bookIds}/>
+      <BookList readingList={readingList} />
     </>
   );
 }
