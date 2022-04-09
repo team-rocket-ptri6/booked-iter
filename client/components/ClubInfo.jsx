@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
-
-import BookPanel from './BookPanel';
 import Logo from '../assets/logo.png';
-
 
 function ClubInfo(props) {
   const auth = useAuth();
@@ -53,21 +50,16 @@ function ClubInfo(props) {
       .catch(err => console.warn(err));
   };
 
-
   return (
     <div className="clubInfo">
       <Link to='/profile'><img className="logo" src={Logo}/></Link>
       <h1 className="clubTitle">{clubName}</h1>
       <br />
-      {/* <div> */}
-        <h2 className="leftText">About {clubName}</h2>
-        <h3 className="leftText">{clubDescription}</h3>
-       
-      {/* </div> */}
+      <h2 className="leftText">About {clubName}</h2>
+      <h3 className="leftText">{clubDescription}</h3>
       <br />
-      {/* <div > */}
       <h2 className="leftText">Who is reading with us?</h2>
-       <ul className="members" >
+      <ul className="members" >
         {members.map((peeps) => (<ul className="memberList" key={peeps.user_id}>
          
             {peeps.firstName}
@@ -80,10 +72,8 @@ function ClubInfo(props) {
                 </>
                 : null}
             </span>
-         
         </ul>))}
-     </ul>
-      {/* </div> */}
+      </ul>
       <br />
 
 
@@ -109,19 +99,18 @@ function ClubInfo(props) {
             </button>
           </form>
           <button
-          className="editButton"
-          value={editPage}
-          onClick={(e) => {
-            e.preventDefault();
-            setEditPage(!editPage);
-          }}
-        >
+            className="editButton"
+            value={editPage}
+            onClick={(e) => {
+              e.preventDefault();
+              setEditPage(!editPage);
+            }}
+          >
         Edit Club Page
-        </button>
-         {/* This button has no functionality */}
-         <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
+          </button>
+          {/* This button has no functionality */}
+          <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
           <br />
-          <BookPanel />
         </>}
     </div>
   );
