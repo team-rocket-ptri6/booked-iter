@@ -30,10 +30,16 @@ function BookPanel() {
   }, [ ,updateList]);
 
   return (
-    <>
+    <div >
+      <hr className = "horizontalLine"></hr>
+      <div className="list">
       <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
+      </div>
+      <br/>
+      <div className="list">
       {(readingList.length >= 1) && <BookList readingList={readingList} />}
-    </>
+      </div>
+    </div>
   );
 }
 

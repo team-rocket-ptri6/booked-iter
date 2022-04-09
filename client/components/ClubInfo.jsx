@@ -73,15 +73,13 @@ function ClubInfo(props) {
   return (
     <div className="clubInfo">
       <img className="logo" src={Logo}/>
-      <h1 className="clubTitle">{clubName}</h1>
-      <br />
+      <h1 className="clubTitle">{clubName}</h1>  
+      
       {/* <div> */}
-        <h2 className="leftText">About {clubName}</h2>
-        <h3 className="leftText">{clubDescription}</h3>
-       
-      {/* </div> */}
-      <br />
-      {/* <div > */}
+      <h2 className="leftText">About {clubName}</h2>
+        <h3 className="descriptionText">{clubDescription}</h3>
+      
+     
       <h2 className="leftText">Who is reading with us?</h2>
        <ul className="members" >
         {members.map((peeps) => (<ul className="memberList" key={peeps.user_id}>
@@ -100,7 +98,7 @@ function ClubInfo(props) {
         </ul>))}
      </ul>
       {/* </div> */}
-      <br />
+
 
 
       {!isAdmin ? null :
@@ -124,8 +122,7 @@ function ClubInfo(props) {
             >
               Add Member
             </button>
-          </form>
-          <button
+            <button
           className="editButton"
           value={editPage}
           onClick={(e) => {
@@ -133,13 +130,15 @@ function ClubInfo(props) {
             setEditPage(!editPage);
           }}
         >
-        Edit Club Page
+        Edit Club
         </button>
          {/* This button has no functionality */}
          <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
+          </form>
           <br />
           <BookPanel />
         </>}
+        <br/>
     </div>
   );
 }

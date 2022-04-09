@@ -9,7 +9,7 @@ function SearchSuggestions({ title, author, googleBookId, save, inBookList }) {
   }
   return (
     <div className='bg-white border-none'>
-      <span>{title} by {author}</span> {saved || inBookList ? <span>Book Saved! ✅</span> : <button type='button' onClick={saveSuggestion}>Save to reading list!</button>}
+      <span>{title} by {author}</span> {saved || inBookList ? <span className="green">Book Saved! ✅</span> : <button type='button' onClick={saveSuggestion}>Save to reading list!</button>}
     </div>
   );
 };
