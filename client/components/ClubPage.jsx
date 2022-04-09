@@ -7,9 +7,9 @@ function ClubPage() {
 
   return (
     
-    <div>
+    <div className="clubInfo">
       {!isMember ? 'We\'re sorry, but you are not a member of this club' :
-        ( <span>
+        ( <span >
           <ClubInfo />
           {/* <ClubQuestions /> */}
           <BookPanel />
