@@ -72,7 +72,7 @@ function ClubInfo(props) {
 
   return (
     <div className="clubInfo">
-      <img classname="logo" src={Logo}/>
+      <img className="logo" src={Logo}/>
       <h1 className="clubTitle">{clubName}</h1>
       <br />
       {/* <div> */}
