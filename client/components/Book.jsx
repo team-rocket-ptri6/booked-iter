@@ -10,7 +10,7 @@ function Book({title, authors, bookId, currentlyReading, thumbnail, readNow}) {
       <>
         <button lassName = "voteButton" type='button'>Vote to read next!</button> <button lassName = "voteButton" type='button'>We are reading this!</button>
       </> 
-        }
+      }
     </>
   );
 }
