@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 
 import BookPanel from './BookPanel';
@@ -56,7 +56,7 @@ function ClubInfo(props) {
 
   return (
     <div className="clubInfo">
-      <img className="logo" src={Logo}/>
+      <Link to='/profile'><img className="logo" src={Logo}/></Link>
       <h1 className="clubTitle">{clubName}</h1>
       <br />
       {/* <div> */}
