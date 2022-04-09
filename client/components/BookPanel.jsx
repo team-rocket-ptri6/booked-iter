@@ -10,6 +10,7 @@ function BookPanel() {
 
   const [readingList, setReadingList] = useState('');
   const [bookIds, setBookIds] = useState('');
+  const [updateList, setUpdate] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:8080/books/${params.id}`, {
@@ -26,11 +27,11 @@ function BookPanel() {
         setBookIds(idList);
       })
       .catch(err => console.warn(err));
-  }, []);
+  }, [ ,updateList]);
 
   return (
     <>
-      <BookSearch idList={bookIds}/>
+      <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
       <BookList readingList={readingList} />
     </>
   );

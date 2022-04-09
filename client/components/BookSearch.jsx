@@ -3,7 +3,7 @@ import SearchSuggestions from './SearchSuggestions';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 
-function BookSearch({ idList }) {
+function BookSearch({ idList, setUpdate, updateList }) {
   const params = useParams();
   const auth = useAuth();
 
@@ -51,8 +51,8 @@ function BookSearch({ idList }) {
       },
       body: body,
     }).then(response => response.json())
-      .then(data => console.log(data))
-      .catch(err => 'Could not save the book');
+      .then(() => setUpdate(!updateList))
+      .catch(err => console.warn(err));
   };
 
 
