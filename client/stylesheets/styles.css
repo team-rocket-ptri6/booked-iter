@@ -1,13 +1,12 @@
-.logo {
-    /* border-radius: 50%; */
+.coverLogo {
     width: 100%;
-    /* height: auto; */
-    /* margin: auto; */
-    /* display: block; */
-    /* padding: 30px; */
-    /* padding-top: 70px; */
 }
 
+.logo {
+    width: 100%;
+    padding-top: 100px;
+    
+}
 
 .small {
     border-radius: 50%;
@@ -16,7 +15,40 @@
     margin: auto;
     display: block;
     padding:15px;
+}
 
+.userProfile {
+    background: white;
+    padding: 20px;
+    border: 10px solid rgb(155, 44, 35);
+}
+
+.clubInfo {
+    background: white;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    border:10px solid rgb(155, 44, 35);
+}
+
+.list {
+    color: rgb(0, 74, 173);
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border: 3px;
+    border-style: solid;
+    border-color: rgb(155, 44, 35);
+    background-color: lightgrey;
+    /* justify-content: space-between; */
+    padding-top: 8px;
+    
+}
+
+.clubDescription {
+    color: rgb(0, 74, 173);
+    font-size:14pt;
 }
 
 .text {
@@ -27,7 +59,66 @@
     align-items: center;
 }
 
+.welcome {
+    color: rgb(0, 74, 173);
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.clubTitle {
+    color: rgb(0, 74, 173);
+    justify-content: center;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.members {
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border: 4px;
+    border-style: solid;
+    border-color: rgb(155, 44, 35);
+    background-color: lightgrey;
+    padding: 8px;
+    margin-left: auto;
+    font-size: 16px;
+    font-style: bold;   
+    color: rgb(0, 74, 173);
+}
+
+.memberList {
+    margin-left: -25px;
+    font-style: bold;
+}
+
+.input {
+    width: 30%;
+    height: 40px;
+}
+
+.editButton {
+    background-color: rgb(155, 44, 35);
+    padding: 6px 12px;
+    text-align:center;
+    color: rgb(236, 241, 245);
+    margin: 8px;
+    font-size: 12px;
+    align-items: right;
+}
+
 .leftText {
+    color: rgb(0, 74, 173);
+    justify-content: left;
+    align-items: left;
+}
+
+.userText {
     color: rgb(0, 74, 173);
     justify-content: left;
     display: flex;
@@ -40,28 +131,60 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-left: 200px;
-    margin-right: 200px; */
+}
+
+.clubName {
+    color: rgb(0, 74, 173);
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    font-size: 18px ;
+    font-weight: bold;
 }
 
 .button { 
-    background-color: rgb(0, 74, 173);
+      background-color: rgb(0, 74, 173);
       padding: 8px 18px;
       text-align:center;
       color: rgb(236, 241, 245);
       margin: 10px;
       font-size: 14px;
 } 
+.buttonCenter { 
+    background-color: rgb(0, 74, 173);
+    padding: 8px 18px;
+    text-align:center;
+    color: rgb(236, 241, 245);
+    margin: 10px;
+    font-size: 14px;
+    display: center;
+    
+} 
+.smallButton { 
+      background-color:white;
+      padding: 6px 12px;
+      text-align:center;
+      color: rgb(0, 74, 173);
+      margin: 8px;
+      font-size: 12px;
+} 
+
+.createClub {
+    /* background-color:#f5f5f5; */
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
 
 body {
     width: 100%;
-    height: 100vh;
+    height:100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     perspective: 1200px;
     background:rgb(236, 241, 245);
-    /* padding-top: -200px; */
     padding-bottom: 200px;
   }
   
@@ -196,3 +319,7 @@ body {
     transform: rotateY(0deg) scale(1.1);
     box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
   }
+
+
+
+
