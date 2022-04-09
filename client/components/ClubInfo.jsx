@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
-
-import BookPanel from './BookPanel';
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo.png';
 
 const members = [
   {
@@ -34,8 +32,6 @@ const members = [
   },
 ];
 
-// let about = 'iramisu gummi bears tootsie roll gingerbread chocolate bar sweet roll. Shortbread fruitcake sweet cheesecake shortbread. Jujubes dragée biscuit apple pie cotton candy cake gummi bears pudding. ';
-
 function ClubInfo(props) {
   const auth = useAuth();
   const [clubName, setClubName] = useState('Super Awesome Book Club');
@@ -57,49 +53,32 @@ function ClubInfo(props) {
       });
   },[params.id]);
 
-  //   const club = setClubName('Cool Club');
-  // const club = (id) => {
-  //   axios
-  //     .get(`http://localhost:8080/clubs/:${id}`, {
-  //       clubName,
-  //       clubDescription,
-  //     })
-  //     .then((response) => {
-  //       console.log(response)
-  //       //ADD WHAT WE NEED HERE
-  //     });
-  // };
+
 
   return (
     <div className="clubInfo">
       <img className="logo" src={Logo}/>
       <h1 className="clubTitle">{clubName}</h1>
       <br />
-      {/* <div> */}
-        <h2 className="leftText">About {clubName}</h2>
-        <h3 className="leftText">{clubDescription}</h3>
-       
-      {/* </div> */}
+      <h2 className="leftText">About {clubName}</h2>
+      <h3 className="leftText">{clubDescription}</h3>
       <br />
-      {/* <div > */}
       <h2 className="leftText">Who is reading with us?</h2>
-       <ul className="members" >
+      <ul className="members" >
         {members.map((peeps) => (<ul className="memberList" key={peeps.user_id}>
          
-            {peeps.firstName}
-            <span>
-              {/* This button has no functionality. I added arrow just because it was hard to see */}
-              {editPage ?
-                <>
-                  <br></br> <button className="smallButton" onClick={() => alert('this needs to remove a member')} >Remove Member</button>
-                  <span></span> <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
-                </>
-                : null}
-            </span>
+          {peeps.firstName}
+          <span>
+            {editPage ?
+              <>
+                <br></br> <button className="smallButton" onClick={() => alert('this needs to remove a member')} >Remove Member</button>
+                <span></span> <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
+              </>
+              : null}
+          </span>
          
         </ul>))}
-     </ul>
-      {/* </div> */}
+      </ul>
       <br />
 
 
@@ -119,26 +98,25 @@ function ClubInfo(props) {
               className="button"
               onClick={(e) => {
                 e.preventDefault();
-                alert('this submits a request to add member. I figured email would be the best look up')
+                alert('this submits a request to add member. I figured email would be the best look up');
               }}
             >
               Add Member
             </button>
           </form>
           <button
-          className="editButton"
-          value={editPage}
-          onClick={(e) => {
-            e.preventDefault();
-            setEditPage(!editPage);
-          }}
-        >
+            className="editButton"
+            value={editPage}
+            onClick={(e) => {
+              e.preventDefault();
+              setEditPage(!editPage);
+            }}
+          >
         Edit Club Page
-        </button>
-         {/* This button has no functionality */}
-         <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
+          </button>
+          {/* This button has no functionality */}
+          <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
           <br />
-          <BookPanel />
         </>}
     </div>
   );
