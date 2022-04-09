@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Book from './Book';
 
-function BookList({ readingList }) {
+function BookList({ readingList, setUpdate, updateList }) {
   // Can move this sort to the backend if there is time
   const [rank, setRank] = useState('');
   const [currentlyReading, setCurrentlyReading] = useState('');
@@ -18,10 +18,8 @@ function BookList({ readingList }) {
     fetch(`http://localhost:8080/books/update/${bookId}`, {
       method: 'POST',
       headers: {
-        'Authorization':`Bearer ${auth.token}`,
         'Content-Type': 'application/json'
       },
-      body: body,
     }).then(response => response.json())
       .then(() => setUpdate(!updateList))
       .catch(err => console.warn(err));
@@ -32,7 +30,7 @@ function BookList({ readingList }) {
     <>
       {currentlyReading && currentlyReading.length > 0 &&
       <>
-        <label id="bookList">Currently Reading: </label>  <Book className ="clubName" title={currentlyReading.title} key={currentlyReading.bookId} bookId={currentlyReading.bookId} author={currentlyReading.authors} currentlyReading={true} thumbnail={currentlyReading.thumbnail ? currentlyReading.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
+        <label id="bookList">Currently Reading: </label>  <Book className ="clubName" title={currentlyReading.title} key={currentlyReading.book_id} bookId={currentlyReading.bookId} author={currentlyReading.authors} currentlyReading={true} thumbnail={currentlyReading.thumbnail ? currentlyReading.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
       </>
       }
 
@@ -42,7 +40,7 @@ function BookList({ readingList }) {
             <ol>
               {rank.map(book => {
                 return (<li key={book.google_book_id}>
-                  <Book title={book.title} readNow={() => readNow(book.bookId)} key={book.bookId} bookId={book.bookId} author={book.authors} currentlyReading={false} thumbnail={book.thumbnail ? book.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
+                  <Book title={book.title} readNow={() => readNow(book.book_id)} key={book.book_id} bookId={book.book_id} author={book.authors} currentlyReading={false} thumbnail={book.thumbnail ? book.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
                 </li>);
               })}
             </ol> 

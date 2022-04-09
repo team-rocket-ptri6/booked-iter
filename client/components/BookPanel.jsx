@@ -37,7 +37,7 @@ function BookPanel() {
       </div>
       <br/>
       <div className="list">
-        {(readingList.length >= 1) && <BookList readingList={readingList} />}
+        {(readingList.length >= 1) && <BookList readingList={readingList} setUpdate={setUpdate} updateList={updateList}  />}
       </div>
     </div>
   );
