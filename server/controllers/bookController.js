@@ -1,4 +1,5 @@
-const { response } = require('express');
+// mod.cjs
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const db = require('../models/database');
 const queries = require('../models/queries');
 
@@ -30,12 +31,35 @@ bookController.getBooksByClub = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      log: `bookController.saveBook: ERROR: ${error}`,
+      log: `bookController.getBooksByClub: ERROR: ${error}`,
       message: {
-        err: 'bookController.saveBook: ERROR: Check server logs for details.',
+        err: 'bookController.getBooksByClub: ERROR: Check server logs for details.',
       },
     });  
   }
+};
+
+bookController.getGoogleBooks = async (req, res, next) => {
+  for (let i = 0; i < res.locals.books.length; i++) {
+    try {
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${res.locals.books[i].google_book_id}?fields=id,volumeInfo(title, authors,imageLinks(thumbnail))`);
+      const data = await response.json();
+
+      res.locals.books[i].title = data.volumeInfo.title;
+      res.locals.books[i].authors = data.volumeInfo.authors;
+      res.locals.books[i].thumbnail = data.volumeInfo.imageLinks;
+
+      return next();
+    } catch (error) {
+      return next({
+        log: `bookController.getGoogleBooks: ERROR: ${error}`,
+        message: {
+          err: 'bookController.getGoogleBooks: ERROR: Check server logs for details.',
+        },
+      });
+    }
+  }
+
 };
 
 module.exports = bookController;
