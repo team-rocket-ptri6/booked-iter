@@ -55,9 +55,11 @@ function ClubInfo(props) {
       <Link to='/profile'><img className="logo" src={Logo}/></Link>
       <h1 className="clubTitle">{clubName}</h1>
       <br />
+
       <h2 className="leftText">About {clubName}</h2>
-      <h3 className="leftText">{clubDescription}</h3>
-      <br />
+        <h3 className="descriptionText">{clubDescription}</h3>
+      
+     
       <h2 className="leftText">Who is reading with us?</h2>
       <ul className="members" >
         {members.map((peeps) => (<ul className="memberList" key={peeps.user_id}>
@@ -73,10 +75,8 @@ function ClubInfo(props) {
                 : null}
             </span>
         </ul>))}
-      </ul>
-      <br />
-
-
+     </ul>
+      {/* </div> */}
       {!isAdmin ? null :
         <>
 
@@ -112,6 +112,7 @@ function ClubInfo(props) {
           <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
           <br />
         </>}
+        <br/>
     </div>
   );
 }
