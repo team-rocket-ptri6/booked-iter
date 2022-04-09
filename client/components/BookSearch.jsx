@@ -3,7 +3,7 @@ import SearchSuggestions from './SearchSuggestions';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 
-function BookSearch() {
+function BookSearch({ idList }) {
   const params = useParams();
   const auth = useAuth();
 
@@ -63,7 +63,9 @@ function BookSearch() {
         <input type="search" placeholder='Search for a new book to read!' id='search' size='30' aria-label='Search for a new book to read!' value={search} onChange={e => setSearch(e.target.value)}/>
       </div>
       {Array.isArray(suggestions) && search != '' && suggestions.map(suggestion => {
-        return <SearchSuggestions save={saveBook} title={suggestion.volumeInfo.title} author={suggestion.volumeInfo.authors}  key={suggestion.id} googleBookId={suggestion.id}/>;
+        let inBookList = false;
+        if (idList.includes(suggestion.id)) inBookList = true;
+        return <SearchSuggestions save={saveBook} inBookList={inBookList} title={suggestion.volumeInfo.title} author={suggestion.volumeInfo.authors}  key={suggestion.id} googleBookId={suggestion.id}/>;
       })}
     </>
   );

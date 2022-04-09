@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
-import BookSearch from './BookSearch';
+import BookPanel from './BookPanel';
 
 const members = [
   {
@@ -141,7 +141,7 @@ function ClubInfo(props) {
             </button>
           </form>
           <br />
-          <BookSearch />
+          <BookPanel />
         </>}
     </div>
   );

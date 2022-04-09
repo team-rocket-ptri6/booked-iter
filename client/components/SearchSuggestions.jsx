@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SearchSuggestions({ title, author, googleBookId, save }) {
+function SearchSuggestions({ title, author, googleBookId, save, inBookList }) {
   const [saved, setSaved] = useState(false);
 
   function saveSuggestion() {
@@ -9,7 +9,7 @@ function SearchSuggestions({ title, author, googleBookId, save }) {
   }
   return (
     <div className='bg-white border-none'>
-      <span>{title} by {author}</span> {saved ? <span>Book Saved! ✅</span> : <button type='button' onClick={saveSuggestion}>Save to reading list!</button>}
+      <span>{title} by {author}</span> {saved || inBookList ? <span>Book Saved! ✅</span> : <button type='button' onClick={saveSuggestion}>Save to reading list!</button>}
     </div>
   );
 };
