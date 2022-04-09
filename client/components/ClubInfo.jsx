@@ -45,7 +45,10 @@ function ClubInfo(props) {
     };
 
     fetch('http://localhost:8080/clubs/add', options)
-      .then(response => setMembersUpdated(!membersUpdated))
+      .then(response => {
+        setMembersUpdated(!membersUpdated);
+        setAddMember('');
+      })
       .catch(err => console.warn(err));
   };
 
