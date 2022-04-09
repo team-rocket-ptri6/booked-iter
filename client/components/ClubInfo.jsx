@@ -4,37 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 
 import BookPanel from './BookPanel';
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo.png';
 
-const members = [
-  {
-    user_id: 42,
-    firstName: 'Patrick',
-    LastName: 'Reid'
-  },
-  {
-    user_id: 18,
-    firstName: 'Rachelle',
-    LastName: 'M'
-  },
-  {
-    user_id: 7,
-    firstName: 'Nidhi',
-    LastName: 'Kasireddy'
-  },
-  {
-    user_id: 1,
-    firstName: 'Flora',
-    LastName: 'Yufei'
-  },
-  {
-    user_id: 14,
-    firstName: 'Jon',
-    LastName: 'Haviv'
-  },
-];
-
-// let about = 'iramisu gummi bears tootsie roll gingerbread chocolate bar sweet roll. Shortbread fruitcake sweet cheesecake shortbread. Jujubes dragée biscuit apple pie cotton candy cake gummi bears pudding. ';
 
 function ClubInfo(props) {
   const auth = useAuth();
@@ -43,7 +14,8 @@ function ClubInfo(props) {
   const [members, setMembers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const [editPage, setEditPage] = useState(false);
-  const [addMember, setAddMember] = useState();
+  const [addMember, setAddMember] = useState('');
+  const [membersUpdated, setMembersUpdated] = useState(false);
 
   const params = useParams();
   useEffect(()=>{
@@ -55,20 +27,27 @@ function ClubInfo(props) {
         setClubDescription(response.data.description);
         setMembers(response.data.members);
       });
-  },[params.id]);
+  },[params.id, membersUpdated]);
 
-  //   const club = setClubName('Cool Club');
-  // const club = (id) => {
-  //   axios
-  //     .get(`http://localhost:8080/clubs/:${id}`, {
-  //       clubName,
-  //       clubDescription,
-  //     })
-  //     .then((response) => {
-  //       console.log(response)
-  //       //ADD WHAT WE NEED HERE
-  //     });
-  // };
+  function postMember(e) {
+    e.preventDefault();
+    const body = JSON.stringify({
+      email: addMember,
+      clubId: params.id,
+    });
+    const options = {
+      method: 'POST',
+      headers: {
+        'Authorization':`Bearer ${auth.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: body,
+    };
+
+    fetch('http://localhost:8080/clubs/add', options)
+      .then(response => setMembersUpdated(!membersUpdated))
+      .catch(err => console.warn(err));
+  };
 
   return (
     <div className="clubInfo">
@@ -118,8 +97,7 @@ function ClubInfo(props) {
             <button
               className="button"
               onClick={(e) => {
-                e.preventDefault();
-                alert('this submits a request to add member. I figured email would be the best look up')
+                postMember(e);
               }}
             >
               Add Member
