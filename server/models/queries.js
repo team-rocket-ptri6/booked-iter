@@ -143,4 +143,13 @@ FROM
 WHERE
 	club_id = $1`;
 
+queries.setCurrentlyReading = `UPDATE
+	books
+SET
+	currenly_reading = TRUE
+WHERE
+	book_id = $1
+RETURNING
+	*;`;
+
 module.exports = queries;

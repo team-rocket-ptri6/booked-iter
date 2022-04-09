@@ -62,4 +62,21 @@ bookController.getGoogleBooks = async (req, res, next) => {
 
 };
 
+bookController.setCurrentlyReading = async (req, res, next) => {
+  const bookId = req.params.bookId;
+  try {
+    const repsonse = await db.query(queries.setCurrentlyReading, [bookId]);
+    res.locals.book = repsonse.rows;
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `bookController.setCurrentlyReading: ERROR: ${error}`,
+      message: {
+        err: 'bookController.setCurrentlyReading: ERROR: Check server logs for details.',
+      },
+    });  
+  }
+};
+
 module.exports = bookController;
