@@ -33,11 +33,11 @@ function BookPanel() {
     <div >
       <hr className = "horizontalLine"></hr>
       <div className="list">
-      <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
+        <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
       </div>
       <br/>
       <div className="list">
-      {(readingList.length >= 1) && <BookList readingList={readingList} />}
+        {(readingList.length >= 1) && <BookList readingList={readingList} />}
       </div>
     </div>
   );
