@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
+
+import BookPanel from './BookPanel';
 import Logo from '../assets/logo.png'
 
 const members = [
@@ -136,7 +138,7 @@ function ClubInfo(props) {
          {/* This button has no functionality */}
          <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
           <br />
-
+          <BookPanel />
         </>}
     </div>
   );
