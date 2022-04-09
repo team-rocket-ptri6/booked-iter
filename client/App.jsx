@@ -21,7 +21,7 @@ function App() {
 
     //else render this below
     <div className='book'>
-      <div className="back"><img className="logo" src={Book}/></div>
+      <div className="back"><img className="coverLogo" src={Book}/></div>
 
       <div className="page10">
         {!showLogin ?
@@ -44,7 +44,7 @@ function App() {
       <div className="page2"></div>
       <div className="page1"></div>
       <div className="front">
-        <img className="logo" src={Book}/>
+        <img className="coverLogo" src={Book}/>
       </div>
       
     </div>
