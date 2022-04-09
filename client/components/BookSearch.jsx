@@ -55,18 +55,21 @@ function BookSearch({ idList, setUpdate, updateList }) {
       .catch(err => console.warn(err));
   };
 
-
-
   return (
     <>
-      <div>
-        <input type="search" placeholder='Search for a new book to read!' id='search' size='30' aria-label='Search for a new book to read!' value={search} onChange={e => setSearch(e.target.value)}/>
+      <div id="searchCenter">
+        <h2> Search for a new book to read! </h2>
+      </div>
+        
+      <div id="searchCenter">  
+        <input className="input" type="search" id='search' size='30' aria-label='Search for a new book to read!' value={search} onChange={e => setSearch(e.target.value)}/>
       </div>
       {Array.isArray(suggestions) && search != '' && suggestions.map(suggestion => {
         let inBookList = false;
         if (idList.includes(suggestion.id)) inBookList = true;
         return <SearchSuggestions save={saveBook} inBookList={inBookList} title={suggestion.volumeInfo.title} author={suggestion.volumeInfo.authors}  key={suggestion.id} googleBookId={suggestion.id}/>;
       })}
+      <br/>
     </>
   );
 }

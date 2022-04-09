@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAuth } from '../auth/authContext';
 import Book from './Book';
 
 function BookList({ readingList }) {
@@ -17,10 +15,17 @@ function BookList({ readingList }) {
   }, [readingList]);
 
   return (
+
     <>
-      <label>Currently Reading: </label> {currentlyReading && currentlyReading.length > 0 && <Book title={currentlyReading.title} key={currentlyReading.bookId} bookId={currentlyReading.bookId} author={currentlyReading.authors} currentlyReading={true} thumbnail={currentlyReading.thumbnail ? currentlyReading.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>}
+      {currentlyReading && currentlyReading.length > 0 &&
+      <>
+        <label id="bookList">Currently Reading: </label>  <Book className ="clubName" title={currentlyReading.title} key={currentlyReading.bookId} bookId={currentlyReading.bookId} author={currentlyReading.authors} currentlyReading={true} thumbnail={currentlyReading.thumbnail ? currentlyReading.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
+      </>
+      }
+
       {rank && rank.length > 0 &&
           <div>
+            <p>What should we read next?</p>
             <ol>
               {rank.map(book => {
                 return (<li key={book.google_book_id}>
