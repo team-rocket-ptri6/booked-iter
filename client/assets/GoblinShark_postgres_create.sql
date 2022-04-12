@@ -1,4 +1,4 @@
-CREATE TABLE "public.users" (
+CREATE TABLE "users" (
 	"user_id" serial NOT NULL,
 	"first_name" varchar(255) NOT NULL,
 	"last_name" varchar(255) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE "public.users" (
 
 
 
-CREATE TABLE "public.clubs" (
+CREATE TABLE "clubs" (
 	"club_id" serial NOT NULL,
 	"club_name" varchar(80) NOT NULL,
 	"description" varchar(300) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE "public.clubs" (
 
 
 
-CREATE TABLE "public.members" (
+CREATE TABLE "members" (
 	"member_id" serial NOT NULL,
 	"user_id" int NOT NULL,
 	"club_id" int NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE "public.members" (
 
 
 
-CREATE TABLE "public.books" (
+CREATE TABLE "books" (
 	"book_id" serial NOT NULL,
 	"club_id" int NOT NULL,
 	"google_book_id" varchar(255) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE "public.books" (
 
 
 
-CREATE TABLE "public.questions" (
+CREATE TABLE "questions" (
 	"question_id" serial NOT NULL,
 	"question" varchar(255) NOT NULL,
 	"member_id" int NOT NULL,
