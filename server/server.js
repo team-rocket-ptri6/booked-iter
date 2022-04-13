@@ -6,6 +6,7 @@ const usersRouter = require('./routes/users');
 const clubsRouter = require('./routes/clubs');
 const questionsRouter = require('./routes/questions');
 const booksRouter = require('./routes/books');
+const messagesRouter = require('./routes/messages');
 
 const app = express();
 const PORT = 3000;
@@ -25,6 +26,7 @@ app.use('/users', usersRouter);
 app.use('/clubs', clubsRouter);
 app.use('/questions', questionsRouter);
 app.use('/books', booksRouter);
+app.use('/messages', messagesRouter);
 
 /* 
  Only serve the index file if not in production. dev-server will handle serving it otherwise.
