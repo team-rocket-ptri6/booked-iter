@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 import Logo from '../assets/logo.png';
+import  Redirect from './UserProfileRedir';
 
 function ClubInfo(props) {
   const auth = useAuth();
+  const navigate = useNavigate();
   const [clubName, setClubName] = useState('Super Awesome Book Club');
   const [clubDescription, setClubDescription] = useState('');
   const [members, setMembers] = useState([]);
@@ -108,6 +110,15 @@ function ClubInfo(props) {
           >
         Edit Club Page
           </button>
+
+          {/* to do: add back to profile button  */}
+            <button 
+            className="editButton"
+            onClick={(e) => {
+              e.preventDefault();
+              Redirect();
+            }}>Return to Profile</button>
+
           {/* This button has no functionality */}
           <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
           <br />
