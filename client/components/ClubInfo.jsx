@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 import Logo from '../assets/logo.png';
+import { useNavigate } from "react-router-dom";
 
 function ClubInfo(props) {
   const auth = useAuth();
+  const [clubId, setClubId] = useState(null);
   const [clubName, setClubName] = useState('Super Awesome Book Club');
   const [clubDescription, setClubDescription] = useState('');
   const [members, setMembers] = useState([]);
@@ -15,16 +17,22 @@ function ClubInfo(props) {
   const [membersUpdated, setMembersUpdated] = useState(false);
 
   const params = useParams();
-  useEffect(()=>{
-    axios.get(`http://localhost:8080/clubs/${params.id}`, {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/clubs/${params.id}`, {
+      headers: {
+        'Authorization': `Bearer ${auth.token}`
+      }
     })
       .then((response) => {
+        setClubId(response.data.club_id);
         setClubName(response.data.club_name);
         setClubDescription(response.data.description);
         setMembers(response.data.members);
+        console.log('data about this club:', response.data);
       });
-  },[params.id, membersUpdated]);
+  }, [params.id, membersUpdated]);
 
   function postMember(e, action, member_id = '') {
     e.preventDefault();
@@ -36,7 +44,7 @@ function ClubInfo(props) {
     const options = {
       method: 'POST',
       headers: {
-        'Authorization':`Bearer ${auth.token}`,
+        'Authorization': `Bearer ${auth.token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body),
@@ -50,38 +58,67 @@ function ClubInfo(props) {
       .catch(err => console.warn(err));
   };
 
+  function deleteClub() {
+    const body = {
+      clubId: clubId,
+    };
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${auth.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    };
+
+    fetch('http://localhost:8080/clubs/deleteClub', options)
+      .then(response => {
+        console.log('deleted club is:', response);
+        navigate('/profile');
+      })
+      .catch(err => console.warn(err));
+  };
+
   return (
     <div className="clubInfo">
-      <Link to='/profile'><img className="logo" src={Logo}/></Link>
+      <Link to='/profile'><img className="logo" src={Logo} /></Link>
       <h1 className="clubTitle">{clubName}</h1>
       <br />
 
       <h2 className="leftText">About {clubName}</h2>
-        <h3 className="descriptionText">{clubDescription}</h3>
-      
-     
+      <h3 className="descriptionText">{clubDescription}</h3>
+
+
       <h2 className="leftText">Who is reading with us?</h2>
       <ul className="members" >
-        {members.map((peeps) => (<ul className="memberList" key={peeps.user_id}>
-         
+        {members.map((peeps) => (
+          <ul className="memberList" key={peeps.user_id}>
             {peeps.firstName}
             <span>
               {/* This button has no functionality. I added arrow just because it was hard to see */}
               {editPage ?
                 <>
-                  <br></br> <button className="smallButton" onClick={(e) => postMember(e, 'remove', peeps.member_id)}>Remove Member</button>
-                  <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
+                  <br></br>
+                  {peeps.isAdmin ?
+                    <div className="adminMemberMsg">This member is an admin</div>
+                    :
+                    <>
+                      <button className="smallButton" onClick={(e) => postMember(e, 'remove', peeps.member_id)}>Remove Member</button>
+                      <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
+                    </>
+                  }
+
                 </>
                 : null}
             </span>
-        </ul>))}
-     </ul>
+          </ul>))}
+      </ul>
       {/* </div> */}
       {!isAdmin ? null :
         <>
 
           <form> {/* This is what I would put within the form brackets, but no function has been created yet: action="submit" onSubmit={onSubmit}*/}
-            <input 
+            <input
               className="input"
               type="email"
               value={addMember}
@@ -106,13 +143,15 @@ function ClubInfo(props) {
               setEditPage(!editPage);
             }}
           >
-        Edit Club Page
+            Edit Club Page
           </button>
           {/* This button has no functionality */}
           <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
           <br />
+          <button className="deleteClubButton" onClick={() => { deleteClub(); }}>Delete Club</button>
+          <br />
         </>}
-        <br/>
+      <br />
     </div>
   );
 }

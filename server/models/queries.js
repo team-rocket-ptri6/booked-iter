@@ -7,7 +7,7 @@ queries.createUser = `INSERT INTO users (first_name, last_name, email, user_name
   RETURNING
     user_id, user_name, first_name`;
 
-queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';  
+queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';
 
 queries.findUser = `SELECT
 	user_id
@@ -28,6 +28,8 @@ queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-
 queries.createClub = `INSERT INTO clubs (club_name, description)
     VALUES ($1, $2)
   RETURNING club_name, description, club_id`;
+
+queries.deleteClub = 'DELETE from clubs	WHERE club_id = $1 RETURNING *';
 
 queries.findMember = `SELECT
 	*
