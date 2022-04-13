@@ -14,7 +14,7 @@ function Redirect(){
 
   return (
     <div>
-      <button className="editButton" onClick={(e) => handleClick(e)}>Return to Profile</button>
+      <button className="editButton" onClick={(e) => handleClick()}>Return to Profile</button>
     </div>
     
      

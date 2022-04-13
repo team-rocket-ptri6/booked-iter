@@ -112,12 +112,12 @@ function ClubInfo(props) {
           </button>
 
           {/* to do: add back to profile button  */}
-            <button 
+            <div 
             className="editButton"
             onClick={(e) => {
               e.preventDefault();
               Redirect();
-            }}>Return to Profile</button>
+            }}>Return to Profile</div>
 
           {/* This button has no functionality */}
           <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
