@@ -30,12 +30,15 @@ function UserProfile(){
   }
 
   useEffect(()=>{
-    axios.get('http://localhost:8080/users/clubs', {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
-    })
-      .then((response) => {
-        setClubs(response.data.clubs);
-      });
+    const loggedInUser = localStorage.getItem('user');
+    if (loggedInUser) {
+      axios.get('http://localhost:8080/users/clubs', {headers: {
+        'Authorization': `Bearer ${auth.token}` } 
+      })
+        .then((response) => {
+          setClubs(response.data.clubs);
+        });
+    }
   }, [updateClubs]);
 
   const navigate =  useNavigate();

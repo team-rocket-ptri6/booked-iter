@@ -46,7 +46,9 @@ function AuthProvider({children}) {
     try {
       const response = await auth.login(user);
       // TO-DO: Added error handling
+      // console.log('response', response.token);
       setAuthenticated(auth.isAuthenticated);
+      localStorage.setItem('user', response.token);
       setPassword('');
       setToken(response.token);
       setFirstName(response.first_name);
