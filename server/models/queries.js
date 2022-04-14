@@ -29,7 +29,13 @@ queries.createClub = `INSERT INTO clubs (club_name, description)
     VALUES ($1, $2)
   RETURNING club_name, description, club_id`;
 
+queries.deleteMessagesForDeleteClub = 'DELETE from messages WHERE member_id IN (SELECT member_id from members WHERE club_id = $1) RETURNING *';
+queries.deleteQuestionsForDeleteClub = 'DELETE from questions WHERE member_id IN (SELECT member_id from members WHERE club_id = $1) RETURNING *';
+queries.deleteMembersForDeleteClub = 'DELETE from members WHERE club_id = $1 RETURNING *';
+queries.deleteBooksForDeleteClub = 'DELETE from books WHERE club_id = $1 RETURNING *';
 queries.deleteClub = 'DELETE from clubs	WHERE club_id = $1 RETURNING *';
+
+
 
 queries.findMember = `SELECT
 	*

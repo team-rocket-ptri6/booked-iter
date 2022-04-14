@@ -57,15 +57,23 @@ clubController.getClubsByUser = async (req, res, next) => {
 };
 
 clubController.deleteClub = async (req, res, next) => {
-  // getting an error because the club is functioning as a foreign key in members and books
-  // thus we cannot delete it
-  // TODO:
-  // we want to delete all books in this club
-  // and delete members who only belong to this club
 
   try {
     const { clubId } = req.body;
+
+    //first delete messages associated with members in the club we want to delete
+    //then delete questions associated with those members
+    //then delete the members from the members table
+    //then delete books associated with the club
+    //finally we can delete the club from the clubs table
+
+    const deleteMessages = await db.query(queries.deleteMessagesForDeleteClub, [clubId]);
+    const deleteQuestions = await db.query(queries.deleteQuestionsForDeleteClub, [clubId]);
+    const deleteMembers = await db.query(queries.deleteMembersForDeleteClub, [clubId]);
+    const deleteBooks = await db.query(queries.deleteBooksForDeleteClub, [clubId]);
     const response = await db.query(queries.deleteClub, [clubId]);
+
+    // return deleted club info
     res.locals.club = response.rows[0];
     return next();
   } catch (error) {
