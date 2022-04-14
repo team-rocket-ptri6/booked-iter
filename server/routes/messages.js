@@ -17,7 +17,7 @@ router.delete('/:messageId',jwtController.verifyToken, messageController.deleteM
  * Idetify club with clubId
  * Data for the message should be in message property on the body of the request (sets edited flag to false as default)
  */
-router.post('/new/:clubId',jwtController.verifyToken, messageController.addNewClubMessage, (req, res) => {
+router.post('/new',jwtController.verifyToken, messageController.addNewClubMessage, (req, res) => {
   res.status(200).json(res.locals);
 });
 

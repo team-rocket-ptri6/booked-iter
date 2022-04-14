@@ -1,13 +1,21 @@
 queries = {};
 
-
+queries.addNewMessage = `
+  WITH member_id AS (
+    SELECT member_id FROM members
+    WHERE user_id = $1, club_id = $2
+  )
+  INSERT INTO messages (message, member_id, edited)
+  VALUES ($3, member_id, false)
+  RETURNING *
+`;
 
 queries.createUser = `INSERT INTO users (first_name, last_name, email, user_name, password)
     VALUES ($1, $2, $3, $4, $5)
   RETURNING
     user_id, user_name, first_name`;
 
-queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';  
+queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';
 
 queries.findUser = `SELECT
 	user_id
@@ -47,7 +55,6 @@ WHERE
 RETURNING
 	*;`;
 
-
 queries.deleteMember = `DELETE FROM members
 WHERE member_id = $1
 RETURNING
@@ -63,7 +70,6 @@ WHERE
 	user_id = $1
 	AND club_id = $2
 `;
-
 
 queries.addQuestion = `WITH new_question AS (
 INSERT INTO questions (question, member_id)
