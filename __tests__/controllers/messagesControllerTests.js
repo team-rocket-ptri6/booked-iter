@@ -2,8 +2,6 @@ const messageController = require('../../server/controllers/messageController');
 const db = require('../../server/models/database')
 
 jest.mock('../../server/models/database');
-console.log('mock db query?', db);
-
 
 describe('Unit tests for the messageController',  () => {
   let req;
@@ -49,7 +47,7 @@ describe('Unit tests for the messageController',  () => {
       await messageController.addNewClubMessage(req, res, next);
 
       // assertions
-      expect(res.locals.message).toEqual(mockMessageResponce);
+      expect(res.locals.newMessage).toEqual(mockMessageResponce);
       // expect(db.query).toBeCalledWith('QUERY STRING');
       expect(next).toBeCalledTimes(1);
       

@@ -11,7 +11,7 @@ messageController.addNewClubMessage = async (req, res, next) => {
   try {
     result = await db.query(queries.addNewMessage, [userId, clubId, message]);
 
-    res.locals.message = result.rows[1];
+    res.locals.newMessage = result.rows[0];
     return next();
   } catch (error) {
     return next({
