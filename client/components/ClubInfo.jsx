@@ -54,7 +54,11 @@ function ClubInfo(props) {
 
   return (
     <div className="clubInfo">
-      <Link to='/profile'><img className="logo" src={Logo}/></Link>
+      <div>
+        <Link to='/profile'><img className="logo" src={Logo}/></Link>
+        <p className="redirText" style={{margin: '0px'}}>Click me to return to profile!</p>
+      </div>
+      
       <h1 className="clubTitle">{clubName}</h1>
       <br />
 

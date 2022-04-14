@@ -34,6 +34,7 @@
     border-radius: 1%;
     border:10px solid;
     border-color: fe5f55;
+    z-index: 1;
 }
 
 .green {
@@ -212,11 +213,15 @@
   border-width: 3px;
 }
 
+.redirText {
+  z-index: 2;
+}
 #searchCenter {
     justify-content: center;
     display: flex;
     /* flex-direction: column; */
     align-items: center;
+    padding: 9px;
 }
 #bookList{
   font-size: 20px;
