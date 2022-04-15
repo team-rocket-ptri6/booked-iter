@@ -1,15 +1,12 @@
 queries = {};
 
-queries.getClubMessages = ``;
+queries.getClubMessages = `
+  `;
 
 queries.addNewMessage = `
-  WITH member_id AS (
-    SELECT member_id FROM members
-    WHERE user_id = $1, club_id = $2
-  )
-  INSERT INTO messages (message, member_id, edited)
-  VALUES ($3, member_id, false)
-  RETURNING *
+INSERT INTO messages (member_id, message, edited)
+VALUES ($1, $2, $3)
+RETURNING *
 `;
 
 queries.createUser = `INSERT INTO users (first_name, last_name, email, user_name, password)
