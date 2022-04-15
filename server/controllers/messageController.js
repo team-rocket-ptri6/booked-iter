@@ -8,6 +8,14 @@ messageController.get100ClubMessages = async (req, res, next) => {};
 messageController.addNewClubMessage = async (req, res, next) => {
   const { userId } = req.user;
   const { clubId, message } = req.body;
+
+  if (
+    typeof userId !== 'number' ||
+    typeof clubId !== 'number' ||
+    typeof message !== 'string'
+  ) {
+    return res.status(400).send('request data is incorrect');
+  }
   try {
     result = await db.query(queries.addNewMessage, [userId, clubId, message]);
 

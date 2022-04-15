@@ -1,5 +1,7 @@
 queries = {};
 
+queries.getClubMessages = ``;
+
 queries.addNewMessage = `
   WITH member_id AS (
     SELECT member_id FROM members
