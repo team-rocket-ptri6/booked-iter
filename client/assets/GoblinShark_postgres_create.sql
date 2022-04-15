@@ -64,6 +64,7 @@ CREATE TABLE "messages" (
 	"message" varchar(255) NOT NULL,
 	"member_id" int NOT NULL,
   "edited" BOOLEAN NOT NULL,
+  "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT "messages_pk" PRIMARY KEY ("message_id")
 ) WITH (
   OIDS=FALSE

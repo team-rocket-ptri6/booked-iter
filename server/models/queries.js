@@ -1,6 +1,13 @@
 queries = {};
 
 queries.getClubMessages = `
+  WITH club_members AS (
+    SELECT member_id, admin FROM members
+    WHERE club_id = $1
+  ) 
+  SELECT * FROM messages m
+  JOIN club_members cm ON cm.member_id = m.member_id
+  ORDER BY
   `;
 
 queries.addNewMessage = `
