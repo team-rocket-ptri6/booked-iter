@@ -13,7 +13,7 @@ describe('Unit tests for the messageController',  () => {
     beforeEach(() => {
       next = jest.fn();
       req.user = {userName: 'janedoe', userId: 1};
-      req.body = {clubId: 2, message: 'this is a test message'};
+      req.body = {member_id: 2, message: 'this is a test message'};
       res.locals = {};
     });
     afterEach(() => {
@@ -38,19 +38,13 @@ describe('Unit tests for the messageController',  () => {
 
       // assertions
       expect(res.locals.newMessage).toEqual(mockMessageResponce);
-      expect(db.query).toBeCalledWith(queries.addNewMessage, [req.user.userId, req.body.clubId, req.body.message]);
+      expect(db.query).toBeCalledWith(queries.addNewMessage, [req.body.member_id, req.body.message, false]);
       expect(next).toBeCalledTimes(1);
       
     })
 
     it('should invoke global error handler db connection fails', async () => {
       //mock the response to invoking db.query
-      const mockMessageResponce = {
-        message: req.body.message,
-        message_id: 12,
-        member_id: 14,
-        edited: false,
-      }
       const error = new Error('this is an error message')
       db.query.mockResolvedValueOnce(error);
 
@@ -63,11 +57,11 @@ describe('Unit tests for the messageController',  () => {
 
       // assertions
       expect(res.locals.newMessage).toEqual(undefined);
-      expect(db.query).toBeCalledWith(queries.addNewMessage, [req.user.userId, req.body.clubId, req.body.message]);
+      expect(db.query).toBeCalledWith(queries.addNewMessage, [req.body.member_id, req.body.message, false]);
     })
 
     it('should respond with status 400 if reqest information is bad', async ()=> {
-      req.user.userId = 'not the right value';
+      req.body.member_id = 'not the right value';
       res = {
         ...res,
         status: function(responseStatus) {
@@ -100,16 +94,21 @@ describe('Unit tests for the messageController',  () => {
     });
 
     it('adds messages from database to res.locals', async() => {
-      const mockResponce = {
-        // expected data
-      }
+      const mockResponce = [{
+        message_id: 1,
+        message: 'this is a message',
+        user_id: 2,
+        username: 'janedoe',
+        edited: false,
+      }];
+      
       db.query.mockResolvedValueOnce({ 
-        rows: [mockResponce], 
+        rows: mockResponce, 
         rowCount: 1 
       });
 
       //invoke the functino being tested
-      await messageController.addNewClubMessage(req, res, next);
+      await messageController.get100ClubMessages(req, res, next);
 
       // assertions
       expect(res.locals.data).toEqual(mockResponce);
@@ -118,7 +117,19 @@ describe('Unit tests for the messageController',  () => {
     })
 
     it('should invoke global error handler if db connection fails', async () => {
+      const error = new Error('this is an error message')
+      db.query.mockResolvedValueOnce(error);
 
+      next = function(nextInvocation) {
+        expect(nextInvocation).toBeInstanceOf(Object);
+      }
+
+      //invoke the functino being tested
+      await messageController.get100ClubMessages(req, res, next);
+
+      // assertions
+      expect(res.locals.newMessage).toEqual(undefined);
+      expect(db.query).toBeCalledWith(queries.getClubMessages, [req.params.clubId]);
     })
 
   })
