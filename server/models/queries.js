@@ -55,6 +55,15 @@ WHERE
 RETURNING
 	*;`;
 
+queries.removeAdmin = `UPDATE
+	members
+SET
+	admin = FALSE
+WHERE
+	member_id = $1
+RETURNING
+	*;`;
+
 
 queries.deleteMember = `DELETE FROM members
 WHERE member_id = $1

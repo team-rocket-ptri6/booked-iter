@@ -31,6 +31,16 @@ router.delete('/deleteClub', jwtController.verifyToken, memberController.verifyA
   res.status(200).json(res.locals);
 });
 
+//make a member admin (only for admin)
+router.patch('/makeAdmin', jwtController.verifyToken, memberController.makeAdmin, (req, res) => {
+  res.status(200).json(res.locals);
+});
+
+//remove admin privilege from a member (only for admin)
+router.patch('/removeAdmin', jwtController.verifyToken, memberController.removeAdmin, (req, res) => {
+  res.status(200).json(res.locals);
+});
+
 /* /:id routes */
 router.get('/:id', jwtController.verifyToken, clubController.getClub, memberController.getAllClubMembers, (req, res) => {
   res.status(200).json(res.locals);

@@ -11,10 +11,12 @@ function ClubInfo(props) {
   const [clubName, setClubName] = useState('Super Awesome Book Club');
   const [clubDescription, setClubDescription] = useState('');
   const [members, setMembers] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(null);
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState('');
   const [membersUpdated, setMembersUpdated] = useState(false);
+  const [adminUpdated, setAdminUpdated] = useState(false);
+
 
   const params = useParams();
   const navigate = useNavigate();
@@ -30,9 +32,13 @@ function ClubInfo(props) {
         setClubName(response.data.club_name);
         setClubDescription(response.data.description);
         setMembers(response.data.members);
+        response.data.members.forEach((m) => {
+          if (m.username === auth.username) setIsAdmin(m.isAdmin);
+        });
+        console.log('auth user id is', auth);
         console.log('data about this club:', response.data);
       });
-  }, [params.id, membersUpdated]);
+  }, [params.id, membersUpdated, adminUpdated]);
 
   function postMember(e, action, member_id = '') {
     e.preventDefault();
@@ -58,7 +64,8 @@ function ClubInfo(props) {
       .catch(err => console.warn(err));
   };
 
-  function deleteClub() {
+  function deleteClub(e) {
+    e.preventDefault();
     const body = {
       clubId: clubId,
     };
@@ -78,6 +85,27 @@ function ClubInfo(props) {
       })
       .catch(err => console.warn(err));
   };
+
+  function changeAdmin(e, action, member_id) {
+    const body = {
+      member_id: member_id,
+    };
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${auth.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    };
+
+    fetch(`http://localhost:8080/clubs/${action}Admin`, options)
+      .then(response => {
+        setAdminUpdated(!adminUpdated);
+      })
+      .catch(err => console.warn(err));
+  };
+
 
   return (
     <div className="clubInfo">
@@ -100,11 +128,23 @@ function ClubInfo(props) {
                 <>
                   <br></br>
                   {peeps.isAdmin ?
-                    <div className="adminMemberMsg">This member is an admin</div>
+                    (auth.username === peeps.username
+                      ?
+                      <div className="adminMemberMsg">This member is an admin</div>
+                      :
+                      <>
+                        <p className="adminMemberMsg">This member is an admin
+                          <button className="smallButton"
+                            onClick={(e) => changeAdmin(e, 'remove', peeps.member_id)} >
+                            Remove from Admin
+                          </button>
+                        </p>
+
+                      </>)
                     :
                     <>
                       <button className="smallButton" onClick={(e) => postMember(e, 'remove', peeps.member_id)}>Remove Member</button>
-                      <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
+                      <button className="smallButton" onClick={(e) => changeAdmin(e, 'make', peeps.member_id)} >Make Admin</button>
                     </>
                   }
 
@@ -148,7 +188,7 @@ function ClubInfo(props) {
           {/* This button has no functionality */}
           <span> {editPage ? <button className="editButton" onClick={() => alert('this needs to edit description')} >Edit description</button> : null} </span>
           <br />
-          <button className="deleteClubButton" onClick={() => { deleteClub(); }}>Delete Club</button>
+          <button className="deleteClubButton" onClick={(e) => { deleteClub(e); }}>Delete Club</button>
           <br />
         </>}
       <br />
