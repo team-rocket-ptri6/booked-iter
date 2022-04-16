@@ -13,7 +13,10 @@ function Login() {
   //todo: error handling display on frontend
   async function handleSubmit(e) {
     e.preventDefault();
-    await auth.login(() => navigate('/profile'));
+    await auth.login(() => {
+      console.log(response);
+      navigate('/profile');
+    });
   }
 
   return (
