@@ -14,6 +14,27 @@ function AuthProvider({children}) {
   const [token, setToken] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
 
+  const tryToGetUser = useCallback(async (callback) => {
+    /**
+     * Use token in local storage to make request
+     * if request is successful, set all data
+     * if not, session has expired
+    */
+    let localToken = localStorage.getItem('jwt');
+    console.log(localToken);
+    if (!localToken) return
+    const response = await auth.tryToGetUser(localToken);
+
+    setAuthenticated(auth.isAuthenticated);
+    setPassword('password');
+    setToken(localToken);
+    setFirstName('Evan');
+    setLastName('McNeely');
+    setEmail('evan@test.com');
+    return callback()
+  })
+
+
   const signUp = useCallback(async (callback) => {
     const user = {
       firstName,
@@ -30,6 +51,7 @@ function AuthProvider({children}) {
       setAuthenticated(auth.isAuthenticated);
       setPassword('');
       setToken(response.token);
+      localStorage.setItem('jwt', response.token)
       
       return callback();
     } catch (error) {
@@ -52,13 +74,14 @@ function AuthProvider({children}) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setEmail(response.email);
+      localStorage.setItem('jwt', response.token)
       return callback();
     } catch (error) {
       return 'The user could not be logged in';
     }
   });
 
-  const value = { username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, description, setDescription, authenticated, setAuthenticated, signUp, token, setToken, login };
+  const value = { tryToGetUser, username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, description, setDescription, authenticated, setAuthenticated, signUp, token, setToken, login };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

@@ -9,6 +9,7 @@ import axios from 'axios';
 
 function ClubPage() {
   const auth = useAuth();
+  
   const [isMember, setIsMember] = useState(true);
   const [nav, setNav] = useState('info');
   const [clubName, setClubName] = useState('Super Awesome Book Club');

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from './auth/authContext';
 import UserProfile from './components/UserProfile';
 
@@ -10,12 +11,18 @@ import Book from './assets/book.png';
 import BookSearch from './components/BookSearch';
 
 function App() {
+  const navigate = useNavigate();
   const auth = useAuth();
+  
   const [showLogin, setShowLogin] = useState('false');
 
   const toggleForm = () => {
     setShowLogin(!showLogin);
   };
+  useEffect(()=> {
+    console.log('here');
+    auth.tryToGetUser(() => navigate('/profile'))
+  },[]);
 
   return (
   //If path is /profile then show userprofile plus all the other page

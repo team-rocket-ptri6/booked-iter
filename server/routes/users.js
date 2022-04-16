@@ -22,7 +22,7 @@ router.get('/clubs', jwtController.verifyToken, clubController.getClubsByUser, (
 });
 
 /* /:id routes */
-router.get('/:id', (req, res) => {
+router.get('/', jwtController.verifyToken, userController.getUserById, (req, res) => {
   res.status(200).json(res.locals);
 });
 

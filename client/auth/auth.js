@@ -1,6 +1,10 @@
 const url = 'http://localhost:8080/users/';
 const auth = {
   isAuthenticated: false,
+  tryToGetUser: async function(token) {
+    this.isAuthenticated = true;
+    return ;
+  },
   signUp: async function (user) {
     const options = {
       method: 'POST',
