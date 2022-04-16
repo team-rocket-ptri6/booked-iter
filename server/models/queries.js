@@ -1,6 +1,28 @@
 queries = {};
 
-
+queries.getClubMessages = `
+  WITH club_members AS (
+    SELECT member_id, admin FROM members
+    WHERE club_id = $1
+  ) 
+  SELECT * FROM messages m
+  JOIN club_members cm ON cm.member_id = m.member_id
+  ORDER BY created_at DESC
+  LIMIT 100
+  `;
+queries.removeAdmin = `UPDATE
+	members
+SET
+	admin = FALSE
+WHERE
+	member_id = $1
+RETURNING
+	*;`;
+queries.addNewMessage = `
+INSERT INTO messages (member_id, message, edited)
+VALUES ($1, $2, $3)
+RETURNING *
+`;
 
 queries.createUser = `INSERT INTO users (first_name, last_name, email, user_name, password)
     VALUES ($1, $2, $3, $4, $5)
@@ -36,7 +58,6 @@ queries.deleteBooksForDeleteClub = 'DELETE from books WHERE club_id = $1 RETURNI
 queries.deleteClub = 'DELETE from clubs	WHERE club_id = $1 RETURNING *';
 
 
-
 queries.findMember = `SELECT
 	*
 FROM
@@ -55,16 +76,6 @@ WHERE
 RETURNING
 	*;`;
 
-queries.removeAdmin = `UPDATE
-	members
-SET
-	admin = FALSE
-WHERE
-	member_id = $1
-RETURNING
-	*;`;
-
-
 queries.deleteMember = `DELETE FROM members
 WHERE member_id = $1
 RETURNING
@@ -80,7 +91,6 @@ WHERE
 	user_id = $1
 	AND club_id = $2
 `;
-
 
 queries.addQuestion = `WITH new_question AS (
 INSERT INTO questions (question, member_id)
