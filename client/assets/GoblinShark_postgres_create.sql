@@ -42,6 +42,7 @@ CREATE TABLE "books" (
 	"google_book_id" varchar(255) NOT NULL,
 	"currently_reading" BOOLEAN NOT NULL DEFAULT 'false',
 	"to_read" BOOLEAN NOT NULL,
+	"has_read" BOOLEAN NOT NULL default 'false',
 	"book_votes" int NOT NULL,
 	CONSTRAINT "books_pk" PRIMARY KEY ("book_id")
 ) WITH (
@@ -81,9 +82,3 @@ ALTER TABLE "books" ADD CONSTRAINT "books_fk0" FOREIGN KEY ("club_id") REFERENCE
 
 ALTER TABLE "questions" ADD CONSTRAINT "questions_fk0" FOREIGN KEY ("member_id") REFERENCES "members"("member_id");
 ALTER TABLE "messages" ADD CONSTRAINT "messages_fk0" FOREIGN KEY ("member_id") REFERENCES "members"("member_id");
-
-
-
-
-
-

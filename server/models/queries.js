@@ -4,7 +4,7 @@ queries.getClubMessages = `
   WITH club_members AS (
     SELECT member_id, admin FROM members
     WHERE club_id = $1
-  ) 
+  )
   SELECT * FROM messages m
   JOIN club_members cm ON cm.member_id = m.member_id
   ORDER BY created_at DESC
@@ -188,5 +188,14 @@ WHERE
 	AND club_id = $1
 RETURNING
 	*;`;
+
+queries.setHasReadTrue = `UPDATE
+	books
+SET
+	has_read = TRUE
+WHERE
+	book_id = $1
+RETURNING
+ *;`;
 
 module.exports = queries;
