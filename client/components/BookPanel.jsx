@@ -13,9 +13,11 @@ function BookPanel() {
   const [updateList, setUpdate] = useState(false);
 
   useEffect(() => {
+    let token;
+    if (localStorage.user) token = localStorage.getItem('user');
     fetch(`http://localhost:8080/books/${params.id}`, {
       headers: {
-        'Authorization':`Bearer ${auth.token}`,
+        'Authorization':`Bearer ${token}`,
       }
     }).then(response => response.json())
       .then(data => {

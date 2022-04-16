@@ -48,12 +48,13 @@ function AuthProvider({children}) {
       // TO-DO: Added error handling
       // console.log('response', response.token);
       setAuthenticated(auth.isAuthenticated);
-      localStorage.setItem('user', response.token);
       setPassword('');
       setToken(response.token);
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setEmail(response.email);
+      localStorage.setItem('user', response.token);
+      localStorage.setItem('name', response.first_name);
       return callback();
     } catch (error) {
       return 'The user could not be logged in';

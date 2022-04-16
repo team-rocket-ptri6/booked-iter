@@ -12,14 +12,20 @@ function UserProfile(){
   const [clubs, setClubs] = useState([]);
   const [updateClubs, setUpdateClubs] = useState(false);
 
-  async function createClub (e){
-    setUpdateClubs(false);
+  let token;
+  let firstName;
+  if (localStorage.user) {
+    token = localStorage.getItem('user');
+    firstName = localStorage.getItem('name');
+  };
+
+  async function createClub (e){  
     e.preventDefault();
     axios.post('http://localhost:8080/clubs/new', {
       clubName:clubName,
       clubDescription:clubDescription
     }, {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
+      'Authorization': `Bearer ${token}` } 
     }).then((response) => {
       if (response) {
         console.log('Successfully created club!');
@@ -30,10 +36,9 @@ function UserProfile(){
   }
 
   useEffect(()=>{
-    const loggedInUser = localStorage.getItem('user');
-    if (loggedInUser) {
+    if (token) {
       axios.get('http://localhost:8080/users/clubs', {headers: {
-        'Authorization': `Bearer ${auth.token}` } 
+        'Authorization': `Bearer ${token}` } 
       })
         .then((response) => {
           setClubs(response.data.clubs);
@@ -45,7 +50,7 @@ function UserProfile(){
   return (
     <div className="userProfile">
       <img className="logo" src={Logo}/>
-      <h1 className="welcome">Welcome to Booked, {auth.firstName}!</h1>
+      <h1 className="welcome">Welcome to Booked, {firstName}!</h1>
       <h2 className="welcome">A place to promote our love of literature in a positive, nurturing environment. </h2>
       <h2 className="leftText">MY CLUBS</h2>
       <ul className="list">

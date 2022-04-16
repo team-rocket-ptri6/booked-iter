@@ -43,10 +43,13 @@ function BookSearch({ idList, setUpdate, updateList }) {
       googleBookId: bookId,
     });
 
+    let token;
+    if (localStorage.user) token = localStorage.getItem('user');
+
     fetch('http://localhost:8080/books', {
       method: 'POST',
       headers: {
-        'Authorization':`Bearer ${auth.token}`,
+        'Authorization':`Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: body,

@@ -15,9 +15,11 @@ function ClubInfo(props) {
   const [membersUpdated, setMembersUpdated] = useState(false);
 
   const params = useParams();
+  let token;
+  if (localStorage.user) token = localStorage.getItem('user');
   useEffect(()=>{
     axios.get(`http://localhost:8080/clubs/${params.id}`, {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
+      'Authorization': `Bearer ${token}` } 
     })
       .then((response) => {
         setClubName(response.data.club_name);
@@ -36,7 +38,7 @@ function ClubInfo(props) {
     const options = {
       method: 'POST',
       headers: {
-        'Authorization':`Bearer ${auth.token}`,
+        'Authorization':`Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body),
