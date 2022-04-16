@@ -18,6 +18,13 @@ function UserProfile(){
     token = localStorage.getItem('user');
     firstName = localStorage.getItem('name');
   };
+  
+  function logout(e) {
+    e.preventDefault;
+    localStorage.removeItem('user');
+    localStorage.removeItem('name');
+    navigate(`/`);
+  }
 
   async function createClub (e){  
     e.preventDefault();
@@ -50,6 +57,7 @@ function UserProfile(){
   return (
     <div className="userProfile">
       <img className="logo" src={Logo}/>
+      <button  className="smallButton"  onClick={logout}>Logout</button>
       <h1 className="welcome">Welcome to Booked, {firstName}!</h1>
       <h2 className="welcome">A place to promote our love of literature in a positive, nurturing environment. </h2>
       <h2 className="leftText">MY CLUBS</h2>
