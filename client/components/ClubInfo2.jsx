@@ -5,7 +5,7 @@ import { useAuth } from '../auth/authContext';
 import Logo from '../assets/logo.png';
 import  Redirect from './UserProfileRedir';
 
-function ClubInfo(props) {
+function ClubInfo2(props) {
   const auth = useAuth();
   const navigate = useNavigate();
   const [clubName, setClubName] = useState('Super Awesome Book Club');
@@ -64,7 +64,7 @@ function ClubInfo(props) {
       <br />
 
       <h2 className="leftText">About {clubName}</h2>
-        <h3 className="descriptionText">{clubDescription}</h3>
+      <h3 className="descriptionText">{clubDescription}</h3>
       
      
       <h2 className="leftText">Who is reading with us?</h2>
@@ -72,18 +72,18 @@ function ClubInfo(props) {
       <ul className="members" >
         {members.map((peeps) => (<ul className="memberList" key={peeps.user_id}>
          
-            {peeps.firstName}
-            <span>
-              {/* This button has no functionality. I added arrow just because it was hard to see */}
-              {editPage ?
-                <>
-                  <br></br> <button className="smallButton" onClick={(e) => postMember(e, 'remove', peeps.member_id)}>Remove Member</button>
-                  <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
-                </>
-                : null}
-            </span>
+          {peeps.firstName}
+          <span>
+            {peeps.firstName !== auth.firstName ? }
+            {editPage ?
+              <>
+                <br></br> <button className="smallButton" onClick={(e) => postMember(e, 'remove', peeps.member_id)}>Remove Member</button>
+                <button className="smallButton" onClick={() => alert('this needs to make member admin')} >Make Admin</button>
+              </>
+              : null}
+          </span>
         </ul>))}
-     </ul>
+      </ul>
       {/* </div> */}
       {!isAdmin ? null :
         <>
@@ -126,4 +126,4 @@ function ClubInfo(props) {
   );
 }
 
-export default ClubInfo;
+export default ClubInfo2;

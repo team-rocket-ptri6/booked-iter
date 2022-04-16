@@ -16,6 +16,8 @@ FROM
 WHERE
 	email = $1`;
 
+
+
 queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
 
 queries.addMember = `INSERT INTO members (user_id, club_id)
