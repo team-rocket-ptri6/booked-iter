@@ -10,7 +10,14 @@ queries.getClubMessages = `
   ORDER BY created_at DESC
   LIMIT 100
   `;
-
+queries.removeAdmin = `UPDATE
+	members
+SET
+	admin = FALSE
+WHERE
+	member_id = $1
+RETURNING
+	*;`;
 queries.addNewMessage = `
 INSERT INTO messages (member_id, message, edited)
 VALUES ($1, $2, $3)
@@ -49,7 +56,6 @@ queries.deleteQuestionsForDeleteClub = 'DELETE from questions WHERE member_id IN
 queries.deleteMembersForDeleteClub = 'DELETE from members WHERE club_id = $1 RETURNING *';
 queries.deleteBooksForDeleteClub = 'DELETE from books WHERE club_id = $1 RETURNING *';
 queries.deleteClub = 'DELETE from clubs	WHERE club_id = $1 RETURNING *';
-
 
 
 queries.findMember = `SELECT
