@@ -73,6 +73,7 @@ function ClubPage() {
               membersUpdated={membersUpdated}
               members={members}
               clubId={clubId}
+              adminUpdated={adminUpdated}
               setAdminUpdated={setAdminUpdated}
               isAdmin={isAdmin}
             />
