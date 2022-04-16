@@ -29,7 +29,7 @@ function App() {
             (<Signup  />) :
             (<Login />)
           }
- 
+
           {showLogin ?
             (<p className="text">Don&apos;t have an account? <span className="button" type='button' onClick={toggleForm}>Sign up today!</span></p>) :
             (<p className="text">Have an account? <span className="button" type='button' onClick={toggleForm}>Login here</span></p>)
@@ -47,7 +47,7 @@ function App() {
         <div className="front">
           <img className="coverLogo" src={Book}/>
         </div>
-      
+
       </div>
     </>
   );
