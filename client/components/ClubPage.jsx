@@ -22,10 +22,12 @@ function ClubPage() {
   const params = useParams();
   
   useEffect(() => {
+    let token;
+    if (localStorage.user) token = localStorage.getItem('user');
     axios
       .get(`http://localhost:8080/clubs/${params.id}`, {
         headers: {
-          Authorization: `Bearer ${auth.token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {

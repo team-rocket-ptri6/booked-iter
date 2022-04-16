@@ -16,7 +16,9 @@ function ClubInfo(props) {
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState('');
   const navigate = useNavigate();
-
+  let token;
+  if (localStorage.user) token = localStorage.getItem('user');
+  
   function postMember(e, action, member_id = '') {
     e.preventDefault();
     const body = {
