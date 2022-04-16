@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
 
 
-router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, memberController.setAdmin, (req,res) => {
+router.post('/new', jwtController.verifyToken, clubController.createClub, memberController.addMember, memberController.setAdmin, (req, res) => {
   res.status(200).json(res.locals);
 });
 
@@ -23,6 +23,21 @@ router.post('/add', jwtController.verifyToken, memberController.verifyAdmin, use
 
 //delete members
 router.post('/remove', jwtController.verifyToken, memberController.verifyAdmin, memberController.removeMember, (req, res) => {
+  res.status(200).json(res.locals);
+});
+
+//delete club (only for admin)
+router.delete('/deleteClub', jwtController.verifyToken, memberController.verifyAdmin, clubController.deleteClub, (req, res) => {
+  res.status(200).json(res.locals);
+});
+
+//make a member admin (only for admin)
+router.patch('/makeAdmin', jwtController.verifyToken, memberController.makeAdmin, (req, res) => {
+  res.status(200).json(res.locals);
+});
+
+//remove admin privilege from a member (only for admin)
+router.patch('/removeAdmin', jwtController.verifyToken, memberController.removeAdmin, (req, res) => {
   res.status(200).json(res.locals);
 });
 

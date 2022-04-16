@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+// added navigate from gerry
+import { Link, Navigate, useParams } from 'react-router-dom';
 import ClubInfo from './ClubInfo';
 import ClubMessages from './ClubMessages';
 import BookPanel from './BookPanel';
@@ -15,8 +16,13 @@ function ClubPage() {
   const [clubDescription, setClubDescription] = useState('');
   const [members, setMembers] = useState([]);
   const [membersUpdated, setMembersUpdated] = useState(false);
+  // changes from Gerry
+  const [adminUpdated, setAdminUpdated] = useState(false);
+  const [clubId, setClubId] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   const params = useParams();
+  
   useEffect(() => {
     axios
       .get(`http://localhost:8080/clubs/${params.id}`, {
@@ -25,11 +31,19 @@ function ClubPage() {
         },
       })
       .then((response) => {
+        // gerry
+        setClubId(response.data.club_id);
         setClubName(response.data.club_name);
         setClubDescription(response.data.description);
         setMembers(response.data.members);
+        // gerry
+        response.data.members.forEach((m) => {
+          if (m.username === auth.username) setIsAdmin(m.isAdmin);
+        });
+        console.log('auth user id is', auth);
+        console.log('data about this club:', response.data);
       });
-  }, [params.id, membersUpdated]);
+  }, [params.id, membersUpdated, adminUpdated]);
 
   return (
     <div className="clubInfo">
@@ -58,6 +72,9 @@ function ClubPage() {
               setMembersUpdated={setMembersUpdated}
               membersUpdated={membersUpdated}
               members={members}
+              clubId={clubId}
+              setAdminUpdated={setAdminUpdated}
+              isAdmin={isAdmin}
             />
           )}
           {nav === 'messages' && <ClubMessages />}

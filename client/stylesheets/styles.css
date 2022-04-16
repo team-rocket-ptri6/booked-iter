@@ -1,205 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .coverLogo {
-    width: 100%;
+  width: 100%;
 }
 
 .logo {
-    width: 100%;
-    padding-top: 25px;
-    
+  width: 100%;
+  padding-top: 25px;
+
 }
 
 .small {
-    border-radius: 50%;
-    width: 35%;
-    height: auto;
-    margin: auto;
-    display: block;
-    padding:15px;
+  border-radius: 50%;
+  width: 35%;
+  height: auto;
+  margin: auto;
+  display: block;
+  padding: 15px;
 }
 
 .userProfile {
-    background: white;
-    border-radius: 1%;
-    padding: 20px;
-    border: 10px solid;
-    border-color: fe5f55;
+  background: white;
+  border-radius: 1%;
+  padding: 20px;
+  border: 10px solid;
+  border-color: fe5f55;
 }
 
 .clubInfo {
-    background: white;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-radius: 1%;
-    border:10px solid;
-    border-color: fe5f55;
+  background: white;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 1%;
+  border: 10px solid;
+  border-color: fe5f55;
 }
 
 .green {
-    color: green;
-    font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 
 .list {
-    color: 22333b;
-    justify-content: left;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    border: 3px;
-    border-style: solid;
-    border-color: fe5f55;
-    background-color: f9f9f9;
-    /* justify-content: space-between; */
-    padding-top: 8px;
-    
+  color: 22333b;
+  justify-content: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  border: 3px;
+  border-style: solid;
+  border-color: fe5f55;
+  background-color: f9f9f9;
+  /* justify-content: space-between; */
+  padding-top: 8px;
+
 }
 
 .clubDescription {
-    color: 22333b;
-    font-size:14pt;
+  color: 22333b;
+  font-size: 14pt;
 }
 
 .text {
-    color: 22333b;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  color: 22333b;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .welcome {
-    color: rgb(0, 74, 173);
-    justify-content: center;
-    display: flex;
-    align-items: center;
+  color: rgb(0, 74, 173);
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 .clubTitle {
-    color: rgb(0, 74, 173);
-    justify-content: center;
-    display: flex;
-    /* flex-direction: column; */
-    align-items: center;
-    font-weight: bold;
-    text-decoration: underline;
+  color: rgb(0, 74, 173);
+  justify-content: center;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .members {
-    justify-content: left;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    border: 4px;
-    border-style: solid;
-    border-color: fe5f55;
-    background-color: f9f9f9;
-    padding: 8px;
-    margin-left: auto;
-    font-size: 16px;
-    font-weight: bold; 
-    color: #22333b;
+  justify-content: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  border: 4px;
+  border-style: solid;
+  border-color: fe5f55;
+  background-color: f9f9f9;
+  padding: 8px;
+  margin-left: auto;
+  font-size: 16px;
+  font-weight: bold;
+  color: #22333b;
 }
 
 .memberList {
-    margin-left: -25px;
-    font-style: bold;
+  margin-left: -25px;
+  font-style: bold;
 }
 
 .input {
-    width: 30%;
-    height: 40px;
+  width: 30%;
+  height: 40px;
 }
 
 .editButton {
-    background-color: fe5f55;
-    padding: 8px 18px;
-    text-align:center;
-    color: rgb(236, 241, 245);
-    margin: 10px;
-    font-size: 14px;
+  background-color: fe5f55;
+  padding: 8px 18px;
+  text-align: center;
+  color: rgb(236, 241, 245);
+  margin: 10px;
+  font-size: 14px;
+}
+
+.deleteClubButton {
+  background-color: #e60000;
+  padding: 8px 18px;
+  text-align: center;
+  color: rgb(236, 241, 245);
+  margin: 10px;
+  font-size: 14px;
 }
 
 .leftText {
-    color: rgb(0, 74, 173);
-    justify-content: left;
-    align-items: left;
+  color: rgb(0, 74, 173);
+  justify-content: left;
+  align-items: left;
 }
 
 .descriptionText {
-    color: #22333b;
-    justify-content: left;
-    align-items: left;
+  color: #22333b;
+  justify-content: left;
+  align-items: left;
 }
 
 .userText {
-    color: #22333b;
-    justify-content: left;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+  color: #22333b;
+  justify-content: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
 .formContainer {
-    background-color:#f5f5f5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .clubName {
-    color: rgb(0, 74, 173);
-    justify-content: left;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    font-size: 18px ;
-    font-weight: bold;
+  color: rgb(0, 74, 173);
+  justify-content: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.button { 
-      background-color: rgb(0, 74, 173);
-      padding: 8px 18px;
-      text-align:center;
-      color: rgb(236, 241, 245);
-      margin: 10px;
-      font-size: 14px;
-} 
-.buttonCenter { 
-    background-color: rgb(0, 74, 173);
-    padding: 8px 18px;
-    text-align:center;
-    color: rgb(236, 241, 245);
-    margin: 10px;
-    font-size: 14px;
-    display: center;
-    
-} 
-.smallButton { 
-      background-color:white;
-      padding: 6px 12px;
-      text-align:center;
-      color: rgb(0, 74, 173);
-      margin: 8px;
-      font-size: 12px;
-} 
+.button {
+  background-color: rgb(0, 74, 173);
+  padding: 8px 18px;
+  text-align: center;
+  color: rgb(236, 241, 245);
+  margin: 10px;
+  font-size: 14px;
+}
+
+.buttonCenter {
+  background-color: rgb(0, 74, 173);
+  padding: 8px 18px;
+  text-align: center;
+  color: rgb(236, 241, 245);
+  margin: 10px;
+  font-size: 14px;
+  display: center;
+
+}
+
+.smallButton {
+  background-color: white;
+  padding: 6px 12px;
+  text-align: center;
+  color: rgb(0, 74, 173);
+  margin: 8px;
+  font-size: 12px;
+}
 
 .createClub {
-    /* background-color:#f5f5f5; */
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+  /* background-color:#f5f5f5; */
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
 .voteButton {
-    background-color: rgb(0, 74, 173);
-    padding: 4px 10px;
-    text-align:center;
-    color: rgb(236, 241, 245);
-    margin: 10px;
-    font-size: 14px;
-    border-radius: 3%
+  background-color: rgb(0, 74, 173);
+  padding: 4px 10px;
+  text-align: center;
+  color: rgb(236, 241, 245);
+  margin: 10px;
+  font-size: 14px;
+  border-radius: 3%
 }
 
 .horizontalLine {
@@ -213,169 +228,192 @@
 }
 
 #searchCenter {
-    justify-content: center;
-    display: flex;
-    /* flex-direction: column; */
-    align-items: center;
+  justify-content: center;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
 }
-#bookList{
+
+#bookList {
   font-size: 20px;
   font-weight: bold;
   justify-content: center;
   display: flex;
-    /* flex-direction: column; */
+  /* flex-direction: column; */
   align-items: center;
-  
+
 }
 
 body {
-    width: 100%;
-    /* height:100vh; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1200px;
-    background:rgb(236, 241, 245);
-    padding-bottom: 200px;
-  }
-  
-  .book {
-    transform-style: preserve-3d;
-    position: center;
-    height: 400px;
-    cursor: pointer;
-    backface-visibility: visible;
-  }
-  
-  .front, .back, .page1, .page2, .page3, .page4, .page5, .page6, .page7, .page8, .page9, .page10 {
-    transform-style: preserve-3d;
-    position: absolute;
-    width: 400px;
-    height: 150%;
-    top: 0; left: 0;
-    transform-origin: left center;
-    transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
-  }
+  width: 100%;
+  /* height:100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+  background: rgb(236, 241, 245);
+  padding-bottom: 200px;
+}
 
-  
-  .front, .page1, .page3, .page5, .page7, .page9{
-    border-bottom-right-radius: .5em;
-    border-top-right-radius: .5em;
-  }
-  
-  .back, .page2, .page4, .page6, .page8, .page10 {
-    border-bottom-right-radius: .5em;
-    border-top-right-radius: .5em;
-  }
-  
-  .page1 { 
-    background: #efefefb0;
-  }
-  
-  .page2 {
-    background: #efefef;
-  }
-  
-  .page3 {
-    background: #f5f5f5;
-  }
-  
-  .page4 {
-    background: #f5f5f5;
-    z-index: 0;
-  }
-  
-  .page5 {
-    background: #fafafa;
-  }
-  
-  .page6 {
-    background: #fdfdfd;
-  }
+.book {
+  transform-style: preserve-3d;
+  position: center;
+  height: 400px;
+  cursor: pointer;
+  backface-visibility: visible;
+}
 
-  .page7 {
-    background: #fdfdfd;
-  }
+.front,
+.back,
+.page1,
+.page2,
+.page3,
+.page4,
+.page5,
+.page6,
+.page7,
+.page8,
+.page9,
+.page10 {
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 400px;
+  height: 150%;
+  top: 0;
+  left: 0;
+  transform-origin: left center;
+  transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
+}
 
-  .page8 {
-    background: #fdfdfd;
-  }
 
-  .page9 {
-    background: #fdfdfd;
-  }
+.front,
+.page1,
+.page3,
+.page5,
+.page7,
+.page9 {
+  border-bottom-right-radius: .5em;
+  border-top-right-radius: .5em;
+}
 
-  .page10 {
-    background: #f5f5f5;
-    
-  }
+.back,
+.page2,
+.page4,
+.page6,
+.page8,
+.page10 {
+  border-bottom-right-radius: .5em;
+  border-top-right-radius: .5em;
+}
 
-  .book:hover .front {
-    transform: rotateY(-180deg) scale(1.1); 
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  } 
-  
-  .book:hover .page1 {
-    transform: rotateY(-175deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
-  
-  .book:hover .page2 {
-    transform: rotateY(-170deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
-  
-  .book:hover .page3 {
-    transform: rotateY(-165deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
-  
-  .book:hover .page4 {
-    transform: rotateY(-160deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
-  
-  .book:hover .page5 {
-    transform: rotateY(-155deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
+.page1 {
+  background: #efefefb0;
+}
 
-  .book:hover .page6 {
-    transform: rotateY(-150deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
+.page2 {
+  background: #efefef;
+}
 
-  .book:hover .page7 {
-    transform: rotateY(-145deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
+.page3 {
+  background: #f5f5f5;
+}
 
-  .book:hover .page8 {
-    transform: rotateY(-140deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
+.page4 {
+  background: #f5f5f5;
+  z-index: 0;
+}
 
-  .book:hover .page9 {
-    transform: rotateY(-135deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
-  
-  .book:hover .page10 {
-    transform: rotateY(0deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-   
-  }
-  
-  .book:hover .back {
-    transform: rotateY(0deg) scale(1.1);
-    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-  }
+.page5 {
+  background: #fafafa;
+}
+
+.page6 {
+  background: #fdfdfd;
+}
+
+.page7 {
+  background: #fdfdfd;
+}
+
+.page8 {
+  background: #fdfdfd;
+}
+
+.page9 {
+  background: #fdfdfd;
+}
+
+.page10 {
+  background: #f5f5f5;
+
+}
+
+.book:hover .front {
+  transform: rotateY(-180deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page1 {
+  transform: rotateY(-175deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page2 {
+  transform: rotateY(-170deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page3 {
+  transform: rotateY(-165deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page4 {
+  transform: rotateY(-160deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page5 {
+  transform: rotateY(-155deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page6 {
+  transform: rotateY(-150deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page7 {
+  transform: rotateY(-145deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page8 {
+  transform: rotateY(-140deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page9 {
+  transform: rotateY(-135deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page10 {
+  transform: rotateY(0deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+
+}
+
+.book:hover .back {
+  transform: rotateY(0deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
 
 .list-none {
   list-style-type: none;
   justify-content: center;
   display: flex;
-    /* flex-direction: column; */
+  /* flex-direction: column; */
   align-items: center;
 }
 
@@ -395,3 +433,9 @@ body {
 
 
 
+.adminMemberMsg {
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
