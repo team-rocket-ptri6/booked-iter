@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// added navigate from gerry
 import { Link, Navigate, useParams } from 'react-router-dom';
 import ClubInfo from './ClubInfo';
 import ClubMessages from './ClubMessages';
@@ -16,7 +15,6 @@ function ClubPage() {
   const [clubDescription, setClubDescription] = useState('');
   const [members, setMembers] = useState([]);
   const [membersUpdated, setMembersUpdated] = useState(false);
-  // changes from Gerry
   const [adminUpdated, setAdminUpdated] = useState(false);
   const [clubId, setClubId] = useState(null);
   const [isAdmin, setIsAdmin] = useState(true);
@@ -31,12 +29,10 @@ function ClubPage() {
         },
       })
       .then((response) => {
-        // gerry
         setClubId(response.data.club_id);
         setClubName(response.data.club_name);
         setClubDescription(response.data.description);
         setMembers(response.data.members);
-        // gerry
         response.data.members.forEach((m) => {
           if (m.username === auth.username) setIsAdmin(m.isAdmin);
         });

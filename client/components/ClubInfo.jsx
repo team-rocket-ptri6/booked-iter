@@ -15,7 +15,6 @@ function ClubInfo(props) {
   const auth = useAuth();
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState('');
-  //gerry
   const navigate = useNavigate();
 
   function postMember(e, action, member_id = '') {

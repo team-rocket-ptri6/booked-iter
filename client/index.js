@@ -14,7 +14,6 @@ render(
     <AuthProvider>
       <Routes>
         <Route path="/" element={<App />} />
-        {/* <Route path="/club" element={<ClubInfo />} /> */}
         <Route
           path="/profile"
           element={
@@ -28,13 +27,6 @@ render(
           element={
             <RequireAuth>
               <ClubPage />
-              <Routes>
-                {/* <ClubInfo /> */}
-                <Route path="info" element={<ClubInfo />} />
-                {/* <Route path='messages' element={<ClubMessages />}/>
-            <Route path='books' element={<BookPanel />}/> */}
-                {/* <Route path='read' element={<BooksRead />}/> ---> This one is for gerry*/}
-              </Routes>
             </RequireAuth>
           }
         />
