@@ -7,7 +7,8 @@ queries.getClubMessages = `
   ) 
   SELECT * FROM messages m
   JOIN club_members cm ON cm.member_id = m.member_id
-  ORDER BY
+  ORDER BY created_at DESC
+  LIMIT 100
   `;
 
 queries.addNewMessage = `

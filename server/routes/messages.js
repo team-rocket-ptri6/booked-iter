@@ -25,6 +25,7 @@ router.post('/new',jwtController.verifyToken, messageController.addNewClubMessag
 /** 
  * Get the most recent 100 messages from the database for a specific club id
  * Idetify club with clubId
+ * returns 100 messages with most recent message first in the array on property 'data' in locals
  */
 router.get('/:clubId', jwtController.verifyToken, messageController.get100ClubMessages, (req, res) => {
   res.status(200).json(res.locals);
