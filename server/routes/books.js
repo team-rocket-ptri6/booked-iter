@@ -12,6 +12,10 @@ router.post('/update/:bookId', bookController.setCurrentlyReading, (req, res) =>
   return res.status(200).json(res.locals);
 });
 
+router.post('/updateRead/:bookId', bookController.markAsRead, (req, res) => {
+  return res.status(200).json(res.locals);
+});
+
 router.post('/vote/:bookId', (req, res) => {
   return res.status(200).json(res.locals);
 });

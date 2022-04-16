@@ -35,7 +35,7 @@ bookController.getBooksByClub = async (req, res, next) => {
       message: {
         err: 'bookController.getBooksByClub: ERROR: Check server logs for details.',
       },
-    });  
+    });
   }
 };
 
@@ -48,7 +48,7 @@ bookController.getGoogleBooks = async (req, res, next) => {
       res.locals.books[i].title = data.volumeInfo.title;
       res.locals.books[i].authors = data.volumeInfo.authors;
       res.locals.books[i].thumbnail = data.volumeInfo.imageLinks;
-      
+
     }
     return next();
   } catch (error) {
@@ -77,7 +77,28 @@ bookController.setCurrentlyReading = async (req, res, next) => {
       message: {
         err: 'bookController.setCurrentlyReading: ERROR: Check server logs for details.',
       },
-    });  
+    });
+  }
+};
+
+bookController.markAsRead = async (req, res, next) => {
+  const bookId = req.params.bookId;
+  const { clubId } = req.body;
+  try {
+    console.log("in bookController, bookId is :", bookId);
+    console.log("in bookController, clubId is :", clubId);
+    const response = await db.query(queries.setHasReadTrue, [bookId]);
+    await db.query(queries.setCurrentlyReadingFalse, [clubId]);
+    res.locals.book = response.rows;
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `bookController.markAsRead: ERROR: ${error}`,
+      message: {
+        err: 'bookController.markAsRead: ERROR: Check server logs for details.',
+      },
+    });
   }
 };
 
