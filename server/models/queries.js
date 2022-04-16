@@ -143,6 +143,8 @@ FROM
 WHERE
 	club_id = $1`;
 
+queries.voteForBook = ``;
+
 queries.setCurrentlyReadingTrue = `UPDATE
 	books
 SET

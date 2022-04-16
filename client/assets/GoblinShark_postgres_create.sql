@@ -29,6 +29,7 @@ CREATE TABLE "members" (
 	"user_id" int NOT NULL,
 	"club_id" int NOT NULL,
 	"admin" BOOLEAN NOT NULL DEFAULT 'false',
+	"voted" BOOLEAN NOT NULL DEFAULT 'false',
 	CONSTRAINT "members_pk" PRIMARY KEY ("member_id")
 ) WITH (
   OIDS=FALSE
