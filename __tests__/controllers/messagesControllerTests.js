@@ -4,7 +4,7 @@ const queries = require('../../server/models/queries')
 
 jest.mock('../../server/models/database');
 
-describe('Unit tests for the messageController',  () => {
+describe('Unit tests for messageController',  () => {
   let req = {};
   let res = {};
   let next;
