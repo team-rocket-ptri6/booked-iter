@@ -1,30 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import { useAuth } from '../auth/authContext';
-import Logo from '../assets/logo.png';
+import React, { useState } from 'react';
 
 function ClubInfo(props) {
-  const auth = useAuth();
-  const [clubName, setClubName] = useState('Super Awesome Book Club');
-  const [clubDescription, setClubDescription] = useState('');
-  const [members, setMembers] = useState([]);
+  const {setMembersUpdated, membersUpdated, members } = props;
   const [isAdmin, setIsAdmin] = useState(true);
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState('');
-  const [membersUpdated, setMembersUpdated] = useState(false);
 
-  const params = useParams();
-  useEffect(()=>{
-    axios.get(`http://localhost:8080/clubs/${params.id}`, {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
-    })
-      .then((response) => {
-        setClubName(response.data.club_name);
-        setClubDescription(response.data.description);
-        setMembers(response.data.members);
-      });
-  },[params.id, membersUpdated]);
 
   function postMember(e, action, member_id = '') {
     e.preventDefault();
@@ -51,13 +32,13 @@ function ClubInfo(props) {
   };
 
   return (
-    <div className="clubInfo">
-      <Link to='/profile'><img className="logo" src={Logo}/></Link>
+    <div>
+      {/* <Link to='/profile'><img className="logo" src={Logo}/></Link>
       <h1 className="clubTitle">{clubName}</h1>
       <br />
 
       <h2 className="leftText">About {clubName}</h2>
-        <h3 className="descriptionText">{clubDescription}</h3>
+        <h3 className="descriptionText">{clubDescription}</h3> */}
       
      
       <h2 className="leftText">Who is reading with us?</h2>

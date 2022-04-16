@@ -379,4 +379,19 @@ body {
   align-items: center;
 }
 
+#clubNav ul{
+  display: flex;
+  flex-direction: row;
+  
+  justify-content: space-around;
+}
+
+#clubNav li {
+  font-size: x-large;
+}
+#clubNav li:hover {
+  color: rgb(0, 74, 173);
+}
+
+
 
