@@ -46,7 +46,14 @@ export const ReadBooksPanel = () => {
       ) : (
         readBooksList.map((readBook, index) => {
           return (
-            <ReadBookCard key={readBook.book_id} book={readBook}></ReadBookCard>
+            <ReadBookCard
+              key={readBook.book_id}
+              book={readBook}
+              setReadBooksList={setReadBooksList}
+              readBooksList={readBooksList}
+              setUpdateReadBooksList={setUpdateReadBooksList}
+              updateReadBooksList={updateReadBooksList}
+            ></ReadBookCard>
           );
         })
       )}
