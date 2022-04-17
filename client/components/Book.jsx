@@ -11,7 +11,7 @@ function Book({
   return (
     <>
       <span className="font-semibold text-lg">{title}</span>
-      {!currentlyReading && (
+      {!currentlyReading ? (
         <>
           <button className="voteButton" type="button">
             Vote to read next!
@@ -19,12 +19,15 @@ function Book({
           <button onClick={readNow} className="voteButton" type="button">
             We are reading this!
           </button>
+          <div className="flex">
+            <img src={thumbnail} style={{ maxHeight: "208px" }} />
+          </div>
         </>
-      )}{" "}
-      <div>
-        {" "}
-        <img src={thumbnail} style={{ maxHeight: "208px" }} />
-      </div>
+      ) : (
+        <div className="flex items-center justify-center">
+          <img src={thumbnail} style={{ maxHeight: "208px" }} />
+        </div>
+      )}
     </>
   );
 }
