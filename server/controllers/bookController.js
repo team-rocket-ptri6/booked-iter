@@ -84,11 +84,13 @@ bookController.setCurrentlyReading = async (req, res, next) => {
 bookController.markAsRead = async (req, res, next) => {
   const bookId = req.params.bookId;
   const { clubId } = req.body;
+  const currDate = new Date();
   try {
     console.log("in bookController, bookId is :", bookId);
     console.log("in bookController, clubId is :", clubId);
     const response = await db.query(queries.setHasReadTrue, [bookId]);
     await db.query(queries.setCurrentlyReadingFalse, [clubId]);
+    await db.query(queries.addReadDate, [currDate, bookId]);
     res.locals.book = response.rows;
 
     return next();
