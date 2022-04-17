@@ -19,6 +19,7 @@ function BookList({ readingList, setUpdate, updateList }) {
     setCurrentlyReading(
       readingList.filter((book) => book.currently_reading)[0]
     );
+    // setisLoading(!isLoading);
   }, [readingList]);
 
   const updateBooks = (bookId, action) => {
@@ -82,7 +83,7 @@ function BookList({ readingList, setUpdate, updateList }) {
 
       {rank && rank.length > 0 && (
         <div>
-          <p>What should we read next?</p>
+          <p className="text-xl ml-3">What should we read next?</p>
           <ol>
             {rank.map((book) => {
               return (
