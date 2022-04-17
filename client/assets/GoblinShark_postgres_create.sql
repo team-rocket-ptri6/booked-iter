@@ -44,6 +44,7 @@ CREATE TABLE "books" (
 	"to_read" BOOLEAN NOT NULL,
 	"has_read" BOOLEAN NOT NULL default 'false',
 	"book_votes" int NOT NULL,
+	"date_read" TIMESTAMP,
 	CONSTRAINT "books_pk" PRIMARY KEY ("book_id")
 ) WITH (
   OIDS=FALSE

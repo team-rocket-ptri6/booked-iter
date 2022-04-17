@@ -198,4 +198,14 @@ WHERE
 RETURNING
  *;`;
 
+queries.addReadDate = `UPDATE
+ books
+SET
+ date_read = $1
+WHERE
+ book_id = $2
+RETURNING
+*;`;
+
+
 module.exports = queries;

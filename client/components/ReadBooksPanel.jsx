@@ -45,7 +45,6 @@ export const ReadBooksPanel = () => {
         </div>
       ) : (
         readBooksList.map((readBook, index) => {
-          console.log("readBook is", readBook);
           return (
             <ReadBookCard key={readBook.book_id} book={readBook}></ReadBookCard>
           );
