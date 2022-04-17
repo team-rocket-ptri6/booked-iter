@@ -164,11 +164,16 @@ RETURNING
 	*`;
 
 queries.getBooksByClub = `SELECT
-	*
+	b.book_id, b.club_id, b.google_book_id,
+	b.currently_reading, b.to_read, b.book_votes,
+	b.has_read, b.date_read, br.rating_id,
+	br.rating, br.review
 FROM
-	books
+	books AS b
+LEFT JOIN book_ratings br
+ON b.book_id = br.book_id
 WHERE
-	club_id = $1`;
+	b.club_id = $1`;
 
 queries.setCurrentlyReadingTrue = `UPDATE
 	books
@@ -206,6 +211,38 @@ WHERE
  book_id = $2
 RETURNING
 *;`;
+
+
+
+queries.deleteReadBook = `DELETE FROM books
+WHERE book_id = $1 RETURNING *`;
+
+queries.deleteBookRating = `DELETE from book_ratings
+WHERE rating_id IN (SELECT rating_id from book_ratings WHERE book_id = $1) RETURNING *`;
+
+
+queries.addBookRating = `INSERT INTO book_ratings (book_id)
+VALUES ($1)
+RETURNING
+*;`;
+
+queries.updateBookRating = `UPDATE
+book_ratings
+SET
+rating = $1
+WHERE
+book_id = $2
+RETURNING
+*;`;
+
+queries.updateBookReview = `UPDATE
+book_ratings
+SET
+review = $1
+WHERE
+book_id = $2
+RETURNING
+`;
 
 
 module.exports = queries;

@@ -28,6 +28,8 @@ bookController.getBooksByClub = async (req, res, next) => {
     const response = await db.query(queries.getBooksByClub, [clubId]);
     res.locals.books = response.rows;
 
+    console.log('retrieved data from bookController.getBooksByClub is:', response.rows);
+
     return next();
   } catch (error) {
     return next({
@@ -86,8 +88,6 @@ bookController.markAsRead = async (req, res, next) => {
   const { clubId } = req.body;
   const currDate = new Date();
   try {
-    console.log("in bookController, bookId is :", bookId);
-    console.log("in bookController, clubId is :", clubId);
     const response = await db.query(queries.setHasReadTrue, [bookId]);
     await db.query(queries.setCurrentlyReadingFalse, [clubId]);
     await db.query(queries.addReadDate, [currDate, bookId]);
@@ -99,6 +99,26 @@ bookController.markAsRead = async (req, res, next) => {
       log: `bookController.markAsRead: ERROR: ${error}`,
       message: {
         err: 'bookController.markAsRead: ERROR: Check server logs for details.',
+      },
+    });
+  }
+};
+
+bookController.deleteReadBook = async (req, res, next) => {
+  const bookId = req.params.bookId;
+  try {
+    console.log("in bookController.deleteReadBook, bookId is :", bookId);
+    // delete book ratings first before deleting read book (foreign key constraint)
+    await db.query(queries.deleteBookRating, [bookId]);
+    const response = await db.query(queries.deleteReadBook, [bookId]);
+    res.locals.book = response.rows;
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `bookController.deleteReadBook: ERROR: ${error}`,
+      message: {
+        err: 'bookController.deleteReadBook: ERROR: Check server logs for details.',
       },
     });
   }
