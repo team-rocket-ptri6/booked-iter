@@ -6,7 +6,7 @@ import BookPanel from "./BookPanel";
 import Logo from "../assets/logo.png";
 import { useAuth } from "../auth/authContext";
 import axios from "axios";
-import { ReadBooks } from "./ReadBooks";
+import { ReadBooksPanel } from "./ReadBooksPanel";
 
 function ClubPage() {
   const auth = useAuth();
@@ -85,7 +85,7 @@ function ClubPage() {
             )}
             {nav === "messages" && <ClubMessages />}
             {nav === "books" && <BookPanel />}
-            {nav === "read" && <ReadBooks />}
+            {nav === "read" && <ReadBooksPanel />}
           </div>
         </div>
       )}

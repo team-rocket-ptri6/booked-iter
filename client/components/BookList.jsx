@@ -67,7 +67,7 @@ function BookList({ readingList, setUpdate, updateList }) {
           </ul>
           <button
             type="button"
-            className="inline-block my-1 w-2/12 px-1 py-1 bg-blue-500 text-white
+            className="inline-block my-1 ml-2 w-2/12 px-1 py-1 bg-blue-500 text-white
         font-medium text-sm leading-tight rounded shadow-md
         hover:bg-blue-800 hover:shadow-lg focus:bg-blue-800 focus:shadow-lg
         focus:outline-none focus:ring-0 active:bg-blue-900 active:shadow-lg
