@@ -14,7 +14,7 @@ function BookPanel() {
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/books/${params.id}`, {
+    fetch(`http://localhost:8080/books/read/${params.id}`, {
       headers: {
         Authorization: `Bearer ${auth.token}`,
       },

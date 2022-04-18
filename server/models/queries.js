@@ -163,17 +163,45 @@ queries.saveBook = `INSERT INTO books (google_book_id, club_id, to_read, book_vo
 RETURNING
 	*`;
 
-queries.getBooksByClub = `SELECT
+queries.createNewBookRating = `
+INSERT INTO book_ratings (book_id, username)
+	VALUES ($1, $2)
+RETURNING
+	*`;
+
+
+queries.getBooksByClub = `
+SELECT * FROM books WHERE club_id = $1`;
+
+// queries.getBooksByClub = `SELECT
+// 	b.book_id, b.club_id, b.google_book_id,
+// 	b.currently_reading, b.to_read, b.book_votes,
+// 	b.has_read, b.date_read, br.rating_id,
+// 	br.rating, br.review
+// FROM
+// 	books AS b
+// LEFT JOIN book_ratings br
+// ON b.book_id = br.book_id
+// WHERE
+// 	b.club_id = $1`;
+
+queries.getBooksByClubAndRating = `SELECT
 	b.book_id, b.club_id, b.google_book_id,
 	b.currently_reading, b.to_read, b.book_votes,
-	b.has_read, b.date_read, br.rating_id,
-	br.rating, br.review
+	b.has_read, b.date_read, br.rating_id, br.rating, br.review, br2.avg_rating, br2.num_rating
 FROM
 	books AS b
-LEFT JOIN book_ratings br
+LEFT JOIN ( SELECT * FROM book_ratings
+	WHERE book_ratings.username = $2) AS br
 ON b.book_id = br.book_id
-WHERE
-	b.club_id = $1`;
+LEFT JOIN (SELECT book_id, AVG(rating) AS avg_rating,
+COUNT(rating) AS num_rating FROM book_ratings
+WHERE rating IS NOT NULL
+GROUP BY book_id) AS br2
+ON b.book_id = br2.book_id
+WHERE b.club_id = $1
+
+`;
 
 queries.setCurrentlyReadingTrue = `UPDATE
 	books

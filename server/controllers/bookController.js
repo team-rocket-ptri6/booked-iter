@@ -8,8 +8,11 @@ const bookController = {};
 bookController.saveBook = async (req, res, next) => {
   const { googleBookId, clubId } = req.body;
   try {
+    // console.log('googleBookId and clubId in bookController.saveBook are: ', googleBookId, ' ', clubId);
     const response = await db.query(queries.saveBook, [googleBookId, clubId]);
     res.locals.books = response.rows[0];
+    // console.log('saved response in bookController.saveBook is: ', res.local.books);
+
 
     return next();
   } catch (error) {
@@ -24,11 +27,10 @@ bookController.saveBook = async (req, res, next) => {
 
 bookController.getBooksByClub = async (req, res, next) => {
   const { clubId } = req.params;
+
   try {
     const response = await db.query(queries.getBooksByClub, [clubId]);
     res.locals.books = response.rows;
-
-    console.log('retrieved data from bookController.getBooksByClub is:', response.rows);
 
     return next();
   } catch (error) {
@@ -41,9 +43,30 @@ bookController.getBooksByClub = async (req, res, next) => {
   }
 };
 
+bookController.getBooksByClubAndRating = async (req, res, next) => {
+  const { clubId, username } = req.params;
+  console.log('club Id and username in getBooksByClubandRating :', clubId, ' ', username);
+  try {
+    const response = await db.query(queries.getBooksByClubAndRating, [clubId, username]);
+    res.locals.books = response.rows;
+
+    console.log('retrieved data from bookController.getBooksByClubAndRating is:', response.rows);
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `bookController.getBooksByClubAndRating: ERROR: ${error}`,
+      message: {
+        err: 'bookController.getBooksByClubAndRating: ERROR: Check server logs for details.',
+      },
+    });
+  }
+};
+
 bookController.getGoogleBooks = async (req, res, next) => {
   try {
     for (let i = 0; i < res.locals.books.length; i++) {
+      console.log('google book id: ', res.locals.books[i].google_book_id);
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${res.locals.books[i].google_book_id}?fields=id,volumeInfo(title, authors,imageLinks(thumbnail))`);
       const data = await response.json();
 

@@ -14,8 +14,6 @@ export const ReadBookCard = ({
     return date.toDateString();
   };
 
-  console.log(readBooksList);
-
   const deleteBook = (bookId) => {
     fetch(`http://localhost:8080/books/delete/${bookId}`, {
       method: "DELETE",
@@ -26,11 +24,11 @@ export const ReadBookCard = ({
       .then((response) => response.json())
       .then((data) => {
         setReadBooksList(readBooksList.filter((b) => b.book_id !== bookId));
-        // const idList = [];
-        // for (let i = 0; i < readBooksList.length; i++) {
-        //   if (readBooksList[i]) idList.push(readBooksList[i].google_book_id);
-        // }
-        // setReadBookIds(idList);
+        const idList = [];
+        for (let i = 0; i < readBooksList.length; i++) {
+          if (readBooksList[i]) idList.push(readBooksList[i].google_book_id);
+        }
+        setReadBookIds(idList);
         setUpdateReadBooksList(!updateReadBooksList);
       })
       .catch((err) => console.warn(err));
@@ -71,25 +69,33 @@ export const ReadBookCard = ({
             Date completed:{" "}
             {book.date_read ? timeConverter(book.date_read) : "not available"}
           </p>
-          <ul className="flex justify-center">
-            <li>
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fas"
-                data-icon="heart"
-                className="w-3.5 text-red-500 mr-1"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  fill="currentColor"
-                  d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
-                ></path>
-              </svg>
-            </li>
-          </ul>
+          <div className="flex">
+            <p className="text-gray-600 text-sm">My rating :</p>
+            <ul className="flex justify-center list-none">
+              {book.rating &&
+                Array(book.rating)
+                  .fill(1)
+                  .map((n, index) => (
+                    <li key={index + "star"}>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="heart"
+                        className="w-3.5 text-red-500 mr-1"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
+                        ></path>
+                      </svg>
+                    </li>
+                  ))}
+            </ul>
+          </div>
           <div className="flex items-center">
             <svg
               className="w-5 h-5 text-yellow-400"
