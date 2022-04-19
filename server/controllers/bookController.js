@@ -45,12 +45,12 @@ bookController.getBooksByClub = async (req, res, next) => {
 
 bookController.getBooksByClubAndRating = async (req, res, next) => {
   const { clubId, username } = req.params;
-  console.log('club Id and username in getBooksByClubandRating :', clubId, ' ', username);
+  console.log('username in getBooksByClubandRating :', username);
   try {
     const response = await db.query(queries.getBooksByClubAndRating, [clubId, username]);
     res.locals.books = response.rows;
 
-    console.log('retrieved data from bookController.getBooksByClubAndRating is:', response.rows);
+    console.log('retrieved data from bookController.getBooksByClubAndRating is:', res.locals);
 
     return next();
   } catch (error) {
@@ -66,7 +66,7 @@ bookController.getBooksByClubAndRating = async (req, res, next) => {
 bookController.getGoogleBooks = async (req, res, next) => {
   try {
     for (let i = 0; i < res.locals.books.length; i++) {
-      console.log('google book id: ', res.locals.books[i].google_book_id);
+      // console.log('google book id: ', res.locals.books[i].google_book_id);
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${res.locals.books[i].google_book_id}?fields=id,volumeInfo(title, authors,imageLinks(thumbnail))`);
       const data = await response.json();
 
@@ -127,10 +127,27 @@ bookController.markAsRead = async (req, res, next) => {
   }
 };
 
+bookController.submitNewRatingAndNotes = async (req, res, next) => {
+  const { bookId, username, newRating, newNotes } = req.body;
+  try {
+    const response = await db.query(queries.submitNewRatingAndNotes, [bookId, username, newRating, newNotes]);
+    res.locals.book = response.rows;
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `bookController.submitNewRatingAndNotes: ERROR: ${error}`,
+      message: {
+        err: 'bookController.submitNewRatingAndNotes: ERROR: Check server logs for details.',
+      },
+    });
+  }
+};
+
 bookController.deleteReadBook = async (req, res, next) => {
   const bookId = req.params.bookId;
   try {
-    console.log("in bookController.deleteReadBook, bookId is :", bookId);
+    // console.log("in bookController.deleteReadBook, bookId is :", bookId);
     // delete book ratings first before deleting read book (foreign key constraint)
     await db.query(queries.deleteBookRating, [bookId]);
     const response = await db.query(queries.deleteReadBook, [bookId]);

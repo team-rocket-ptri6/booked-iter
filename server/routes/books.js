@@ -29,7 +29,9 @@ router.get('/read/:clubId', jwtController.verifyToken, bookController.getBooksBy
   return res.status(200).json(res.locals);
 });
 
-
+router.patch('/rating', bookController.submitNewRatingAndNotes, (req, res) => {
+  return res.status(200).json(res.locals);
+});
 
 router.delete('/delete/:bookId', bookController.deleteReadBook, (req, res) => {
   return res.status(200).json(res.locals);

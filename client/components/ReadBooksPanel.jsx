@@ -15,10 +15,6 @@ export const ReadBooksPanel = () => {
   const [isLoadingReadBooks, setisLoadingReadBooks] = useState(true);
 
   useEffect(() => {
-    const paramsForFetch = {
-      clubId: params.id,
-      username: auth.username,
-    };
     fetch(`http://localhost:8080/books/rating/${params.id}&${auth.username}}`, {
       headers: {
         Authorization: `Bearer ${auth.token}`,
@@ -31,7 +27,13 @@ export const ReadBooksPanel = () => {
         for (let i = 0; i < data.books.length; i++) {
           idList.push(data.books[i].google_book_id);
         }
-        setReadBooksList(data.books.filter((b) => b.has_read));
+        setReadBooksList(
+          data.books
+            .filter((b) => b.has_read)
+            .sort((a, b) => {
+              return a.book_id - b.book_id;
+            })
+        );
         setReadBookIds(idList);
         setisLoadingReadBooks(false);
       })
