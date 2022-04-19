@@ -42,6 +42,20 @@ const auth = {
     catch (error) {
       return console.log('Error with signin', err);
     }
+  },
+  persist: async function () {
+    
+    try {
+      const response = await fetch(`${url}isAuth`, {method: 'GET'});
+      if (response.ok) {
+        this.isAuthenticated = true;
+      }
+
+      return await response.json();
+
+    } catch (error) {
+      return console.log('Error with checking for logged in user', err);
+    }
   }
 };
 

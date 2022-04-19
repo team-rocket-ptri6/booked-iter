@@ -30,9 +30,7 @@ function UserProfile(){
   }
 
   useEffect(()=>{
-    axios.get('http://localhost:8080/users/clubs', {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
-    })
+    axios.get('http://localhost:8080/users/clubs')
       .then((response) => {
         setClubs(response.data.clubs);
       });

@@ -49,7 +49,6 @@ function ClubInfo(props) {
     const options = {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${auth.token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
@@ -70,7 +69,6 @@ function ClubInfo(props) {
     const options = {
       method: 'PATCH',
       headers: {
-        Authorization: `Bearer ${auth.token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),

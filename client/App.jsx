@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from './auth/authContext';
 import UserProfile from './components/UserProfile';
 
@@ -8,14 +8,20 @@ import './stylesheets/styles.css';
 import ClubPage from './components/ClubPage';
 import Book from './assets/book.png';
 import BookSearch from './components/BookSearch';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const auth = useAuth();
+  const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState('false');
 
   const toggleForm = () => {
     setShowLogin(!showLogin);
   };
+
+  useEffect(() => {
+    auth.isLoggedIn(() => navigate('/profile'));
+  }, []);
 
   return (
   //If path is /profile then show userprofile plus all the other page

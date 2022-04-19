@@ -13,11 +13,8 @@ function BookPanel() {
   const [updateList, setUpdate] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/books/${params.id}`, {
-      headers: {
-        'Authorization':`Bearer ${auth.token}`,
-      }
-    }).then(response => response.json())
+    fetch(`http://localhost:8080/books/${params.id}`)
+      .then(response => response.json())
       .then(data => {
         setReadingList(data.books);
         const idList = [];

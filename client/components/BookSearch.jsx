@@ -46,7 +46,6 @@ function BookSearch({ idList, setUpdate, updateList }) {
     fetch('http://localhost:8080/books', {
       method: 'POST',
       headers: {
-        'Authorization':`Bearer ${auth.token}`,
         'Content-Type': 'application/json'
       },
       body: body,

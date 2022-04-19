@@ -23,11 +23,7 @@ function ClubPage() {
   
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clubs/${params.id}`, {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      })
+      .get(`http://localhost:8080/clubs/${params.id}`)
       .then((response) => {
         setClubId(response.data.club_id);
         setClubName(response.data.club_name);

@@ -72,4 +72,30 @@ userController.findOneByEmail = async (req, res, next) => {
   }
 };
 
+userController.findOneByUserId = async (req, res, next) => {
+  const userId = req.user;
+  try {
+    const response = await db.query(queries.findUserId, [userId]);
+    if (response.rows.length < 1) {
+      throw {
+        log: `User with id: ${userId} could not be found.`,
+        status: 404,
+        message: `User with id: ${userId} could not be found.`,
+      };
+    };
+
+    res.locals = {
+      user_id: response.rows[0].user_id,
+      first_name: response.rows[0].first_name,
+    }; 
+    return next();
+  } catch (error) {
+    return next({
+      log: `userController.findOneById: ERROR: ${error.log}`,
+      message: { err: `${error.message ? error.message : 'userController.findOneById: ERROR: Check server logs for details.'}` },
+      status: error.status ? error.status : 500,
+    });
+  }
+};
+
 module.exports = userController;

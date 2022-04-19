@@ -16,7 +16,7 @@ jwtController.generateToken = async (req, res, next) => {
       expiresIn: '3d',
     };
     const token = await jwt.sign(payload, process.env.SECRET_KEY, options);
-    res.cookie("access_token", token, {
+    res.cookie('access_token', token, {
       httpOnly: true
     });
     
