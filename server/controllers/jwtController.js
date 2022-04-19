@@ -3,6 +3,7 @@ const queries = require('../models/queries');
 const jwt = require('jsonwebtoken');
 require('dotenv').config;
 
+
 const jwtController = {};
 
 jwtController.generateToken = async (req, res, next) => {
@@ -15,7 +16,9 @@ jwtController.generateToken = async (req, res, next) => {
       expiresIn: '3d',
     };
     const token = await jwt.sign(payload, process.env.SECRET_KEY, options);
-    res.locals.token = token;
+    res.cookie("access_token", token, {
+      httpOnly: true
+    });
     
     return next();
   } 
@@ -29,8 +32,7 @@ jwtController.generateToken = async (req, res, next) => {
 
 jwtController.verifyToken = async (req, res, next) => {
   try {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = req.cookies.access_token;
     
     if (!token) return res.status(401).send('No authorization!');
     const decoded = await jwt.verify(token, process.env.SECRET_KEY, { maxAge: '3d' });
