@@ -20,7 +20,6 @@ function App() {
     setShowLogin(!showLogin);
   };
   useEffect(()=> {
-    console.log('here');
     auth.tryToGetUser(() => navigate('/profile'))
   },[]);
 

@@ -20,14 +20,11 @@ function AuthProvider({children}) {
      * if request is successful, set all data
      * if not, session has expired
     */
-    let localToken = localStorage.getItem('jwt');
-    console.log(localToken);
-    if (!localToken) return
     const response = await auth.tryToGetUser(localToken);
 
     setAuthenticated(auth.isAuthenticated);
     setPassword('password');
-    setToken(localToken);
+    setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MDMyNjI2OSwiZXhwIjoxNjUwNTg1NDY5fQ.ZhHH2TG7iE-OI0CQBR7jP8fZpfAWYiwn_DbG-X1KpWI');
     setFirstName('Evan');
     setLastName('McNeely');
     setEmail('evan@test.com');
@@ -51,7 +48,7 @@ function AuthProvider({children}) {
       setAuthenticated(auth.isAuthenticated);
       setPassword('');
       setToken(response.token);
-      localStorage.setItem('jwt', response.token)
+      // localStorage.setItem('jwt', response.token)
       
       return callback();
     } catch (error) {
@@ -74,7 +71,7 @@ function AuthProvider({children}) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setEmail(response.email);
-      localStorage.setItem('jwt', response.token)
+      // localStorage.setItem('jwt', response.token)
       return callback();
     } catch (error) {
       return 'The user could not be logged in';

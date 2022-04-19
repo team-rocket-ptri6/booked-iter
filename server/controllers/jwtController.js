@@ -16,6 +16,7 @@ jwtController.generateToken = async (req, res, next) => {
     };
     const token = await jwt.sign(payload, process.env.SECRET_KEY, options);
     res.locals.token = token;
+    console.log(token);
     
     return next();
   } 
