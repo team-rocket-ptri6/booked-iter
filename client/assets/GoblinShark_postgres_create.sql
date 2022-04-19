@@ -95,3 +95,6 @@ ALTER TABLE "books" ADD CONSTRAINT "books_fk0" FOREIGN KEY ("club_id") REFERENCE
 ALTER TABLE "questions" ADD CONSTRAINT "questions_fk0" FOREIGN KEY ("member_id") REFERENCES "members"("member_id");
 ALTER TABLE "messages" ADD CONSTRAINT "messages_fk0" FOREIGN KEY ("member_id") REFERENCES "members"("member_id");
 ALTER TABLE "book_ratings" ADD CONSTRAINT "ratings_fk0" FOREIGN KEY ("book_id") REFERENCES "books"("book_id");
+
+CREATE UNIQUE INDEX "bookid_user_notnull_idx" ON "book_ratings" ("book_id", "username")
+WHERE "book_id" IS NOT NULL AND "username" IS NOT NULL;

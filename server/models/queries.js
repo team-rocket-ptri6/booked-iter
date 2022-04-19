@@ -191,8 +191,8 @@ queries.getBooksByClubAndRating = `SELECT
 	b.has_read, b.date_read, br.rating_id, br.rating, br.review, br2.avg_rating, br2.num_rating
 FROM
 	books AS b
-LEFT JOIN ( SELECT * FROM book_ratings
-	WHERE book_ratings.username = $2) AS br
+LEFT JOIN ( SELECT * FROM book_ratings AS brat
+	WHERE brat.username = $2 ) AS br
 ON b.book_id = br.book_id
 LEFT JOIN (SELECT book_id, AVG(rating) AS avg_rating,
 COUNT(rating) AS num_rating FROM book_ratings
@@ -272,5 +272,13 @@ book_id = $2
 RETURNING
 `;
 
+queries.submitNewRatingAndNotes = `INSERT
+INTO book_ratings AS br (book_id, username, rating, review)
+VALUES($1, $2, $3, $4)
+ON CONFLICT (book_id, username)
+WHERE book_id IS NOT NULL AND username IS NOT NULL
+DO UPDATE
+SET rating = $3, review = $4
+`;
 
 module.exports = queries;
