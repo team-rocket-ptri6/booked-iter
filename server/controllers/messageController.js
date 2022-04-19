@@ -8,7 +8,7 @@ messageController.get100ClubMessages = async (req, res, next) => {
   try {
     result = await db.query(queries.getClubMessages, [clubId]);
 
-    res.locals.data = result.rows;
+    res.locals.messages = result.rows;
     return next();
   } catch (error) {
     return next({
