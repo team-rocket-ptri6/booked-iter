@@ -15,10 +15,12 @@ userController.checkUser = async (req, res, next) => {
     const checkMail = await db.query(queries.findUser, [email]);
     if(checkMail.rows.length > 0) {
       // return res.status(403).send('There is already an account associated with this email address.');
+      res.locals.mailError = true;
       console.error('There is already an account associated with this email address.');
     };
     const checkName = await db.query(queries.loginUser, [userName]);
     if (checkName.rows.length > 0) {
+      res.locals.nameError = true;
       console.error('Username is already in use. They beat you to it :(');
     }
     // res.locals = {

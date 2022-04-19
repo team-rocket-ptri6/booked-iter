@@ -1,6 +1,7 @@
 const url = 'http://localhost:8080/users/';
 const auth = {
   isAuthenticated: false,
+  // errorMsg: false,
   signUp: async function (user) {
     const options = {
       method: 'POST',
@@ -30,13 +31,20 @@ const auth = {
       },
       body: JSON.stringify(user),
     };
-
+    const response = {
+      error: false,
+      data: null
+    };
+    const data = await fetch(`${url}login`, options);
     try {
-      const response = await fetch(`${url}login`, options);
-      if (response.ok) {
+      if (data.ok) {
         this.isAuthenticated = true;
       }
-
+      response.data = data;
+      if (!data.ok) {
+        console.log('login error!');
+        response.error = true;
+      }
       return await response.json();
     }
     catch (error) {

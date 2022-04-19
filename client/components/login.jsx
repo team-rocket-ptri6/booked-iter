@@ -1,20 +1,21 @@
 
 import React, { useState } from 'react';
-import { useAuth } from '../auth/authContext'; 
+import { AuthProvider, useAuth } from '../auth/authContext'; 
 import { useNavigate } from 'react-router-dom';
 import Small from '../assets/smalllogo.png';
+
 
 function Login() {
   const auth = useAuth();
   const navigate = useNavigate();
+  const [val, setVal] = useState();
 
 
 
   //todo: error handling display on frontend
-  async function handleSubmit(e) {
-    e.preventDefault();
-    await auth.login(() => navigate('/profile'));
+ 
   }
+  
 
   return (
     <div> 
