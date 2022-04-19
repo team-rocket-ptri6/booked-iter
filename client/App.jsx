@@ -19,6 +19,7 @@ function App() {
   const toggleForm = () => {
     setShowLogin(!showLogin);
   };
+  
   useEffect(()=> {
     auth.tryToGetUser(() => navigate('/profile'))
   },[]);
