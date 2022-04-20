@@ -43,7 +43,7 @@ CREATE TABLE "books" (
 	"google_book_id" varchar(255) NOT NULL,
 	"currently_reading" BOOLEAN NOT NULL DEFAULT 'false',
 	"to_read" BOOLEAN NOT NULL,
-	"book_votes" int NOT NULL,
+	"book_votes" int NOT NULL DEFAULT 0,
 	CONSTRAINT "books_pk" PRIMARY KEY ("book_id")
 ) WITH (
   OIDS=FALSE
