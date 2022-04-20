@@ -1,12 +1,17 @@
-# MyBookClub
-//back to profile button
-    //request to set login status 
-    //if session status ok, navigate to login
-//make it impossible to remove self from club if you're admin
-//give admin option to delete club
-//allow members to remove themselves from clubs at will
-//add functionality to make admin button, prevent auto-logout
-//add functionality to edit club description button
-//members should only be added to club once
-//persist login
-//add voting functionality
+# Booked
+
+A place for people to create and manage their book clubs with ease
+
+## Requirements
+
+1. Postgres database instance
+2. A Node.js development environment
+
+## Development Enviroment Setup
+
+1. Clone this repository
+2. Run `npm install`
+3. Copy `template.env` and create a `.env` file in the project root.
+   1. Specify the Postgres database connection URI as `DB_URI`.
+   2. Secret key for auth as `SECRET_KEY`.
+4. Start the app `npm run dev`.

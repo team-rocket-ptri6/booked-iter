@@ -32,10 +32,10 @@ userController.checkUser = async (req, res, next) => {
     return next({
       log: `userController.checkUser: ERROR ${err}`,
       message: { err: 'userController.checkUser: ERROR: Check server logs for details.'} 
-    })
+    });
   }
 
-}
+};
 userController.createUser = async (req, res, next) => {
   try {
     const { username, password, email, firstName, lastName } = req.body;
