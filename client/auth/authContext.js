@@ -47,11 +47,7 @@ function AuthProvider({children}) {
     };
     try {
       const response = await auth.login(user);
-      if (response.error) {
-        console.log('auth failed!');
-        //what do I return??
-      }
-      console.log(auth.isAuthenticated);
+
       setAuthenticated(auth.isAuthenticated);
       setPassword('');
       setToken(response.token);
@@ -62,7 +58,10 @@ function AuthProvider({children}) {
     } catch (error) {
       setErrorMsg(true);
       console.log('inside catch');
+      setPassword('');
+      setUsername('');
       return 'The user could not be logged in';
+      
     }
   });
 

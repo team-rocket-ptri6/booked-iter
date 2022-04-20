@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 import Logo from '../assets/logo.png';
-import  Redirect from './UserProfileRedir';
+// import  Redirect from './UserProfileRedir';
 
 function ClubInfo(props) {
   const auth = useAuth();
