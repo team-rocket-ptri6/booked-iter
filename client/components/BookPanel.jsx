@@ -31,7 +31,6 @@ function BookPanel() {
 
   return (
     <div >
-      <hr className = "horizontalLine"></hr>
       <div className="list">
         <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
       </div>
