@@ -33,11 +33,12 @@ function ClubPage() {
         },
       })
       .then((response) => {
+        console.log('response',response)
         setClubId(response.data.club_id);
         setClubName(response.data.club_name);
         setClubDescription(response.data.description);
         setMembers(response.data.members);
-        setClubMessages(response.messages);
+        setClubMessages(response.data.messages);
         response.data.members.forEach((m) => {
           if (m.username === auth.username) setIsAdmin(m.isAdmin);
         });

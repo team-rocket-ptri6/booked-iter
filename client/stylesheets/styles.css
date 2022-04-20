@@ -440,3 +440,19 @@ body {
   margin-bottom: 10px;
   font-weight: 400;
 }
+
+#feed {
+  text-align: left;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+  height: 450px;
+  width: 500px;
+  
+}
+
+#message-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}

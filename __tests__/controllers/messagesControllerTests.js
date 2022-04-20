@@ -111,7 +111,7 @@ describe('Unit tests for messageController',  () => {
       await messageController.get100ClubMessages(req, res, next);
 
       // assertions
-      expect(res.locals.data).toEqual(mockResponce);
+      expect(res.locals.messages).toEqual(mockResponce);
       expect(db.query).toBeCalledWith(queries.getClubMessages, [req.params.clubId]);
       expect(next).toBeCalledTimes(1);
     })
