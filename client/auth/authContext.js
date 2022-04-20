@@ -13,6 +13,7 @@ function AuthProvider({children}) {
   const [description, setDescription] = useState('');
   const [token, setToken] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
 
   const signUp = useCallback(async (callback) => {
     const user = {
@@ -33,7 +34,9 @@ function AuthProvider({children}) {
       
       return callback();
     } catch (error) {
-      return 'The user could not be signed up!';
+      // if (response.data.mailError) return 'There is already an account associated with this email address.';
+      // if (response.data.nameError) return 'This username is already in use.';
+      // return 'The user could not be signed up!';
     }
   });
 
@@ -42,10 +45,9 @@ function AuthProvider({children}) {
       password,
       username,
     };
-
     try {
       const response = await auth.login(user);
-      // TO-DO: Added error handling
+
       setAuthenticated(auth.isAuthenticated);
       setPassword('');
       setToken(response.token);
@@ -54,7 +56,12 @@ function AuthProvider({children}) {
       setEmail(response.email);
       return callback();
     } catch (error) {
+      setErrorMsg(true);
+      console.log('inside catch');
+      setPassword('');
+      setUsername('');
       return 'The user could not be logged in';
+      
     }
   });
 

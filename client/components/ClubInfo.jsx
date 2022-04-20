@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link, useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
+import Logo from '../assets/logo.png';
+// import  Redirect from './UserProfileRedir';
 
 function ClubInfo(props) {
+  const navigate = useNavigate();
   const {
     setMembersUpdated,
     membersUpdated,
@@ -15,7 +19,6 @@ function ClubInfo(props) {
   const auth = useAuth();
   const [editPage, setEditPage] = useState(false);
   const [addMember, setAddMember] = useState('');
-  const navigate = useNavigate();
 
   function postMember(e, action, member_id = '') {
     e.preventDefault();
@@ -166,6 +169,7 @@ function ClubInfo(props) {
             }}>
             Edit Club Page
           </button>
+
           {/* This button has no functionality */}
           <span>
             {' '}

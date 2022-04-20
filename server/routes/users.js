@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   res.status(200).json(res.locals);
 });
 
-router.post('/signup', userController.createUser, jwtController.generateToken, (req, res) => {
+router.post('/signup', userController.checkUser, userController.createUser, jwtController.generateToken, (req, res) => {
   res.status(200).json(res.locals);
 });
 
