@@ -64,7 +64,7 @@ function AuthProvider({children}) {
       const response = await auth.persist();
       console.log('isLoggedIn response', response);
       setAuthenticated(auth.isAuthenticated);
-      setFirstName(response.firstName);
+      setFirstName(response.first_name);
       return callback();
     } catch (error) {
       return 'The user was not logged in';

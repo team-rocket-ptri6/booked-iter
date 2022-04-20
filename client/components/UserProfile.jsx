@@ -18,8 +18,6 @@ function UserProfile(){
     axios.post('http://localhost:8080/clubs/new', {
       clubName:clubName,
       clubDescription:clubDescription
-    }, {headers: {
-      'Authorization': `Bearer ${auth.token}` } 
     }).then((response) => {
       if (response) {
         console.log('Successfully created club!');
@@ -28,6 +26,10 @@ function UserProfile(){
       setShow(false);
     });
   }
+  
+  function logout () {
+    console.log('clicked logout');
+  };
 
   useEffect(()=>{
     axios.get('http://localhost:8080/users/clubs')
@@ -40,6 +42,7 @@ function UserProfile(){
   return (
     <div className="userProfile">
       <img className="logo" src={Logo}/>
+      <button  className="smallButton"  onClick={logout}>Logout</button>
       <h1 className="welcome">Welcome to Booked, {auth.firstName}!</h1>
       <h2 className="welcome">A place to promote our love of literature in a positive, nurturing environment. </h2>
       <h2 className="leftText">MY CLUBS</h2>
