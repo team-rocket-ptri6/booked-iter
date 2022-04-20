@@ -75,8 +75,8 @@ CREATE TABLE "messages" (
 CREATE TABLE "book_ratings" (
 	"rating_id" serial NOT NULL,
 	"book_id" int NOT NULL,
-	"username" varchar(255) DEFAULT NULL,
-	"rating" int NOT NULL DEFAULT 0,
+	"username" varchar(255),
+	"rating" int,
 	"review" varchar,
 	CONSTRAINT "ratings_pk" PRIMARY KEY ("rating_id")
 ) WITH (

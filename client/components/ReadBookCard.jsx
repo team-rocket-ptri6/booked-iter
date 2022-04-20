@@ -79,7 +79,7 @@ export const ReadBookCard = ({
             <div className="flex items-center my-1 h-5">
               <p className="text-gray-600 text-sm">My rating: </p>
               {book.rating ? (
-                <ul className="flex list-none">
+                <ul className="list-none mx-0 pl-1 ">
                   {Array(book.rating)
                     .fill(1)
                     .map((n, index) => (
@@ -134,10 +134,9 @@ export const ReadBookCard = ({
                 <p className="text-gray-600 text-sm ml-1">{" No rating yet"}</p>
               )}
             </div>
-            <div className="flex -mt-2 mb-0 h-auto">
-              <p className="text-gray-600 text-sm">My notes: </p>
-              <p className="text-gray-600 text-sm ml-1">
-                {book.review ? book.review : "No notes added"}
+            <div className="flex -mt-2 mb-0 h-auto w-[23.5rem]">
+              <p className="text-gray-600 text-sm">
+                My notes: {book.review ? book.review : "No notes added"}
               </p>
             </div>
             <div className="flex justify-end my-1">
