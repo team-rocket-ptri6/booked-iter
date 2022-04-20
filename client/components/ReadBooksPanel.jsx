@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom";
 import { ReadBookCard } from "./ReadBookCard";
 
 export const ReadBooksPanel = () => {
-  const auth = useAuth();
   const params = useParams();
+  const auth = useAuth();
 
   const [readBooksList, setReadBooksList] = useState("");
   const [readBookIds, setReadBookIds] = useState("");
@@ -15,7 +15,8 @@ export const ReadBooksPanel = () => {
   const [isLoadingReadBooks, setisLoadingReadBooks] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/books/rating/${params.id}&${auth.username}}`, {
+    // console.log("auth username is: ", auth.username);
+    fetch(`http://localhost:8080/books/rating/${params.id}&${auth.username}`, {
       headers: {
         Authorization: `Bearer ${auth.token}`,
       },

@@ -8,7 +8,6 @@ const bookController = {};
 bookController.saveBook = async (req, res, next) => {
   const { googleBookId, clubId } = req.body;
   try {
-    // console.log('googleBookId and clubId in bookController.saveBook are: ', googleBookId, ' ', clubId);
     const response = await db.query(queries.saveBook, [googleBookId, clubId]);
     res.locals.books = response.rows[0];
     // console.log('saved response in bookController.saveBook is: ', res.local.books);
@@ -49,8 +48,6 @@ bookController.getBooksByClubAndRating = async (req, res, next) => {
   try {
     const response = await db.query(queries.getBooksByClubAndRating, [clubId, username]);
     res.locals.books = response.rows;
-
-    console.log('retrieved data from bookController.getBooksByClubAndRating is:', res.locals);
 
     return next();
   } catch (error) {

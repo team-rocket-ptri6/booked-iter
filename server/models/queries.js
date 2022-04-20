@@ -200,7 +200,6 @@ WHERE rating IS NOT NULL
 GROUP BY book_id) AS br2
 ON b.book_id = br2.book_id
 WHERE b.club_id = $1
-
 `;
 
 queries.setCurrentlyReadingTrue = `UPDATE
