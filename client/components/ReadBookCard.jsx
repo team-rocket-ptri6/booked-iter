@@ -127,7 +127,7 @@ export const ReadBookCard = ({
                     href="#"
                     className="text-sm font-medium text-gray-700 underline hover:no-underline"
                   >
-                    {book.num_rating} user ratings
+                    {book.num_rating} user rating(s)
                   </a>
                 </>
               ) : (
