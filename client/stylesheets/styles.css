@@ -30,14 +30,15 @@
 }
 
 .clubInfo {
-  background: white;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 1%;
-  border: 10px solid;
-  border-color: fe5f55;
+    background: white;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 1%;
+    border:10px solid;
+    border-color: fe5f55;
+    z-index: 1;
 }
 
 .green {
@@ -228,11 +229,15 @@
   border-width: 3px;
 }
 
+.redirText {
+  z-index: 2;
+}
 #searchCenter {
-  justify-content: center;
-  display: flex;
-  /* flex-direction: column; */
-  align-items: center;
+    justify-content: center;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    padding: 9px;
 }
 
 #bookList {
