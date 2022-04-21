@@ -37,10 +37,6 @@ export const ReadBookCard = ({
       .catch((err) => console.warn(err));
   };
 
-  const openRatingModal = () => {};
-
-  console.log("book object is:", book);
-
   return (
     <div className="flex justify-center">
       <div className="flex justify-center my-2">
@@ -123,12 +119,9 @@ export const ReadBookCard = ({
                     {parseFloat(book.avg_rating).toFixed(2)}
                   </p>
                   <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full "></span>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 underline hover:no-underline"
-                  >
+                  <p className="text-sm font-medium text-gray-700 underline hover:no-underline">
                     {book.num_rating} user rating(s)
-                  </a>
+                  </p>
                 </>
               ) : (
                 <p className="text-gray-600 text-sm ml-1">{" No rating yet"}</p>

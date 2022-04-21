@@ -37,8 +37,6 @@ function ClubPage() {
         response.data.members.forEach((m) => {
           if (m.username === auth.username) setIsAdmin(m.isAdmin);
         });
-        console.log("auth user id is", auth);
-        console.log("data about this club:", response.data);
       });
   }, [params.id, membersUpdated, adminUpdated]);
 

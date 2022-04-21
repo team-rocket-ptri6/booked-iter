@@ -44,7 +44,7 @@ bookController.getBooksByClub = async (req, res, next) => {
 
 bookController.getBooksByClubAndRating = async (req, res, next) => {
   const { clubId, username } = req.params;
-  console.log('username in getBooksByClubandRating :', username);
+  // console.log('username in getBooksByClubandRating :', username);
   try {
     const response = await db.query(queries.getBooksByClubAndRating, [clubId, username]);
     res.locals.books = response.rows;
