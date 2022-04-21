@@ -1,4 +1,4 @@
-queries = {};
+const queries = {};
 
 queries.getClubMessages = `
   WITH club_members AS (

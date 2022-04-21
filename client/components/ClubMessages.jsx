@@ -10,9 +10,7 @@ function ClubMessages({ clubMessages, setClubMessages }) {
   const [messageFeild, setMessageFeild] = useState('')
   
   useEffect(async () => {
-    let getMessagesInterval = setInterval(() => {
-      getClubMessages()
-    }, 15000);
+    let getMessagesInterval = setInterval(() => getClubMessages(), 15000);
 
     return () => {
       clearInterval(getMessagesInterval);
@@ -58,14 +56,14 @@ function ClubMessages({ clubMessages, setClubMessages }) {
   // input and send button
   return (
   <div id="message-component"> 
+    <div id="message-submission">
+      <textarea type="textarea" rows="2" value={messageFeild} onChange={(e)=> setMessageFeild(e.target.value)}/>
+      <button className="button" onClick={postNewMessage}>Submit</button>
+    </div>
     <div id="feed">
       {clubMessages.map(message => {
         <Message username={message.user_name} message={message.message}/>
       })}
-    </div>
-    <div id="message-submission">
-      <input type="textbox" value={messageFeild} onChange={(e)=> setMessageFeild(e.target.value)}/>
-      <button onClick={postNewMessage}>Submit</button>
     </div>
   </div>
   )

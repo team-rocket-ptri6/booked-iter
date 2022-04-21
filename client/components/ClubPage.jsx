@@ -11,6 +11,7 @@ function ClubPage() {
   const auth = useAuth();
   const params = useParams(); // params.id is the clubId...
   // clubId in redundant, don't use it. Use params instead
+  
   const [clubId, setClubId] = useState(null);
 
   const [nav, setNav] = useState('info');
