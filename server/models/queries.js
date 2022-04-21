@@ -172,6 +172,16 @@ FROM
 WHERE
 	club_id = $1`;
 
+queries.getVoterStatus = 'SELECT voted FROM members WHERE member_id = $1';
+
+queries.voteForBook = 'UPDATE books SET book_votes = book_votes + 1 WHERE book_id = $1';
+
+queries.toggleVoterStatus = 'UPDATE members SET voted = NOT voted WHERE member_id = $1';
+
+queries.resetClubVoters = 'UPDATE members SET voted = false WHERE club_id = $1';
+
+queries.resetBookVotes = 'UPDATE books SET book_votes = 0 WHERE club_id = $1';
+
 queries.setCurrentlyReadingTrue = `UPDATE
 	books
 SET

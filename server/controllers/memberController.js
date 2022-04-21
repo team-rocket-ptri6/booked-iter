@@ -113,6 +113,7 @@ memberController.getAllClubMembers = async (req, res, next) => {
   try {
     const response = await db.query(queries.getClubMembers, [clubId]);
     res.locals.members = response.rows;
+    res.locals.memberId = response.rows.filter(el => el.user_id === req.user)[0].member_id;
 
     return next();
   } catch (error) {
