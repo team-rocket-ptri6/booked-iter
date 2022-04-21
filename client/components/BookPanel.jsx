@@ -23,6 +23,7 @@ function BookPanel() {
       .then((data) => {
         setReadingList(data.books);
         const idList = [];
+        console.log("in Book Panel, returned data is :", data);
         for (let i = 0; i < data.books.length; i++) {
           idList.push(data.books[i].google_book_id);
         }

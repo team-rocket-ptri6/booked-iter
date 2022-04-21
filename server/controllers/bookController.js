@@ -31,6 +31,8 @@ bookController.getBooksByClub = async (req, res, next) => {
     const response = await db.query(queries.getBooksByClub, [clubId]);
     res.locals.books = response.rows;
 
+    console.log('returned data from getBooksByClub is :', response.rows);
+
     return next();
   } catch (error) {
     return next({
@@ -62,16 +64,28 @@ bookController.getBooksByClubAndRating = async (req, res, next) => {
 
 bookController.getGoogleBooks = async (req, res, next) => {
   try {
+
+    console.log("in getGoogleBooks, books data in res locals is :", res.locals);
     for (let i = 0; i < res.locals.books.length; i++) {
       // console.log('google book id: ', res.locals.books[i].google_book_id);
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${res.locals.books[i].google_book_id}?fields=id,volumeInfo(title, authors,imageLinks(thumbnail))`);
       const data = await response.json();
 
+      console.log('returned data from google books api for book ', i, ', is:', data);
       res.locals.books[i].title = data.volumeInfo.title;
       res.locals.books[i].authors = data.volumeInfo.authors;
       res.locals.books[i].thumbnail = data.volumeInfo.imageLinks;
-
     }
+    // verror: {
+    //  code: 429,
+    //  message: "Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.",
+    //  errors: [ [Object] ],
+    //  status: 'RESOURCE_EXHAUSTED',
+    //  details: [ [Object] ]
+    //  }
+    //  }
+
+
     return next();
   } catch (error) {
     return next({
