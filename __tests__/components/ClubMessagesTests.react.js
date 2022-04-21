@@ -1,3 +1,4 @@
+import regeneratorRuntime from 'regenerator-runtime';
 import ClubMessages from '../../client/components/ClubComponents.jsx';
 
 import userEvent from '@testing-library/user-event';
