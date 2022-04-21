@@ -4,7 +4,7 @@ import { useAuth } from '../auth/authContext';
 import BookList from './BookList';
 import  BookSearch from './BookSearch';
 
-function BookPanel() {
+function BookPanel({ memberId }) {
   const auth = useAuth();
   const params = useParams();
 
@@ -19,6 +19,7 @@ function BookPanel() {
       }
     }).then(response => response.json())
       .then(data => {
+        console.log('memberId -->', memberId);
         setReadingList(data.books);
         const idList = [];
         for (let i = 0; i < data.books.length; i++) {
@@ -31,13 +32,12 @@ function BookPanel() {
 
   return (
     <div >
-      <hr className = "horizontalLine"></hr>
       <div className="list">
-      <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
+        <BookSearch idList={bookIds} setUpdate={setUpdate} updateList={updateList}/>
       </div>
       <br/>
       <div className="list">
-      {(readingList.length >= 1) && <BookList readingList={readingList} />}
+        {(readingList.length >= 1) && <BookList memberId={memberId} readingList={readingList} setUpdate={setUpdate} updateList={updateList}  />}
       </div>
     </div>
   );

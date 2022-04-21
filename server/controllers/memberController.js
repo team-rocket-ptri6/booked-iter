@@ -18,7 +18,7 @@ memberController.verifyAdmin = async (req, res, next) => {
     };
 
     res.locals.club_id = memberResponse.rows[0].club_id;
-    
+
     return next();
 
   } catch (error) {
@@ -26,7 +26,7 @@ memberController.verifyAdmin = async (req, res, next) => {
       log: `memberController.verifyAdmin: ERROR: ${error.log}`,
       message: { err: `${error.message ? error.message : 'memberController.verifyAdmin: ERROR: Check server logs for details.'}` },
       status: error.status ? error.status : 500,
-    });    
+    });
   }
 };
 
@@ -59,6 +59,39 @@ memberController.setAdmin = async (req, res, next) => {
   }
 };
 
+memberController.makeAdmin = async (req, res, next) => {
+  const { member_id } = req.body;
+  try {
+    const response = await db.query(queries.setAdmin, [member_id]);
+    res.locals.member = response.rows[0];
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `memberController.makeAdmin: ERROR: ${error}`,
+      message: { err: 'memberController.makeAdmin: ERROR: Check server logs for details.' }
+    });
+  }
+};
+
+memberController.removeAdmin = async (req, res, next) => {
+  const { member_id } = req.body;
+  try {
+    const response = await db.query(queries.removeAdmin, [member_id]);
+    res.locals.member = response.rows[0];
+
+    return next();
+  } catch (error) {
+    return next({
+      log: `memberController.removeAdmin: ERROR: ${error}`,
+      message: { err: 'memberController.removeAdmin: ERROR: Check server logs for details.' }
+    });
+  }
+};
+
+
+
+
 memberController.removeMember = async (req, res, next) => {
   const { member_id } = req.body;
   try {
@@ -73,13 +106,14 @@ memberController.removeMember = async (req, res, next) => {
       message: { err: 'memberController.removeMember: ERROR: Check server logs for details.' }
     });
   }
-}; 
+};
 
 memberController.getAllClubMembers = async (req, res, next) => {
   const clubId = req.params.id;
   try {
     const response = await db.query(queries.getClubMembers, [clubId]);
     res.locals.members = response.rows;
+    res.locals.memberId = response.rows.filter(el => el.user_id === req.user)[0].member_id;
 
     return next();
   } catch (error) {
@@ -93,7 +127,7 @@ memberController.getAllClubMembers = async (req, res, next) => {
 // This process feels repetitive and can be bundled into the get all members function but not sure if there is enough case for them to be separate.
 // memberController.verifyMembership = async (req, res, next) => {
 //   const clubId = req.params.id;
-//   const userId = req.user; 
+//   const userId = req.user;
 //   try {
 //     const response = await await db.query(queries.findMember, [userId, clubId]);
 //     res.locals.members = response.rows; const userId = req.user;
