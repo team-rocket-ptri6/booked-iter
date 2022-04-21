@@ -5,9 +5,7 @@ import { AuthProvider } from './auth/authContext';
 import RequireAuth from './components/RequireAuth';
 import UserProfile from './components/UserProfile';
 import App from './App';
-import ClubInfo from './components/ClubInfo';
 import ClubPage from './components/ClubPage';
-import ClubMessages from './components/ClubMessages';
 
 render(
   <BrowserRouter>

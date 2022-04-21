@@ -11,7 +11,7 @@ function ClubPage() {
   const auth = useAuth();
   const params = useParams(); // params.id is the clubId...
   // clubId in redundant, don't use it. Use params instead
-  
+
   const [clubId, setClubId] = useState(null);
 
   const [nav, setNav] = useState('info');
@@ -80,20 +80,26 @@ function ClubPage() {
             </ul>
           </nav>
           <div className="clubInfo">
-          {nav === 'info' && (
-            <ClubInfo
-              setMembersUpdated={setMembersUpdated}
-              membersUpdated={membersUpdated}
-              members={members}
-              clubId={clubId}
-              adminUpdated={adminUpdated}
-              setAdminUpdated={setAdminUpdated}
-              isAdmin={isAdmin}
-            />
-          )}
-          {nav === 'messages' && <ClubMessages />}
-          {nav === 'books' && <BookPanel memberId={memberId} />}
-          {/* {nav === 'read' && ?????} ----> for Gerry*/}
+            {nav === 'info' && (
+              <ClubInfo
+                setMembersUpdated={setMembersUpdated}
+                membersUpdated={membersUpdated}
+                members={members}
+                clubId={clubId}
+                adminUpdated={adminUpdated}
+                setAdminUpdated={setAdminUpdated}
+                isAdmin={isAdmin}
+              />
+            )}
+            {nav === 'messages' && (
+              <ClubMessages
+                memberId={memberId}
+                clubMessages={clubMessages}
+                setClubMessages={setClubMessages}
+              />
+            )}
+            {nav === 'books' && <BookPanel memberId={memberId} />}
+            {/* {nav === 'read' && ?????} ----> for Gerry*/}
           </div>
         </div>
       )}

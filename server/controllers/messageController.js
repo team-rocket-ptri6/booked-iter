@@ -4,9 +4,10 @@ const db = require('../models/database');
 const messageController = {};
 
 messageController.get100ClubMessages = async (req, res, next) => {
-  const { clubId } = req.params;
+  const { id } = req.params;
+  console.log(id)
   try {
-    result = await db.query(queries.getClubMessages, [clubId]);
+    result = await db.query(queries.getClubMessages, [id]);
 
     res.locals.messages = result.rows;
     return next();

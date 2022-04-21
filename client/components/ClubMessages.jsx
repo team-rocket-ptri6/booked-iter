@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '../auth/authContext.js';
 import Message from './Message.jsx';
 
-function ClubMessages({ clubMessages, setClubMessages }) {
+function ClubMessages({ clubMessages, setClubMessages, memberId }) {
   const clubId = useParams();
+  console.log(clubId);
   const auth = useAuth();
 
   const [messageFeild, setMessageFeild] = useState('')
@@ -38,9 +39,10 @@ function ClubMessages({ clubMessages, setClubMessages }) {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${auth.token}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        member_id: '',
+        member_id: memberId,
         message:  messageFeild,
       }),
     });
@@ -62,7 +64,7 @@ function ClubMessages({ clubMessages, setClubMessages }) {
     </div>
     <div id="feed">
       {clubMessages.map(message => {
-        <Message username={message.user_name} message={message.message}/>
+        return <Message key={message.message_id} username={message.user_name} message={message.message}/>
       })}
     </div>
   </div>
