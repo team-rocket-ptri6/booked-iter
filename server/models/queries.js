@@ -1,35 +1,13 @@
 queries = {};
 
-queries.getClubMessages = `
-  WITH club_members AS (
-    SELECT member_id, admin FROM members
-    WHERE club_id = $1
-  ) 
-  SELECT * FROM messages m
-  JOIN club_members cm ON cm.member_id = m.member_id
-  ORDER BY created_at DESC
-  LIMIT 100
-  `;
-queries.removeAdmin = `UPDATE
-	members
-SET
-	admin = FALSE
-WHERE
-	member_id = $1
-RETURNING
-	*;`;
-queries.addNewMessage = `
-INSERT INTO messages (member_id, message, edited)
-VALUES ($1, $2, $3)
-RETURNING *
-`;
+
 
 queries.createUser = `INSERT INTO users (first_name, last_name, email, user_name, password)
     VALUES ($1, $2, $3, $4, $5)
   RETURNING
     user_id, user_name, first_name`;
 
-queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';
+queries.loginUser = 'SELECT * FROM users WHERE user_name = $1';  
 
 queries.findUser = `SELECT
 	user_id
@@ -37,8 +15,6 @@ FROM
 	users
 WHERE
 	email = $1`;
-
-
 
 queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
 
@@ -52,13 +28,6 @@ queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-
 queries.createClub = `INSERT INTO clubs (club_name, description)
     VALUES ($1, $2)
   RETURNING club_name, description, club_id`;
-
-queries.deleteMessagesForDeleteClub = 'DELETE from messages WHERE member_id IN (SELECT member_id from members WHERE club_id = $1) RETURNING *';
-queries.deleteQuestionsForDeleteClub = 'DELETE from questions WHERE member_id IN (SELECT member_id from members WHERE club_id = $1) RETURNING *';
-queries.deleteMembersForDeleteClub = 'DELETE from members WHERE club_id = $1 RETURNING *';
-queries.deleteBooksForDeleteClub = 'DELETE from books WHERE club_id = $1 RETURNING *';
-queries.deleteClub = 'DELETE from clubs	WHERE club_id = $1 RETURNING *';
-
 
 queries.findMember = `SELECT
 	*
@@ -78,6 +47,7 @@ WHERE
 RETURNING
 	*;`;
 
+
 queries.deleteMember = `DELETE FROM members
 WHERE member_id = $1
 RETURNING
@@ -93,6 +63,7 @@ WHERE
 	user_id = $1
 	AND club_id = $2
 `;
+
 
 queries.addQuestion = `WITH new_question AS (
 INSERT INTO questions (question, member_id)
@@ -171,34 +142,5 @@ FROM
 	books
 WHERE
 	club_id = $1`;
-
-queries.getVoterStatus = 'SELECT voted FROM members WHERE member_id = $1';
-
-queries.voteForBook = 'UPDATE books SET book_votes = book_votes + 1 WHERE book_id = $1';
-
-queries.toggleVoterStatus = 'UPDATE members SET voted = NOT voted WHERE member_id = $1';
-
-queries.resetClubVoters = 'UPDATE members SET voted = false WHERE club_id = $1';
-
-queries.resetBookVotes = 'UPDATE books SET book_votes = 0 WHERE club_id = $1';
-
-queries.setCurrentlyReadingTrue = `UPDATE
-	books
-SET
-	currently_reading = TRUE
-WHERE
-	book_id = $1
-RETURNING
-	*;`;
-
-queries.setCurrentlyReadingFalse = `UPDATE
-	books
-SET
-	currently_reading = FALSE
-WHERE
-	currently_reading = TRUE
-	AND club_id = $1
-RETURNING
-	*;`;
 
 module.exports = queries;
