@@ -29,6 +29,7 @@ CREATE TABLE "members" (
 	"user_id" int NOT NULL,
 	"club_id" int NOT NULL,
 	"admin" BOOLEAN NOT NULL DEFAULT 'false',
+	"voted" BOOLEAN NOT NULL DEFAULT 'false',
 	CONSTRAINT "members_pk" PRIMARY KEY ("member_id")
 ) WITH (
   OIDS=FALSE
@@ -42,7 +43,7 @@ CREATE TABLE "books" (
 	"google_book_id" varchar(255) NOT NULL,
 	"currently_reading" BOOLEAN NOT NULL DEFAULT 'false',
 	"to_read" BOOLEAN NOT NULL,
-	"book_votes" int NOT NULL,
+	"book_votes" int NOT NULL DEFAULT 0,
 	CONSTRAINT "books_pk" PRIMARY KEY ("book_id")
 ) WITH (
   OIDS=FALSE

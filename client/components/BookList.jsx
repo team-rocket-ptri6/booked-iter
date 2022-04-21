@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Book from './Book';
 import { useParams } from 'react-router-dom';
 
-function BookList({ readingList, setUpdate, updateList }) {
+function BookList({ memberId, readingList, setUpdate, updateList }) {
   const params = useParams();
   // Can move this sort to the backend if there is time
   const [rank, setRank] = useState('');
@@ -18,6 +18,21 @@ function BookList({ readingList, setUpdate, updateList }) {
 
   const readNow = (bookId) => {
     fetch(`http://localhost:8080/books/update/${bookId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        clubId: params.id
+      })
+    }).then(response => response.json())
+      .then(() => setUpdate(!updateList))
+      .catch(err => console.warn(err));
+  };
+
+  const voteForBook = (bookId, memberId) => {
+    console.log('memberId -->', memberId);
+    fetch(`http://localhost:8080/books/vote/${bookId}/${memberId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -49,7 +64,7 @@ function BookList({ readingList, setUpdate, updateList }) {
             <ol>
               {rank.map(book => {
                 return (<li key={book.google_book_id}>
-                  <Book title={book.title} readNow={() => readNow(book.book_id)} key={book.book_id} bookId={book.book_id} author={book.authors} currentlyReading={false} thumbnail={book.thumbnail ? book.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
+                  <Book title={book.title} memberId={memberId} readNow={() => readNow(book.book_id)} votes={book.book_votes} voteForBook={() => voteForBook(book.book_id, memberId)} key={book.book_id} bookId={book.book_id} author={book.authors} currentlyReading={false} thumbnail={book.thumbnail ? book.thumbnail.thumbnail : 'https://toppng.com/uploads/preview/book-cover-stock-photography-clip-art-stack-of-books-11563000775i3ijq3g55g.png'}/>
                 </li>);
               })}
             </ol> 
