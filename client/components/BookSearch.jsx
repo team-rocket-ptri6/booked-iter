@@ -60,8 +60,7 @@ function BookSearch({ idList, setUpdate, updateList }) {
   return (
     <>
       <div id="searchCenter">
-        
-        <h2 style={{margin: "auto"}}> Search for a new book to read! </h2>
+        <h2 style={{ margin: "auto" }}> Search for a new book to read! </h2>
       </div>
 
       <div id="searchCenter">
