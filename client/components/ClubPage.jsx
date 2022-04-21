@@ -14,6 +14,7 @@ function ClubPage() {
   const [clubName, setClubName] = useState('Super Awesome Book Club');
   const [clubDescription, setClubDescription] = useState('');
   const [members, setMembers] = useState([]);
+  const [memberId, setMemberId] = useState('');
   const [membersUpdated, setMembersUpdated] = useState(false);
   const [adminUpdated, setAdminUpdated] = useState(false);
   const [clubId, setClubId] = useState(null);
@@ -25,10 +26,12 @@ function ClubPage() {
     axios
       .get(`http://localhost:8080/clubs/${params.id}`)
       .then((response) => {
+        console.log(response.data);
         setClubId(response.data.club_id);
         setClubName(response.data.club_name);
         setClubDescription(response.data.description);
         setMembers(response.data.members);
+        setMemberId(response.data.memberId);
         response.data.members.forEach((m) => {
           if (m.username === auth.username) setIsAdmin(m.isAdmin);
         });
@@ -71,7 +74,7 @@ function ClubPage() {
             />
           )}
           {nav === 'messages' && <ClubMessages />}
-          {nav === 'books' && <BookPanel />}
+          {nav === 'books' && <BookPanel memberId={memberId} />}
           {/* {nav === 'read' && ?????} ----> for Gerry*/}
           </div>
         </div>
