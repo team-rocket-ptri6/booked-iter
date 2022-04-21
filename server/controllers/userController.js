@@ -8,34 +8,6 @@ const userController = {};
 
 // const regex = new RegExp('\w');
 
-userController.checkUser = async (req, res, next) => {
-  try {
-    const { userName, email } = req.body;
-    //if username or email are already in db, throw error
-    const checkMail = await db.query(queries.findUser, [email]);
-    if(checkMail.rows.length > 0) {
-      // return res.status(403).send('There is already an account associated with this email address.');
-      res.locals.mailError = true;
-      console.error('There is already an account associated with this email address.');
-    };
-    const checkName = await db.query(queries.loginUser, [userName]);
-    if (checkName.rows.length > 0) {
-      res.locals.nameError = true;
-      console.error('Username is already in use. They beat you to it :(');
-    }
-    // res.locals = {
-    //   email: checkMail.rows[0].email,
-    //   user_name: checkName.rows[0].user_name
-    // };
-    return next();
-  } catch (err) {
-    return next({
-      log: `userController.checkUser: ERROR ${err}`,
-      message: { err: 'userController.checkUser: ERROR: Check server logs for details.'} 
-    });
-  }
-
-};
 userController.createUser = async (req, res, next) => {
   try {
     const { username, password, email, firstName, lastName } = req.body;
