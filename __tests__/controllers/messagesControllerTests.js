@@ -1,6 +1,6 @@
 const messageController = require('../../server/controllers/messageController');
-const db = require('../../server/models/database')
-const queries = require('../../server/models/queries')
+const db = require('../../server/models/database');
+const queries = require('../../server/models/queries');
 
 jest.mock('../../server/models/database');
 
