@@ -5,7 +5,6 @@ const messageController = {};
 
 messageController.get100ClubMessages = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id)
   try {
     result = await db.query(queries.getClubMessages, [id]);
 

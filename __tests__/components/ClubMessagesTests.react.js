@@ -1,5 +1,6 @@
-import regeneratorRuntime from 'regenerator-runtime';
-import ClubMessages from '../../client/components/ClubComponents.jsx';
+import React from 'React';
+// import regeneratorRuntime from 'regenerator-runtime';
+import ClubMessages from '../../client/components/ClubMessages.jsx';
 
 import userEvent from '@testing-library/user-event';
 import {
