@@ -4,9 +4,14 @@ queries.getClubMessages = `
   WITH club_members AS (
     SELECT member_id, admin, user_id FROM members
     WHERE club_id = $1
+<<<<<<< HEAD
   ) 
   SELECT cm.member_id, cm.admin, cm.user_id, u.user_name, m.message_id, m.message, m.edited, m.created_at 
   FROM messages m
+=======
+  )
+  SELECT * FROM messages m
+>>>>>>> a337eb6dd04ab99e1723ac057b0fae87672fe1b9
   JOIN club_members cm ON cm.member_id = m.member_id
   JOIN users u ON u.user_id = cm.user_id
   ORDER BY created_at DESC
@@ -40,7 +45,12 @@ FROM
 WHERE
 	email = $1`;
 
-
+queries.findUserId = `SELECT
+	user_id, first_name, user_name
+FROM
+	users
+WHERE
+	user_id = $1`;
 
 queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
 
@@ -163,16 +173,48 @@ WHERE
 	members.user_id = $1`;
 
 queries.saveBook = `INSERT INTO books (google_book_id, club_id, to_read, book_votes)
-	VALUES ($1, $2, TRUE, 1)
+	VALUES ($1, $2, TRUE, 0)
 RETURNING
 	*`;
 
-queries.getBooksByClub = `SELECT
-	*
+queries.createNewBookRating = `
+INSERT INTO book_ratings (book_id, username)
+	VALUES ($1, $2)
+RETURNING
+	*`;
+
+
+queries.getBooksByClub = `
+SELECT * FROM books WHERE club_id = $1`;
+
+// queries.getBooksByClub = `SELECT
+// 	b.book_id, b.club_id, b.google_book_id,
+// 	b.currently_reading, b.to_read, b.book_votes,
+// 	b.has_read, b.date_read, br.rating_id,
+// 	br.rating, br.review
+// FROM
+// 	books AS b
+// LEFT JOIN book_ratings br
+// ON b.book_id = br.book_id
+// WHERE
+// 	b.club_id = $1`;
+
+queries.getBooksByClubAndRating = `SELECT
+	b.book_id, b.club_id, b.google_book_id,
+	b.currently_reading, b.to_read, b.book_votes,
+	b.has_read, b.date_read, br.rating_id, br.rating, br.review, br2.avg_rating, br2.num_rating
 FROM
-	books
-WHERE
-	club_id = $1`;
+	books AS b
+LEFT JOIN ( SELECT * FROM book_ratings AS brat
+	WHERE brat.username = $2 ) AS br
+ON b.book_id = br.book_id
+LEFT JOIN (SELECT book_id, AVG(rating) AS avg_rating,
+COUNT(rating) AS num_rating FROM book_ratings
+WHERE rating IS NOT NULL
+GROUP BY book_id) AS br2
+ON b.book_id = br2.book_id
+WHERE b.club_id = $1
+`;
 
 queries.getVoterStatus = 'SELECT voted FROM members WHERE member_id = $1';
 
@@ -202,5 +244,64 @@ WHERE
 	AND club_id = $1
 RETURNING
 	*;`;
+
+queries.setHasReadTrue = `UPDATE
+	books
+SET
+	has_read = TRUE
+WHERE
+	book_id = $1
+RETURNING
+ *;`;
+
+queries.addReadDate = `UPDATE
+ books
+SET
+ date_read = $1
+WHERE
+ book_id = $2
+RETURNING
+*;`;
+
+
+
+queries.deleteReadBook = `DELETE FROM books
+WHERE book_id = $1 RETURNING *`;
+
+queries.deleteBookRating = `DELETE from book_ratings
+WHERE rating_id IN (SELECT rating_id from book_ratings WHERE book_id = $1) RETURNING *`;
+
+
+queries.addBookRating = `INSERT INTO book_ratings (book_id)
+VALUES ($1)
+RETURNING
+*;`;
+
+queries.updateBookRating = `UPDATE
+book_ratings
+SET
+rating = $1
+WHERE
+book_id = $2
+RETURNING
+*;`;
+
+queries.updateBookReview = `UPDATE
+book_ratings
+SET
+review = $1
+WHERE
+book_id = $2
+RETURNING
+`;
+
+queries.submitNewRatingAndNotes = `INSERT
+INTO book_ratings AS br (book_id, username, rating, review)
+VALUES($1, $2, $3, $4)
+ON CONFLICT (book_id, username)
+WHERE book_id IS NOT NULL AND username IS NOT NULL
+DO UPDATE
+SET rating = $3, review = $4
+`;
 
 module.exports = queries;
