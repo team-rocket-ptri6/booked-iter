@@ -65,9 +65,26 @@ function AuthProvider({children}) {
     }
   });
 
-  const value = { username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, description, setDescription, authenticated, setAuthenticated, signUp, token, setToken, errorMsg, setErrorMsg, login };
+  const isLoggedIn = useCallback(async (callback) => {
+
+    try {
+      const response = await auth.persist();
+      console.log('isLoggedIn response', response);
+      setAuthenticated(auth.isAuthenticated);
+      setFirstName(response.first_name);
+      setUsername(response.user_name);
+      setUserId(response.user_id);
+      return callback();
+    } catch (error) {
+      return 'The user was not logged in';
+    }
+  });
+
+  const value = { username, setUsername, userId, setUserId, email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, description, setDescription, authenticated, setAuthenticated, signUp, token, setToken, login, isLoggedIn };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+
 
 const useAuth = () => {
   const context = React.useContext(AuthContext);

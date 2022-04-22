@@ -6,6 +6,7 @@ import BookPanel from './BookPanel';
 import Logo from '../assets/logo.png';
 import { useAuth } from '../auth/authContext';
 import axios from 'axios';
+import { ReadBooksPanel } from './ReadBooksPanel';
 
 function ClubPage() {
   const auth = useAuth();
@@ -28,26 +29,18 @@ function ClubPage() {
   const [clubMessages, setClubMessages] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/clubs/${params.id}`, {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setClubId(response.data.club_id);
-        setClubName(response.data.club_name);
-        setClubDescription(response.data.description);
-        setMembers(response.data.members);
-        setClubMessages(response.data.messages);
-        setMemberId(response.data.memberId);
-        response.data.members.forEach((m) => {
-          if (m.username === auth.username) setIsAdmin(m.isAdmin);
-        });
-        console.log('auth user id is', auth);
-        console.log('data about this club:', response.data);
+    axios.get(`http://localhost:8080/clubs/${params.id}`).then((response) => {
+      // console.log(response.data);
+      setClubId(response.data.club_id);
+      setClubName(response.data.club_name);
+      setClubDescription(response.data.description);
+      setMembers(response.data.members);
+      setClubMessages(response.data.messages);
+      setMemberId(response.data.memberId);
+      response.data.members.forEach((m) => {
+        if (m.username === auth.username) setIsAdmin(m.isAdmin);
       });
+    });
   }, [params.id, membersUpdated, adminUpdated]);
 
   return (
@@ -99,7 +92,7 @@ function ClubPage() {
               />
             )}
             {nav === 'books' && <BookPanel memberId={memberId} />}
-            {/* {nav === 'read' && ?????} ----> for Gerry*/}
+            {nav === 'read' && <ReadBooksPanel />}
           </div>
         </div>
       )}
