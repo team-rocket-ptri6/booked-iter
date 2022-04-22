@@ -14,14 +14,10 @@ function BookPanel({ memberId }) {
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/books/read/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("memberId -->", memberId);
+    fetch(`http://localhost:8080/books/read/${params.id}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log('memberId -->', memberId);
         setReadingList(data.books);
         const idList = [];
         console.log("in Book Panel, returned data is :", data);
