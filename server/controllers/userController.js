@@ -115,6 +115,7 @@ userController.findOneByUserId = async (req, res, next) => {
     res.locals = {
       user_id: response.rows[0].user_id,
       first_name: response.rows[0].first_name,
+      user_name: response.rows[0].user_name,
     }; 
     return next();
   } catch (error) {

@@ -72,6 +72,8 @@ function AuthProvider({children}) {
       console.log('isLoggedIn response', response);
       setAuthenticated(auth.isAuthenticated);
       setFirstName(response.first_name);
+      setUsername(response.user_name);
+      setUserId(response.user_id);
       return callback();
     } catch (error) {
       return 'The user was not logged in';

@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 function BookList({ memberId, readingList, setUpdate, updateList }) {
   const params = useParams();
   // Can move this sort to the backend if there is time
-  const [rank, setRank] = useState("");
-  const [currentlyReading, setCurrentlyReading] = useState("");
+  const [rank, setRank] = useState('');
+  const [currentlyReading, setCurrentlyReading] = useState('');
 
   useEffect(() => {
     if (!Array.isArray(readingList)) return;
@@ -65,7 +65,7 @@ function BookList({ memberId, readingList, setUpdate, updateList }) {
         <div className="flex flex-col items-center justify-center">
           <ul className="list-none">
             <li>
-              <label id="bookList">Currently Reading: </label>{" "}
+              <label id="bookList">Currently Reading: </label>{' '}
               <Book
                 className="clubName"
                 title={currentlyReading.title}

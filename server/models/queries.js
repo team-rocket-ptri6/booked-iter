@@ -39,7 +39,7 @@ WHERE
 	email = $1`;
 
 queries.findUserId = `SELECT
-	user_id, first_name
+	user_id, first_name, user_name
 FROM
 	users
 WHERE
