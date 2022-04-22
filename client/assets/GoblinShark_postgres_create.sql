@@ -44,6 +44,8 @@ CREATE TABLE "books" (
 	"currently_reading" BOOLEAN NOT NULL DEFAULT 'false',
 	"to_read" BOOLEAN NOT NULL,
 	"book_votes" int NOT NULL DEFAULT 0,
+	"has_read" BOOLEAN NOT NULL default 'false',
+	"date_read" TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT "books_pk" PRIMARY KEY ("book_id")
 ) WITH (
   OIDS=FALSE
@@ -71,6 +73,17 @@ CREATE TABLE "messages" (
   OIDS=FALSE
 );
 
+CREATE TABLE "book_ratings" (
+	"rating_id" serial NOT NULL,
+	"book_id" int NOT NULL,
+	"username" varchar(255),
+	"rating" int,
+	"review" varchar,
+	CONSTRAINT "ratings_pk" PRIMARY KEY ("rating_id")
+) WITH (
+  OIDS=FALSE
+);
+
 
 
 
@@ -82,9 +95,7 @@ ALTER TABLE "books" ADD CONSTRAINT "books_fk0" FOREIGN KEY ("club_id") REFERENCE
 
 ALTER TABLE "questions" ADD CONSTRAINT "questions_fk0" FOREIGN KEY ("member_id") REFERENCES "members"("member_id");
 ALTER TABLE "messages" ADD CONSTRAINT "messages_fk0" FOREIGN KEY ("member_id") REFERENCES "members"("member_id");
+ALTER TABLE "book_ratings" ADD CONSTRAINT "ratings_fk0" FOREIGN KEY ("book_id") REFERENCES "books"("book_id");
 
-
-
-
-
-
+CREATE UNIQUE INDEX "bookid_user_notnull_idx" ON "book_ratings" ("book_id", "username")
+WHERE "book_id" IS NOT NULL AND "username" IS NOT NULL;
