@@ -475,3 +475,28 @@ body {
   margin: 10px;
   font-size: 14px; */
 }
+
+.message {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.message-content {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.message-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.message-username {
+  
+}
