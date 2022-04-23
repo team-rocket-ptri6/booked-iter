@@ -4,7 +4,7 @@ const queries = require('../../server/models/queries');
 
 jest.mock('../../server/models/database');
 
-describe('Unit tests for the clubController', () => {
+xdescribe('Unit tests for the clubController', () => {
   const req = {};
   const res = {};
   let next;

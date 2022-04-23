@@ -3,6 +3,7 @@ const clubController = require('../controllers/clubController');
 const jwtController = require('../controllers/jwtController');
 const memberController = require('../controllers/memberController');
 const userController = require('../controllers/userController');
+const messageController = require('../controllers/messageController')
 
 const router = express.Router();
 
@@ -42,7 +43,7 @@ router.patch('/removeAdmin', jwtController.verifyToken, memberController.removeA
 });
 
 /* /:id routes */
-router.get('/:id', jwtController.verifyToken, clubController.getClub, memberController.getAllClubMembers, (req, res) => {
+router.get('/:id', jwtController.verifyToken, clubController.getClub, memberController.getAllClubMembers, messageController.get100ClubMessages, (req, res) => {
   res.status(200).json(res.locals);
 });
 

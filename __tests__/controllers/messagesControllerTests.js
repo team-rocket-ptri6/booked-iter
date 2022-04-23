@@ -86,7 +86,7 @@ describe('Unit tests for messageController',  () => {
   describe('.get100ClubMessages', () => {
     beforeEach(() => {
       next = jest.fn();
-      req.params = {clubId: 1};
+      req.params = {id: 1};
       res.locals = {};
     });
     afterEach(() => {
@@ -111,8 +111,8 @@ describe('Unit tests for messageController',  () => {
       await messageController.get100ClubMessages(req, res, next);
 
       // assertions
-      expect(res.locals.data).toEqual(mockResponce);
-      expect(db.query).toBeCalledWith(queries.getClubMessages, [req.params.clubId]);
+      expect(res.locals.messages).toEqual(mockResponce);
+      expect(db.query).toBeCalledWith(queries.getClubMessages, [req.params.id]);
       expect(next).toBeCalledTimes(1);
     })
 
@@ -129,7 +129,6 @@ describe('Unit tests for messageController',  () => {
 
       // assertions
       expect(res.locals.newMessage).toEqual(undefined);
-      expect(db.query).toBeCalledWith(queries.getClubMessages, [req.params.clubId]);
     })
 
   })

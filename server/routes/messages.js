@@ -37,7 +37,7 @@ router.post(
  * returns 100 messages with most recent message first in the array on property 'data' in locals
  */
 router.get(
-  '/:clubId',
+  '/:id',
   jwtController.verifyToken,
   messageController.get100ClubMessages,
   (req, res) => {

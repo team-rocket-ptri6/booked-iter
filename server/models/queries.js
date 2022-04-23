@@ -1,12 +1,14 @@
-queries = {};
+const queries = {};
 
 queries.getClubMessages = `
   WITH club_members AS (
-    SELECT member_id, admin FROM members
+    SELECT member_id, admin, user_id FROM members
     WHERE club_id = $1
-  )
-  SELECT * FROM messages m
+  ) 
+  SELECT cm.member_id, cm.admin, cm.user_id, u.user_name, m.message_id, m.message, m.edited, m.created_at 
+  FROM messages m
   JOIN club_members cm ON cm.member_id = m.member_id
+  JOIN users u ON u.user_id = cm.user_id
   ORDER BY created_at DESC
   LIMIT 100
   `;
