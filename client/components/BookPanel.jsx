@@ -14,6 +14,8 @@ function BookPanel({ memberId }) {
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
+    // abortcontroller is used to stop the fetch request if it has not been resolved when the component unmounts
+    // this avoids us from changing state when component is no longer mounted
     let controller = new AbortController();
     let signal = controller.signal;
     const options = {
