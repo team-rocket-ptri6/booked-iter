@@ -14,10 +14,15 @@ function BookPanel({ memberId }) {
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/books/read/${params.id}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('memberId -->', memberId);
+    let controller = new AbortController();
+    let signal = controller.signal;
+    const options = {
+      signal,
+    };
+    fetch(`http://localhost:8080/books/read/${params.id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("memberId -->", memberId);
         setReadingList(data.books);
         const idList = [];
         console.log("in Book Panel, returned data is :", data);
@@ -28,6 +33,10 @@ function BookPanel({ memberId }) {
         setisLoading(false);
       })
       .catch((err) => console.warn(err));
+    // this function will run when component unmounts
+    return () => {
+      controller.abort();
+    };
   }, [, updateList]);
 
   return (
