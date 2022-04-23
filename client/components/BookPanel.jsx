@@ -24,10 +24,10 @@ function BookPanel({ memberId }) {
     fetch(`http://localhost:8080/books/read/${params.id}`, options)
       .then((response) => response.json())
       .then((data) => {
-        console.log("memberId -->", memberId);
+        // console.log("memberId -->", memberId);
         setReadingList(data.books);
         const idList = [];
-        console.log("in Book Panel, returned data is :", data);
+        // console.log("in Book Panel, returned data is :", data);
         for (let i = 0; i < data.books.length; i++) {
           idList.push(data.books[i].google_book_id);
         }

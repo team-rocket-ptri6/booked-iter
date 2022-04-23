@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAuth } from '../auth/authContext.js';
-import Message from './Message.jsx';
+import React, { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useAuth } from "../auth/authContext.js";
+import Message from "./Message.jsx";
 
 function ClubMessages({ clubMessages, setClubMessages, memberId }) {
   const clubId = useParams();
-  console.log(clubId);
+  // console.log(clubId);
   const auth = useAuth();
 
-  const [messageFeild, setMessageFeild] = useState('');
+  const [messageFeild, setMessageFeild] = useState("");
 
   useEffect(async () => {
     let getMessagesInterval = setInterval(() => getClubMessages(), 15000);
@@ -28,17 +28,17 @@ function ClubMessages({ clubMessages, setClubMessages, memberId }) {
       const responseData = await response.json();
       setClubMessages(responseData.messages);
     } catch (err) {
-      console.log('error getting club messages ->', err);
+      console.log("error getting club messages ->", err);
     }
   });
 
   const postNewMessage = useCallback(async () => {
     try {
-      const response = await fetch('/messages/new', {
-        method: 'POST',
+      const response = await fetch("/messages/new", {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${auth.token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           member_id: memberId,
@@ -47,9 +47,9 @@ function ClubMessages({ clubMessages, setClubMessages, memberId }) {
       });
 
       getClubMessages();
-      setMessageFeild('');
+      setMessageFeild("");
     } catch (err) {
-      console.log('error posting message ->', err);
+      console.log("error posting message ->", err);
     }
   });
 
