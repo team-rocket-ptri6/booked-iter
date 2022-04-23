@@ -90,6 +90,9 @@ RETURNING
 
 queries.getClub = 'SELECT * FROM clubs WHERE club_id = $1'; //club_name or club-id?
 
+queries.changeClubDescription = 'UPDATE clubs SET description = $2 WHERE club_id = $1';
+
+
 queries.findMember = `SELECT
 	*
 FROM

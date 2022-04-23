@@ -24,20 +24,18 @@ function ClubPage() {
   const params = useParams();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/clubs/${params.id}`)
-      .then((response) => {
-        // console.log(response.data);
-        setClubId(response.data.club_id);
-        setClubName(response.data.club_name);
-        setClubDescription(response.data.description);
-        setMembers(response.data.members);
-        setMemberId(response.data.memberId);
-        response.data.members.forEach((m) => {
-          if (m.username === auth.username) setIsAdmin(m.isAdmin);
-        });
+    axios.get(`http://localhost:8080/clubs/${params.id}`).then((response) => {
+      // console.log(response.data);
+      setClubId(response.data.club_id);
+      setClubName(response.data.club_name);
+      setClubDescription(response.data.description);
+      setMembers(response.data.members);
+      setMemberId(response.data.memberId);
+      response.data.members.forEach((m) => {
+        if (m.username === auth.username) setIsAdmin(m.isAdmin);
       });
-  }, [params.id, membersUpdated, adminUpdated]);
+    });
+  }, [params.id, membersUpdated, adminUpdated, clubDescription]);
 
   return (
     <div className="clubInfo">
@@ -77,6 +75,7 @@ function ClubPage() {
                 clubId={clubId}
                 adminUpdated={adminUpdated}
                 setAdminUpdated={setAdminUpdated}
+                setClubDescription={setClubDescription}
                 isAdmin={isAdmin}
               />
             )}

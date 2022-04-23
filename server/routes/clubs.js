@@ -71,4 +71,9 @@ router.delete('/:bookId', (req, res) => {
   res.status(200).json(res.locals);
 });
 
+//for changing club description
+router.patch('/description', clubController.changeClubDescription, (req, res) => {
+  res.status(200).json(res.locals);
+});
+
 module.exports = router;
