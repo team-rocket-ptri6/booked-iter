@@ -14,13 +14,20 @@ function BookPanel({ memberId }) {
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/books/read/${params.id}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('memberId -->', memberId);
+    // abortcontroller is used to stop the fetch request if it has not been resolved when the component unmounts
+    // this avoids us from changing state when component is no longer mounted
+    let controller = new AbortController();
+    let signal = controller.signal;
+    const options = {
+      signal,
+    };
+    fetch(`http://localhost:8080/books/read/${params.id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("memberId -->", memberId);
         setReadingList(data.books);
         const idList = [];
-        console.log("in Book Panel, returned data is :", data);
+        // console.log("in Book Panel, returned data is :", data);
         for (let i = 0; i < data.books.length; i++) {
           idList.push(data.books[i].google_book_id);
         }
@@ -28,6 +35,10 @@ function BookPanel({ memberId }) {
         setisLoading(false);
       })
       .catch((err) => console.warn(err));
+    // this function will run when component unmounts
+    return () => {
+      controller.abort();
+    };
   }, [, updateList]);
 
   return (

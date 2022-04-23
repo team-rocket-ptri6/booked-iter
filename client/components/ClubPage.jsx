@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
-import ClubInfo from './ClubInfo';
-import ClubMessages from './ClubMessages';
-import BookPanel from './BookPanel';
-import Logo from '../assets/logo.png';
-import { useAuth } from '../auth/authContext';
-import axios from 'axios';
-import { ReadBooksPanel } from './ReadBooksPanel';
+import React, { useState, useEffect } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import ClubInfo from "./ClubInfo";
+import ClubMessages from "./ClubMessages";
+import BookPanel from "./BookPanel";
+import Logo from "../assets/logo.png";
+import { useAuth } from "../auth/authContext";
+import axios from "axios";
+import { ReadBooksPanel } from "./ReadBooksPanel";
 
 function ClubPage() {
   const auth = useAuth();
@@ -15,13 +15,13 @@ function ClubPage() {
 
   const [clubId, setClubId] = useState(null);
 
-  const [nav, setNav] = useState('info');
+  const [nav, setNav] = useState("info");
   const [isMember, setIsMember] = useState(true);
 
-  const [clubName, setClubName] = useState('Super Awesome Book Club');
-  const [clubDescription, setClubDescription] = useState('');
+  const [clubName, setClubName] = useState("Super Awesome Book Club");
+  const [clubDescription, setClubDescription] = useState("");
   const [members, setMembers] = useState([]);
-  const [memberId, setMemberId] = useState('');
+  const [memberId, setMemberId] = useState("");
   const [membersUpdated, setMembersUpdated] = useState(false);
   const [adminUpdated, setAdminUpdated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(true);
@@ -35,13 +35,13 @@ function ClubPage() {
       setClubName(response.data.club_name);
       setClubDescription(response.data.description);
       setMembers(response.data.members);
-      setClubMessages(response.data.messages);
       setMemberId(response.data.memberId);
+      setClubMessages(response.data.messages);
       response.data.members.forEach((m) => {
         if (m.username === auth.username) setIsAdmin(m.isAdmin);
       });
     });
-  }, [params.id, membersUpdated, adminUpdated]);
+  }, [params.id, membersUpdated, adminUpdated, clubDescription]);
 
   return (
     <div className="clubInfo">
@@ -58,22 +58,22 @@ function ClubPage() {
           <h3 className="descriptionText">{clubDescription}</h3>
           <nav id="clubNav">
             <ul>
-              <li className="list-none" onClick={() => setNav('info')}>
+              <li className="list-none" onClick={() => setNav("info")}>
                 Info
               </li>
-              <li className="list-none" onClick={() => setNav('messages')}>
+              <li className="list-none" onClick={() => setNav("messages")}>
                 Messages
               </li>
-              <li className="list-none" onClick={() => setNav('books')}>
+              <li className="list-none" onClick={() => setNav("books")}>
                 Books
               </li>
-              <li className="list-none" onClick={() => setNav('read')}>
+              <li className="list-none" onClick={() => setNav("read")}>
                 Read
               </li>
             </ul>
           </nav>
           <div className="clubInfo">
-            {nav === 'info' && (
+            {nav === "info" && (
               <ClubInfo
                 setMembersUpdated={setMembersUpdated}
                 membersUpdated={membersUpdated}
@@ -81,18 +81,19 @@ function ClubPage() {
                 clubId={clubId}
                 adminUpdated={adminUpdated}
                 setAdminUpdated={setAdminUpdated}
+                setClubDescription={setClubDescription}
                 isAdmin={isAdmin}
               />
             )}
-            {nav === 'messages' && (
+            {nav === "messages" && (
               <ClubMessages
                 memberId={memberId}
                 clubMessages={clubMessages}
                 setClubMessages={setClubMessages}
               />
             )}
-            {nav === 'books' && <BookPanel memberId={memberId} />}
-            {nav === 'read' && <ReadBooksPanel />}
+            {nav === "books" && <BookPanel memberId={memberId} />}
+            {nav === "read" && <ReadBooksPanel />}
           </div>
         </div>
       )}

@@ -86,5 +86,21 @@ clubController.deleteClub = async (req, res, next) => {
   }
 };
 
+clubController.changeClubDescription = async (req, res, next) => {
+  try {
+    const { id, newDescription } = req.body;
+    const response = await db.query(queries.changeClubDescription, [id, newDescription]);
+    res.locals = response.rows[0];
+    return next();
+  } catch (error) {
+    return next({
+      log: `clubController.changeClubDescription : ERROR: ${error}`,
+      message: {
+        err: 'clubController.changeClubDescription : ERROR: Check server logs for details.',
+      },
+    });
+  }
+};
+
 
 module.exports = clubController;
